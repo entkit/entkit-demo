@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as RA from "@refinedev/antd";
 import * as Tables from "./tables";
-import * as Type from "./interfaces";
+import * as Type from "./typedefs";
 import * as Action from "./action";
 export type CompanyListProps = RA.ListProps & {
     tableProps?: Tables.CompanyTableProps;

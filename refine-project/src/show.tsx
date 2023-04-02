@@ -6,7 +6,7 @@ import * as AntdIcons from "@ant-design/icons";
 
 import * as Lists from "./list";
 import * as Diagram from "./diagram";
-import * as Interfaces from "./interfaces";
+import * as Interfaces from "./typedefs";
 import * as View from "./view";
 import * as Custom from "./custom";
 import * as Action from "./action";
@@ -20,7 +20,7 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.ICompany>({
+    const { queryResult } = useShow<Interfaces.EntCompanyInterface>({
         resource: "company",
         id,
         metaData: {
@@ -646,7 +646,7 @@ export const CountryShow: React.FC<CountryShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.ICountry>({
+    const { queryResult } = useShow<Interfaces.EntCountryInterface>({
         resource: "country",
         id,
         metaData: {
@@ -1154,7 +1154,7 @@ export const EmailShow: React.FC<EmailShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IEmail>({
+    const { queryResult } = useShow<Interfaces.EntEmailInterface>({
         resource: "email",
         id,
         metaData: {
@@ -1308,7 +1308,7 @@ export const ImageShow: React.FC<ImageShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IImage>({
+    const { queryResult } = useShow<Interfaces.EntImageInterface>({
         resource: "image",
         id,
         metaData: {
@@ -1482,7 +1482,7 @@ export const LocationShow: React.FC<LocationShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.ILocation>({
+    const { queryResult } = useShow<Interfaces.EntLocationInterface>({
         resource: "location",
         id,
         metaData: {
@@ -1676,7 +1676,7 @@ export const PhoneShow: React.FC<PhoneShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IPhone>({
+    const { queryResult } = useShow<Interfaces.EntPhoneInterface>({
         resource: "phone",
         id,
         metaData: {
@@ -1835,7 +1835,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IProduct>({
+    const { queryResult } = useShow<Interfaces.EntProductInterface>({
         resource: "product",
         id,
         metaData: {
@@ -2025,7 +2025,7 @@ export const VendorShow: React.FC<VendorShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IVendor>({
+    const { queryResult } = useShow<Interfaces.EntVendorInterface>({
         resource: "vendor",
         id,
         metaData: {
@@ -2306,7 +2306,7 @@ export const WarehouseShow: React.FC<WarehouseShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IWarehouse>({
+    const { queryResult } = useShow<Interfaces.EntWarehouseInterface>({
         resource: "warehouse",
         id,
         metaData: {
@@ -2539,7 +2539,7 @@ export const WebsiteShow: React.FC<WebsiteShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.IWebsite>({
+    const { queryResult } = useShow<Interfaces.EntWebsiteInterface>({
         resource: "website",
         id,
         metaData: {

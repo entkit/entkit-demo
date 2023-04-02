@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Typography, Avatar, AutoComplete, Input } from "antd";
 import { useList, useLink } from "@refinedev/core";
-import * as Interfaces from "./interfaces";
+import * as Interfaces from "./typedefs";
 import debounce from "lodash/debounce";
 import { FileImageOutlined, SearchOutlined } from "@ant-design/icons";
 
@@ -56,63 +56,67 @@ export const SearchComponent: React.FC = () => {
             </Link>
         ),
     });
-    const { refetch: refetchCompany } = useList<Interfaces.ICompany>({
-        resource: "company",
-        metaData: {
-            fields: ["id", "name"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        `/company/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Company"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    const { refetch: refetchCompany } = useList<Interfaces.EntCompanyInterface>(
+        {
+            resource: "company",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            `/company/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Company"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
             },
         },
-    });
-    const { refetch: refetchCountry } = useList<Interfaces.ICountry>({
-        resource: "country",
-        metaData: {
-            fields: ["id", "name"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        `/country/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Country"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    );
+    const { refetch: refetchCountry } = useList<Interfaces.EntCountryInterface>(
+        {
+            resource: "country",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            `/country/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Country"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
             },
         },
-    });
-    const { refetch: refetchEmail } = useList<Interfaces.IEmail>({
+    );
+    const { refetch: refetchEmail } = useList<Interfaces.EntEmailInterface>({
         resource: "email",
         metaData: {
             fields: ["id", "title"],
@@ -140,7 +144,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchImage } = useList<Interfaces.IImage>({
+    const { refetch: refetchImage } = useList<Interfaces.EntImageInterface>({
         resource: "image",
         metaData: {
             fields: ["id", "title", "originalURL"],
@@ -168,35 +172,36 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchLocation } = useList<Interfaces.ILocation>({
-        resource: "location",
-        metaData: {
-            fields: ["id", "title"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.title),
-                        null,
-                        `/location/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Location"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    const { refetch: refetchLocation } =
+        useList<Interfaces.EntLocationInterface>({
+            resource: "location",
+            metaData: {
+                fields: ["id", "title"],
+                searchQuery: value,
             },
-        },
-    });
-    const { refetch: refetchPhone } = useList<Interfaces.IPhone>({
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.title),
+                            null,
+                            `/location/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Location"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchPhone } = useList<Interfaces.EntPhoneInterface>({
         resource: "phone",
         metaData: {
             fields: ["id", "title"],
@@ -224,35 +229,37 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchProduct } = useList<Interfaces.IProduct>({
-        resource: "product",
-        metaData: {
-            fields: ["id", "name", "image"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        `${item.image}`,
-                        `/product/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Product"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    const { refetch: refetchProduct } = useList<Interfaces.EntProductInterface>(
+        {
+            resource: "product",
+            metaData: {
+                fields: ["id", "name", "image"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            `${item.image}`,
+                            `/product/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Product"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
             },
         },
-    });
-    const { refetch: refetchVendor } = useList<Interfaces.IVendor>({
+    );
+    const { refetch: refetchVendor } = useList<Interfaces.EntVendorInterface>({
         resource: "vendor",
         metaData: {
             fields: ["id", "name"],
@@ -280,62 +287,65 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchWarehouse } = useList<Interfaces.IWarehouse>({
-        resource: "warehouse",
-        metaData: {
-            fields: ["id", "name"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        `/warehouse/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Warehouse"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    const { refetch: refetchWarehouse } =
+        useList<Interfaces.EntWarehouseInterface>({
+            resource: "warehouse",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            `/warehouse/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Warehouse"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchWebsite } = useList<Interfaces.EntWebsiteInterface>(
+        {
+            resource: "website",
+            metaData: {
+                fields: ["id", "title"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.title),
+                            null,
+                            `/website/show/${item.id}`,
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Website"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
             },
         },
-    });
-    const { refetch: refetchWebsite } = useList<Interfaces.IWebsite>({
-        resource: "website",
-        metaData: {
-            fields: ["id", "title"],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.title),
-                        null,
-                        `/website/show/${item.id}`,
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Website"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
-            },
-        },
-    });
+    );
 
     useEffect(() => {
         setOptions([]);

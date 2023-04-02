@@ -3,22 +3,26 @@ import { HttpError } from "@refinedev/core";
 import * as RA from "@refinedev/antd";
 import * as Antd from "antd";
 import * as AntdIcons from "@ant-design/icons";
-import * as Interfaces from "./interfaces";
+import * as Interfaces from "./typedefs";
 import { Cursors } from "./data-provider";
 import * as Custom from "./custom";
 import * as View from "./view";
 import * as Action from "./action";
 
-export type CompanyTableProps = Antd.TableProps<Interfaces.ICompany> & {
-    extendTable?: RA.useTableProps<Interfaces.ICompany, HttpError>;
-};
+export type CompanyTableProps =
+    Antd.TableProps<Interfaces.EntCompanyInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntCompanyInterface,
+            HttpError
+        >;
+    };
 export const CompanyTable: React.FC<CompanyTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.ICompany>({
+    const table = RA.useTable<Interfaces.EntCompanyInterface>({
         resource: "company",
         initialSorter: [
             {
@@ -266,7 +270,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.ICompany>
+                <Antd.Table.Column<Interfaces.EntCompanyInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -353,16 +357,20 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
         </>
     );
 };
-export type CountryTableProps = Antd.TableProps<Interfaces.ICountry> & {
-    extendTable?: RA.useTableProps<Interfaces.ICountry, HttpError>;
-};
+export type CountryTableProps =
+    Antd.TableProps<Interfaces.EntCountryInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntCountryInterface,
+            HttpError
+        >;
+    };
 export const CountryTable: React.FC<CountryTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.ICountry>({
+    const table = RA.useTable<Interfaces.EntCountryInterface>({
         resource: "country",
         initialSorter: [
             {
@@ -593,7 +601,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.ICountry>
+                <Antd.Table.Column<Interfaces.EntCountryInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -680,8 +688,8 @@ export const CountryTable: React.FC<CountryTableProps> = ({
         </>
     );
 };
-export type EmailTableProps = Antd.TableProps<Interfaces.IEmail> & {
-    extendTable?: RA.useTableProps<Interfaces.IEmail, HttpError>;
+export type EmailTableProps = Antd.TableProps<Interfaces.EntEmailInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.EntEmailInterface, HttpError>;
 };
 export const EmailTable: React.FC<EmailTableProps> = ({
     extendTable,
@@ -689,7 +697,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IEmail>({
+    const table = RA.useTable<Interfaces.EntEmailInterface>({
         resource: "email",
         initialSorter: [
             {
@@ -831,7 +839,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IEmail>
+                <Antd.Table.Column<Interfaces.EntEmailInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -918,8 +926,8 @@ export const EmailTable: React.FC<EmailTableProps> = ({
         </>
     );
 };
-export type ImageTableProps = Antd.TableProps<Interfaces.IImage> & {
-    extendTable?: RA.useTableProps<Interfaces.IImage, HttpError>;
+export type ImageTableProps = Antd.TableProps<Interfaces.EntImageInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.EntImageInterface, HttpError>;
 };
 export const ImageTable: React.FC<ImageTableProps> = ({
     extendTable,
@@ -927,7 +935,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IImage>({
+    const table = RA.useTable<Interfaces.EntImageInterface>({
         resource: "image",
         initialSorter: [
             {
@@ -1054,7 +1062,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IImage>
+                <Antd.Table.Column<Interfaces.EntImageInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1141,16 +1149,20 @@ export const ImageTable: React.FC<ImageTableProps> = ({
         </>
     );
 };
-export type LocationTableProps = Antd.TableProps<Interfaces.ILocation> & {
-    extendTable?: RA.useTableProps<Interfaces.ILocation, HttpError>;
-};
+export type LocationTableProps =
+    Antd.TableProps<Interfaces.EntLocationInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntLocationInterface,
+            HttpError
+        >;
+    };
 export const LocationTable: React.FC<LocationTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.ILocation>({
+    const table = RA.useTable<Interfaces.EntLocationInterface>({
         resource: "location",
         initialSorter: [
             {
@@ -1476,7 +1488,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.ILocation>
+                <Antd.Table.Column<Interfaces.EntLocationInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1563,8 +1575,8 @@ export const LocationTable: React.FC<LocationTableProps> = ({
         </>
     );
 };
-export type PhoneTableProps = Antd.TableProps<Interfaces.IPhone> & {
-    extendTable?: RA.useTableProps<Interfaces.IPhone, HttpError>;
+export type PhoneTableProps = Antd.TableProps<Interfaces.EntPhoneInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.EntPhoneInterface, HttpError>;
 };
 export const PhoneTable: React.FC<PhoneTableProps> = ({
     extendTable,
@@ -1572,7 +1584,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IPhone>({
+    const table = RA.useTable<Interfaces.EntPhoneInterface>({
         resource: "phone",
         initialSorter: [
             {
@@ -1737,7 +1749,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IPhone>
+                <Antd.Table.Column<Interfaces.EntPhoneInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1824,16 +1836,20 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
         </>
     );
 };
-export type ProductTableProps = Antd.TableProps<Interfaces.IProduct> & {
-    extendTable?: RA.useTableProps<Interfaces.IProduct, HttpError>;
-};
+export type ProductTableProps =
+    Antd.TableProps<Interfaces.EntProductInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntProductInterface,
+            HttpError
+        >;
+    };
 export const ProductTable: React.FC<ProductTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IProduct>({
+    const table = RA.useTable<Interfaces.EntProductInterface>({
         resource: "product",
         initialSorter: [
             {
@@ -2131,7 +2147,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IProduct>
+                <Antd.Table.Column<Interfaces.EntProductInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2218,16 +2234,20 @@ export const ProductTable: React.FC<ProductTableProps> = ({
         </>
     );
 };
-export type VendorTableProps = Antd.TableProps<Interfaces.IVendor> & {
-    extendTable?: RA.useTableProps<Interfaces.IVendor, HttpError>;
-};
+export type VendorTableProps =
+    Antd.TableProps<Interfaces.EntVendorInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntVendorInterface,
+            HttpError
+        >;
+    };
 export const VendorTable: React.FC<VendorTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IVendor>({
+    const table = RA.useTable<Interfaces.EntVendorInterface>({
         resource: "vendor",
         initialSorter: [
             {
@@ -2385,7 +2405,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IVendor>
+                <Antd.Table.Column<Interfaces.EntVendorInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2472,16 +2492,20 @@ export const VendorTable: React.FC<VendorTableProps> = ({
         </>
     );
 };
-export type WarehouseTableProps = Antd.TableProps<Interfaces.IWarehouse> & {
-    extendTable?: RA.useTableProps<Interfaces.IWarehouse, HttpError>;
-};
+export type WarehouseTableProps =
+    Antd.TableProps<Interfaces.EntWarehouseInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntWarehouseInterface,
+            HttpError
+        >;
+    };
 export const WarehouseTable: React.FC<WarehouseTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IWarehouse>({
+    const table = RA.useTable<Interfaces.EntWarehouseInterface>({
         resource: "warehouse",
         initialSorter: [
             {
@@ -2688,7 +2712,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IWarehouse>
+                <Antd.Table.Column<Interfaces.EntWarehouseInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2775,16 +2799,20 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
         </>
     );
 };
-export type WebsiteTableProps = Antd.TableProps<Interfaces.IWebsite> & {
-    extendTable?: RA.useTableProps<Interfaces.IWebsite, HttpError>;
-};
+export type WebsiteTableProps =
+    Antd.TableProps<Interfaces.EntWebsiteInterface> & {
+        extendTable?: RA.useTableProps<
+            Interfaces.EntWebsiteInterface,
+            HttpError
+        >;
+    };
 export const WebsiteTable: React.FC<WebsiteTableProps> = ({
     extendTable,
     ...props
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.IWebsite>({
+    const table = RA.useTable<Interfaces.EntWebsiteInterface>({
         resource: "website",
         initialSorter: [
             {
@@ -2926,7 +2954,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.IWebsite>
+                <Antd.Table.Column<Interfaces.EntWebsiteInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as RA from "@refinedev/antd";
 import * as Antd from "antd";
-import * as Interfaces from "./interfaces";
+import * as Interfaces from "./typedefs";
 import { Cursors } from "./data-provider";
 import dayjs from "dayjs";
 import CodeEditor from "@uiw/react-textarea-code-editor";
@@ -11,11 +11,11 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 export const CompanyCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.ICompany>();
+        RA.useForm<Interfaces.EntCompanyInterface>();
 
     const [countriesCursors, setCountriesCursors] = useState<Cursors>({});
     const { selectProps: countriesSelectProps } =
-        RA.useSelect<Interfaces.ICountry>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -32,42 +32,44 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
-    const { selectProps: phonesSelectProps } = RA.useSelect<Interfaces.IPhone>({
-        resource: "Phone",
-        optionLabel: "title",
-        optionValue: "id",
-        metaData: {
-            cursors: phonesCursors,
-            fields: ["id", "title"],
-        },
-        onSearch: (value) => [
-            {
-                field: "title",
-                operator: "contains",
-                value,
+    const { selectProps: phonesSelectProps } =
+        RA.useSelect<Interfaces.EntPhoneInterface>({
+            resource: "Phone",
+            optionLabel: "title",
+            optionValue: "id",
+            metaData: {
+                cursors: phonesCursors,
+                fields: ["id", "title"],
             },
-        ],
-    });
+            onSearch: (value) => [
+                {
+                    field: "title",
+                    operator: "contains",
+                    value,
+                },
+            ],
+        });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
-    const { selectProps: emailsSelectProps } = RA.useSelect<Interfaces.IEmail>({
-        resource: "Email",
-        optionLabel: "title",
-        optionValue: "id",
-        metaData: {
-            cursors: emailsCursors,
-            fields: ["id", "title"],
-        },
-        onSearch: (value) => [
-            {
-                field: "title",
-                operator: "contains",
-                value,
+    const { selectProps: emailsSelectProps } =
+        RA.useSelect<Interfaces.EntEmailInterface>({
+            resource: "Email",
+            optionLabel: "title",
+            optionValue: "id",
+            metaData: {
+                cursors: emailsCursors,
+                fields: ["id", "title"],
             },
-        ],
-    });
+            onSearch: (value) => [
+                {
+                    field: "title",
+                    operator: "contains",
+                    value,
+                },
+            ],
+        });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
     const { selectProps: websitesSelectProps } =
-        RA.useSelect<Interfaces.IWebsite>({
+        RA.useSelect<Interfaces.EntWebsiteInterface>({
             resource: "Website",
             optionLabel: "title",
             optionValue: "id",
@@ -85,7 +87,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
     const { selectProps: locationsSelectProps } =
-        RA.useSelect<Interfaces.ILocation>({
+        RA.useSelect<Interfaces.EntLocationInterface>({
             resource: "Location",
             optionLabel: "title",
             optionValue: "id",
@@ -103,7 +105,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [logo_imageCursors, setLogoImageCursors] = useState<Cursors>({});
     const { selectProps: logo_imageSelectProps } =
-        RA.useSelect<Interfaces.IImage>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -121,7 +123,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [cover_imageCursors, setCoverImageCursors] = useState<Cursors>({});
     const { selectProps: cover_imageSelectProps } =
-        RA.useSelect<Interfaces.IImage>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -141,7 +143,7 @@ export const CompanyCreate: React.FC = () => {
         {},
     );
     const { selectProps: gallery_imagesSelectProps } =
-        RA.useSelect<Interfaces.IImage>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -241,11 +243,11 @@ export const CompanyCreate: React.FC = () => {
 };
 export const CountryCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.ICountry>();
+        RA.useForm<Interfaces.EntCountryInterface>();
 
     const [companiesCursors, setCompaniesCursors] = useState<Cursors>({});
     const { selectProps: companiesSelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -262,42 +264,44 @@ export const CountryCreate: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
-    const { selectProps: phonesSelectProps } = RA.useSelect<Interfaces.IPhone>({
-        resource: "Phone",
-        optionLabel: "title",
-        optionValue: "id",
-        metaData: {
-            cursors: phonesCursors,
-            fields: ["id", "title"],
-        },
-        onSearch: (value) => [
-            {
-                field: "title",
-                operator: "contains",
-                value,
+    const { selectProps: phonesSelectProps } =
+        RA.useSelect<Interfaces.EntPhoneInterface>({
+            resource: "Phone",
+            optionLabel: "title",
+            optionValue: "id",
+            metaData: {
+                cursors: phonesCursors,
+                fields: ["id", "title"],
             },
-        ],
-    });
+            onSearch: (value) => [
+                {
+                    field: "title",
+                    operator: "contains",
+                    value,
+                },
+            ],
+        });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
-    const { selectProps: emailsSelectProps } = RA.useSelect<Interfaces.IEmail>({
-        resource: "Email",
-        optionLabel: "title",
-        optionValue: "id",
-        metaData: {
-            cursors: emailsCursors,
-            fields: ["id", "title"],
-        },
-        onSearch: (value) => [
-            {
-                field: "title",
-                operator: "contains",
-                value,
+    const { selectProps: emailsSelectProps } =
+        RA.useSelect<Interfaces.EntEmailInterface>({
+            resource: "Email",
+            optionLabel: "title",
+            optionValue: "id",
+            metaData: {
+                cursors: emailsCursors,
+                fields: ["id", "title"],
             },
-        ],
-    });
+            onSearch: (value) => [
+                {
+                    field: "title",
+                    operator: "contains",
+                    value,
+                },
+            ],
+        });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
     const { selectProps: websitesSelectProps } =
-        RA.useSelect<Interfaces.IWebsite>({
+        RA.useSelect<Interfaces.EntWebsiteInterface>({
             resource: "Website",
             optionLabel: "title",
             optionValue: "id",
@@ -315,7 +319,7 @@ export const CountryCreate: React.FC = () => {
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
     const { selectProps: locationsSelectProps } =
-        RA.useSelect<Interfaces.ILocation>({
+        RA.useSelect<Interfaces.EntLocationInterface>({
             resource: "Location",
             optionLabel: "title",
             optionValue: "id",
@@ -391,11 +395,11 @@ export const CountryCreate: React.FC = () => {
 };
 export const EmailCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IEmail>();
+        RA.useForm<Interfaces.EntEmailInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -413,7 +417,7 @@ export const EmailCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.ICountry>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -475,12 +479,12 @@ export const EmailCreate: React.FC = () => {
 };
 export const ImageCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IImage>();
+        RA.useForm<Interfaces.EntImageInterface>();
 
     const [gallery_companyCursors, setGalleryCompanyCursors] =
         useState<Cursors>({});
     const { selectProps: gallery_companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -498,7 +502,7 @@ export const ImageCreate: React.FC = () => {
         });
     const [logo_companyCursors, setLogoCompanyCursors] = useState<Cursors>({});
     const { selectProps: logo_companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -518,7 +522,7 @@ export const ImageCreate: React.FC = () => {
         {},
     );
     const { selectProps: cover_companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -589,11 +593,11 @@ export const ImageCreate: React.FC = () => {
 };
 export const LocationCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.ILocation>();
+        RA.useForm<Interfaces.EntLocationInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -611,7 +615,7 @@ export const LocationCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.ICountry>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -729,11 +733,11 @@ export const LocationCreate: React.FC = () => {
 };
 export const PhoneCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IPhone>();
+        RA.useForm<Interfaces.EntPhoneInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -751,7 +755,7 @@ export const PhoneCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.ICountry>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -820,11 +824,11 @@ export const PhoneCreate: React.FC = () => {
 };
 export const ProductCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IProduct>();
+        RA.useForm<Interfaces.EntProductInterface>();
 
     const [warehouseCursors, setWarehouseCursors] = useState<Cursors>({});
     const { selectProps: warehouseSelectProps } =
-        RA.useSelect<Interfaces.IWarehouse>({
+        RA.useSelect<Interfaces.EntWarehouseInterface>({
             resource: "Warehouse",
             optionLabel: "name",
             optionValue: "id",
@@ -841,8 +845,8 @@ export const ProductCreate: React.FC = () => {
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
-    const { selectProps: vendorSelectProps } = RA.useSelect<Interfaces.IVendor>(
-        {
+    const { selectProps: vendorSelectProps } =
+        RA.useSelect<Interfaces.EntVendorInterface>({
             resource: "Vendor",
             optionLabel: "name",
             optionValue: "id",
@@ -857,8 +861,7 @@ export const ProductCreate: React.FC = () => {
                     value,
                 },
             ],
-        },
-    );
+        });
 
     return (
         <RA.Create saveButtonProps={saveButtonProps}>
@@ -926,11 +929,11 @@ export const ProductCreate: React.FC = () => {
 };
 export const VendorCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IVendor>();
+        RA.useForm<Interfaces.EntVendorInterface>();
 
     const [warehousesCursors, setWarehousesCursors] = useState<Cursors>({});
     const { selectProps: warehousesSelectProps } =
-        RA.useSelect<Interfaces.IWarehouse>({
+        RA.useSelect<Interfaces.EntWarehouseInterface>({
             resource: "Warehouse",
             optionLabel: "name",
             optionValue: "id",
@@ -948,7 +951,7 @@ export const VendorCreate: React.FC = () => {
         });
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
     const { selectProps: productsSelectProps } =
-        RA.useSelect<Interfaces.IProduct>({
+        RA.useSelect<Interfaces.EntProductInterface>({
             resource: "Product",
             optionLabel: "url",
             optionValue: "id",
@@ -1003,11 +1006,11 @@ export const VendorCreate: React.FC = () => {
 };
 export const WarehouseCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IWarehouse>();
+        RA.useForm<Interfaces.EntWarehouseInterface>();
 
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
     const { selectProps: productsSelectProps } =
-        RA.useSelect<Interfaces.IProduct>({
+        RA.useSelect<Interfaces.EntProductInterface>({
             resource: "Product",
             optionLabel: "url",
             optionValue: "id",
@@ -1024,8 +1027,8 @@ export const WarehouseCreate: React.FC = () => {
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
-    const { selectProps: vendorSelectProps } = RA.useSelect<Interfaces.IVendor>(
-        {
+    const { selectProps: vendorSelectProps } =
+        RA.useSelect<Interfaces.EntVendorInterface>({
             resource: "Vendor",
             optionLabel: "name",
             optionValue: "id",
@@ -1040,8 +1043,7 @@ export const WarehouseCreate: React.FC = () => {
                     value,
                 },
             ],
-        },
-    );
+        });
 
     return (
         <RA.Create saveButtonProps={saveButtonProps}>
@@ -1095,11 +1097,11 @@ export const WarehouseCreate: React.FC = () => {
 };
 export const WebsiteCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.IWebsite>();
+        RA.useForm<Interfaces.EntWebsiteInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.ICompany>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -1117,7 +1119,7 @@ export const WebsiteCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.ICountry>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",

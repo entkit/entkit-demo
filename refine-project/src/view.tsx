@@ -4,7 +4,7 @@ import * as Antd from "antd";
 import * as AntdIcons from "@ant-design/icons";
 import { useLink } from "@refinedev/core";
 import * as Show from "./show";
-import * as Type from "./interfaces";
+import * as Type from "./typedefs";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import CodeEditor from "@uiw/react-textarea-code-editor";
@@ -260,7 +260,9 @@ export const EntEnumsProcessStatusViewOnForm: React.FC = (props) => {
 
 // region Entity Badges
 
-export const CompanyBadge: React.FC<Partial<Type.ICompany>> = (props) => {
+export const CompanyBadge: React.FC<Partial<Type.EntCompanyInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -286,7 +288,9 @@ export const CompanyBadge: React.FC<Partial<Type.ICompany>> = (props) => {
     );
 };
 
-export const CountryBadge: React.FC<Partial<Type.ICountry>> = (props) => {
+export const CountryBadge: React.FC<Partial<Type.EntCountryInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -312,7 +316,9 @@ export const CountryBadge: React.FC<Partial<Type.ICountry>> = (props) => {
     );
 };
 
-export const EmailBadge: React.FC<Partial<Type.IEmail>> = (props) => {
+export const EmailBadge: React.FC<Partial<Type.EntEmailInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -338,7 +344,9 @@ export const EmailBadge: React.FC<Partial<Type.IEmail>> = (props) => {
     );
 };
 
-export const ImageBadge: React.FC<Partial<Type.IImage>> = (props) => {
+export const ImageBadge: React.FC<Partial<Type.EntImageInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -372,7 +380,9 @@ export const ImageBadge: React.FC<Partial<Type.IImage>> = (props) => {
     );
 };
 
-export const LocationBadge: React.FC<Partial<Type.ILocation>> = (props) => {
+export const LocationBadge: React.FC<Partial<Type.EntLocationInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -398,7 +408,9 @@ export const LocationBadge: React.FC<Partial<Type.ILocation>> = (props) => {
     );
 };
 
-export const PhoneBadge: React.FC<Partial<Type.IPhone>> = (props) => {
+export const PhoneBadge: React.FC<Partial<Type.EntPhoneInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -424,7 +436,9 @@ export const PhoneBadge: React.FC<Partial<Type.IPhone>> = (props) => {
     );
 };
 
-export const ProductBadge: React.FC<Partial<Type.IProduct>> = (props) => {
+export const ProductBadge: React.FC<Partial<Type.EntProductInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -454,7 +468,9 @@ export const ProductBadge: React.FC<Partial<Type.IProduct>> = (props) => {
     );
 };
 
-export const VendorBadge: React.FC<Partial<Type.IVendor>> = (props) => {
+export const VendorBadge: React.FC<Partial<Type.EntVendorInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -480,7 +496,9 @@ export const VendorBadge: React.FC<Partial<Type.IVendor>> = (props) => {
     );
 };
 
-export const WarehouseBadge: React.FC<Partial<Type.IWarehouse>> = (props) => {
+export const WarehouseBadge: React.FC<Partial<Type.EntWarehouseInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover
@@ -506,7 +524,9 @@ export const WarehouseBadge: React.FC<Partial<Type.IWarehouse>> = (props) => {
     );
 };
 
-export const WebsiteBadge: React.FC<Partial<Type.IWebsite>> = (props) => {
+export const WebsiteBadge: React.FC<Partial<Type.EntWebsiteInterface>> = (
+    props,
+) => {
     const Link = useLink();
     return (
         <Antd.Popover

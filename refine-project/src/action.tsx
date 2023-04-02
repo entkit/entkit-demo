@@ -14,7 +14,7 @@ import {
     useLink,
 } from "@refinedev/core";
 import * as Custom from "./custom";
-import * as Type from "./interfaces";
+import * as Type from "./typedefs";
 
 export type CompanyListActionProps = ButtonProps &
     RefineButtonCommonProps &
@@ -97,7 +97,7 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.ICompany>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntCompanyInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -276,7 +276,7 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.ICountry>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntCountryInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -455,7 +455,7 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IEmail>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntEmailInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -634,7 +634,7 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IImage>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntImageInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -815,7 +815,7 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.ILocation>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntLocationInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -996,7 +996,7 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IPhone>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntPhoneInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1206,7 +1206,7 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IProduct>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1289,7 +1289,7 @@ export const ProductMyCustomActionButtonAction: React.FC<
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IProduct>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1437,7 +1437,7 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IVendor>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntVendorInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1618,7 +1618,7 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IWarehouse>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntWarehouseInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1799,7 +1799,7 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.IWebsite>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntWebsiteInterface>();
     const invalidate = useInvalidate();
 
     return can ? (

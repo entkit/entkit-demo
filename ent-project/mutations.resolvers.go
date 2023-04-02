@@ -6,8 +6,8 @@ package ent_project
 
 import (
 	"context"
-	"github.com/entkit/entkit-demo/ent-project/core/ent"
 
+	"github.com/entkit/entkit-demo/ent-project/core/ent"
 	"github.com/google/uuid"
 )
 
