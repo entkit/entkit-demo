@@ -61,6 +61,7 @@ func (Company) Edges() []ent.Edge {
 			Annotations(entgql.RelayConnection()),
 	}
 }
+
 func (Company) Annotations() []schema.Annotation {
 	return []schema.Annotation{
 		entgql.RelayConnection(),

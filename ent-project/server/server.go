@@ -17,7 +17,6 @@ import (
 	"strings"
 
 	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/handler/debug"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"go.uber.org/zap"
 
@@ -54,7 +53,7 @@ func main() {
 
 	srv := handler.NewDefaultServer(example.NewSchema(client))
 	srv.Use(entgql.Transactioner{TxOpener: client})
-	srv.Use(&debug.Tracer{})
+	//srv.Use(&debug.Tracer{})
 	mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
 	mux.HandleFunc("/query", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Access-Control-Allow-Origin", "*")
