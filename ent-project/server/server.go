@@ -36,7 +36,7 @@ func init() {
 func main() {
 	client, err := ent.Open(
 		"sqlite3",
-		"file:example.db?mode=rwc&cache=shared&_fk=1",
+		"file:runtime/ent/demo.db?mode=rwc&cache=shared&_fk=1",
 	)
 	if err != nil {
 		log.Fatal("opening ent client", zap.Error(err))

@@ -56,7 +56,7 @@ export const SearchComponent: React.FC = () => {
             </Link>
         ),
     });
-    const { refetch: refetchCompany } = useList<Interfaces.EntCompanyInterface>(
+    const { refetch: refetchCompany } = useList<Interfaces.QWECompanyInterface>(
         {
             resource: "company",
             metaData: {
@@ -86,7 +86,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     );
-    const { refetch: refetchCountry } = useList<Interfaces.EntCountryInterface>(
+    const { refetch: refetchCountry } = useList<Interfaces.QWECountryInterface>(
         {
             resource: "country",
             metaData: {
@@ -116,7 +116,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     );
-    const { refetch: refetchEmail } = useList<Interfaces.EntEmailInterface>({
+    const { refetch: refetchEmail } = useList<Interfaces.QWEEmailInterface>({
         resource: "email",
         metaData: {
             fields: ["id", "title"],
@@ -144,7 +144,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchImage } = useList<Interfaces.EntImageInterface>({
+    const { refetch: refetchImage } = useList<Interfaces.QWEImageInterface>({
         resource: "image",
         metaData: {
             fields: ["id", "title", "originalURL"],
@@ -173,7 +173,7 @@ export const SearchComponent: React.FC = () => {
         },
     });
     const { refetch: refetchLocation } =
-        useList<Interfaces.EntLocationInterface>({
+        useList<Interfaces.QWELocationInterface>({
             resource: "location",
             metaData: {
                 fields: ["id", "title"],
@@ -201,7 +201,7 @@ export const SearchComponent: React.FC = () => {
                 },
             },
         });
-    const { refetch: refetchPhone } = useList<Interfaces.EntPhoneInterface>({
+    const { refetch: refetchPhone } = useList<Interfaces.QWEPhoneInterface>({
         resource: "phone",
         metaData: {
             fields: ["id", "title"],
@@ -229,7 +229,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     });
-    const { refetch: refetchProduct } = useList<Interfaces.EntProductInterface>(
+    const { refetch: refetchProduct } = useList<Interfaces.QWEProductInterface>(
         {
             resource: "product",
             metaData: {
@@ -259,7 +259,7 @@ export const SearchComponent: React.FC = () => {
             },
         },
     );
-    const { refetch: refetchVendor } = useList<Interfaces.EntVendorInterface>({
+    const { refetch: refetchVendor } = useList<Interfaces.QWEVendorInterface>({
         resource: "vendor",
         metaData: {
             fields: ["id", "name"],
@@ -288,7 +288,7 @@ export const SearchComponent: React.FC = () => {
         },
     });
     const { refetch: refetchWarehouse } =
-        useList<Interfaces.EntWarehouseInterface>({
+        useList<Interfaces.QWEWarehouseInterface>({
             resource: "warehouse",
             metaData: {
                 fields: ["id", "name"],
@@ -316,7 +316,7 @@ export const SearchComponent: React.FC = () => {
                 },
             },
         });
-    const { refetch: refetchWebsite } = useList<Interfaces.EntWebsiteInterface>(
+    const { refetch: refetchWebsite } = useList<Interfaces.QWEWebsiteInterface>(
         {
             resource: "website",
             metaData: {

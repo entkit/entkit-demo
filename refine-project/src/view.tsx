@@ -14,27 +14,27 @@ export type ViewProps<T> = Omit<React.HTMLProps<HTMLElement>, "value"> & {
 };
 
 // region Date
-export const EntDateViewOnShow: React.FC<ViewProps<Date>> = ({ value }) => {
+export const QWEDateViewOnShow: React.FC<ViewProps<Date>> = ({ value }) => {
     return value ? (
         <RA.DateField format="LLL" value={value} />
     ) : (
         <RA.TextField value="Never" />
     );
 };
-export const EntDateViewOnList: React.FC<ViewProps<Date>> = EntDateViewOnShow;
-export const EntDateViewOnForm: React.FC = (props) => {
+export const QWEDateViewOnList: React.FC<ViewProps<Date>> = QWEDateViewOnShow;
+export const QWEDateViewOnForm: React.FC = (props) => {
     return <Antd.DatePicker {...props} showTime={true} />;
 };
 // endregion Date
 
 // region Boolean
-export const EntBooleanViewOnShow: React.FC<ViewProps<Type.EntBoolean>> = ({
+export const QWEBooleanViewOnShow: React.FC<ViewProps<Type.QWEBoolean>> = ({
     value,
 }) => {
     return <RA.TextField value={value ? "Yes" : "No"} />;
 };
-export const EntBooleanViewOnList = EntBooleanViewOnShow;
-export const EntBooleanViewOnForm: React.FC = (props) => {
+export const QWEBooleanViewOnList = QWEBooleanViewOnShow;
+export const QWEBooleanViewOnForm: React.FC = (props) => {
     return (
         <Antd.Radio.Group {...props}>
             <Antd.Radio value={true}>Yes</Antd.Radio>
@@ -45,12 +45,12 @@ export const EntBooleanViewOnForm: React.FC = (props) => {
 // endregion Boolean
 
 // region String
-export const EntStringViewOnShow: React.FC<ViewProps<Type.EntString>> = ({
+export const QWEStringViewOnShow: React.FC<ViewProps<Type.QWEString>> = ({
     value,
 }) => {
     return <Antd.Typography.Text copyable={true}>{value}</Antd.Typography.Text>;
 };
-export const EntStringViewOnList: React.FC<ViewProps<Type.EntString>> = ({
+export const QWEStringViewOnList: React.FC<ViewProps<Type.QWEString>> = ({
     value,
 }) => {
     return (
@@ -63,43 +63,43 @@ export const EntStringViewOnList: React.FC<ViewProps<Type.EntString>> = ({
         </Antd.Tooltip>
     );
 };
-export const EntStringViewOnForm: React.FC = (props) => {
+export const QWEStringViewOnForm: React.FC = (props) => {
     return <Antd.Input {...props} />;
 };
 // endregion String
 
 // region Number
-export const EntNumberViewOnShow: React.FC<ViewProps<Type.EntNumber>> = ({
+export const QWENumberViewOnShow: React.FC<ViewProps<Type.QWENumber>> = ({
     value,
     ...props
 }) => {
-    return <EntStringViewOnShow value={String(value)} {...props} />;
+    return <QWEStringViewOnShow value={String(value)} {...props} />;
 };
-export const EntNumberViewOnList: React.FC<ViewProps<Type.EntNumber>> = ({
+export const QWENumberViewOnList: React.FC<ViewProps<Type.QWENumber>> = ({
     value,
     ...props
 }) => {
-    return <EntNumberViewOnShow value={value} {...props} />;
+    return <QWENumberViewOnShow value={value} {...props} />;
 };
-export const EntNumberViewOnForm: React.FC = (props) => {
+export const QWENumberViewOnForm: React.FC = (props) => {
     return <Antd.InputNumber {...props} />;
 };
 // endregion Number
 
 // region String List
-export const EntStringListViewOnShow: React.FC<
-    ViewProps<Type.EntStringList>
+export const QWEStringListViewOnShow: React.FC<
+    ViewProps<Type.QWEStringList>
 > = ({ value }) => {
     return (
         <>
             {value?.map((v, i) => (
-                <EntStringViewOnShow key={i} value={String(i + 1) + ". " + v} />
+                <QWEStringViewOnShow key={i} value={String(i + 1) + ". " + v} />
             ))}
         </>
     );
 };
-export const EntStringListViewOnList: React.FC<
-    ViewProps<Type.EntStringList>
+export const QWEStringListViewOnList: React.FC<
+    ViewProps<Type.QWEStringList>
 > = ({ value }) => {
     return (
         <Antd.Typography.Text>
@@ -107,37 +107,37 @@ export const EntStringListViewOnList: React.FC<
         </Antd.Typography.Text>
     );
 };
-export const EntStringListViewOnForm: React.FC = (props) => {
+export const QWEStringListViewOnForm: React.FC = (props) => {
     return <Antd.Select {...props} mode="tags" />;
 };
 // endregion
 
 // region Image
-export const EntImageViewOnShow: React.FC<ViewProps<Type.EntImage>> = ({
+export const QWEImageViewOnShow: React.FC<ViewProps<Type.QWEImage>> = ({
     value,
 }) => {
     return (
         <Antd.Image style={{ width: "100%", maxWidth: "256px" }} src={value} />
     );
 };
-export const EntImageViewOnList: React.FC<ViewProps<Type.EntImage>> = ({
+export const QWEImageViewOnList: React.FC<ViewProps<Type.QWEImage>> = ({
     value,
 }) => {
     return <Antd.Image width={48} src={value} />;
 };
-export const EntImageViewOnForm: React.FC = EntStringViewOnForm;
+export const QWEImageViewOnForm: React.FC = QWEStringViewOnForm;
 // endregion Image
 
 // region UUID
-export const EntUUIDViewOnShow: React.FC<ViewProps<Type.EntUUID>> =
-    EntStringViewOnShow;
-export const EntUUIDViewOnList: React.FC<ViewProps<Type.EntUUID>> =
-    EntStringViewOnList;
-export const EntUUIDViewOnForm: React.FC = EntStringListViewOnForm;
+export const QWEUUIDViewOnShow: React.FC<ViewProps<Type.QWEUUID>> =
+    QWEStringViewOnShow;
+export const QWEUUIDViewOnList: React.FC<ViewProps<Type.QWEUUID>> =
+    QWEStringViewOnList;
+export const QWEUUIDViewOnForm: React.FC = QWEStringListViewOnForm;
 // endregion UUID
 
 // region Code
-export const EntCodeViewOnForm: React.FC<any> = (props) => {
+export const QWECodeViewOnForm: React.FC<any> = (props) => {
     return (
         <CodeEditor
             {...props}
@@ -155,12 +155,12 @@ export const EntCodeViewOnForm: React.FC<any> = (props) => {
         />
     );
 };
-export const EntCodeViewOnShow: React.FC<ViewProps<Type.EntCode>> = ({
+export const QWECodeViewOnShow: React.FC<ViewProps<Type.QWECode>> = ({
     value,
 }) => {
-    return <EntCodeViewOnForm value={value} readOnly={true} />;
+    return <QWECodeViewOnForm value={value} readOnly={true} />;
 };
-export const EntCodeViewOnList: React.FC<ViewProps<Type.EntCode>> = ({
+export const QWECodeViewOnList: React.FC<ViewProps<Type.QWECode>> = ({
     value,
 }) => {
     return (
@@ -175,20 +175,20 @@ export const EntCodeViewOnList: React.FC<ViewProps<Type.EntCode>> = ({
 // endregion Code
 
 // region Rich Text
-export const EntRichTextViewOnShow: React.FC<ViewProps<Type.EntRichText>> = ({
+export const QWERichTextViewOnShow: React.FC<ViewProps<Type.QWERichText>> = ({
     value,
 }) => {
     return <div dangerouslySetInnerHTML={{ __html: value || "" }}></div>;
 };
-export const EntRichTextViewOnList: React.FC<ViewProps<Type.EntRichText>> =
-    EntStringViewOnList;
-export const EntRichTextViewOnForm: React.FC = (props) => (
+export const QWERichTextViewOnList: React.FC<ViewProps<Type.QWERichText>> =
+    QWEStringViewOnList;
+export const QWERichTextViewOnForm: React.FC = (props) => (
     <ReactQuill {...props} theme="snow" />
 );
 // endregion Rich Text
 
 // region URL
-export const EntURLViewOnShow: React.FC<ViewProps<Type.EntURL>> = ({
+export const QWEURLViewOnShow: React.FC<ViewProps<Type.QWEURL>> = ({
     value,
 }) => {
     return (
@@ -206,7 +206,7 @@ export const EntURLViewOnShow: React.FC<ViewProps<Type.EntURL>> = ({
         </Antd.Button>
     );
 };
-export const EntURLViewOnList: React.FC<ViewProps<Type.EntURL>> = ({
+export const QWEURLViewOnList: React.FC<ViewProps<Type.QWEURL>> = ({
     value,
 }) => {
     return (
@@ -220,14 +220,14 @@ export const EntURLViewOnList: React.FC<ViewProps<Type.EntURL>> = ({
         </Antd.Button>
     );
 };
-export const EntURLViewOnForm: React.FC = EntStringViewOnForm;
+export const QWEURLViewOnForm: React.FC = QWEStringViewOnForm;
 // endregion URL
 
 // region Enums
 
-export const EntEnumsProcessStatusViewOnShow = EntStringViewOnShow;
-export const EntEnumsProcessStatusViewOnList = EntStringViewOnList;
-export const EntEnumsProcessStatusViewOnForm: React.FC = (props) => {
+export const QWEEnumsProcessStatusViewOnShow = QWEStringViewOnShow;
+export const QWEEnumsProcessStatusViewOnList = QWEStringViewOnList;
+export const QWEEnumsProcessStatusViewOnForm: React.FC = (props) => {
     return (
         <Antd.Select
             {...props}
@@ -260,7 +260,7 @@ export const EntEnumsProcessStatusViewOnForm: React.FC = (props) => {
 
 // region Entity Badges
 
-export const CompanyBadge: React.FC<Partial<Type.EntCompanyInterface>> = (
+export const CompanyBadge: React.FC<Partial<Type.QWECompanyInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -288,7 +288,7 @@ export const CompanyBadge: React.FC<Partial<Type.EntCompanyInterface>> = (
     );
 };
 
-export const CountryBadge: React.FC<Partial<Type.EntCountryInterface>> = (
+export const CountryBadge: React.FC<Partial<Type.QWECountryInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -316,7 +316,7 @@ export const CountryBadge: React.FC<Partial<Type.EntCountryInterface>> = (
     );
 };
 
-export const EmailBadge: React.FC<Partial<Type.EntEmailInterface>> = (
+export const EmailBadge: React.FC<Partial<Type.QWEEmailInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -344,7 +344,7 @@ export const EmailBadge: React.FC<Partial<Type.EntEmailInterface>> = (
     );
 };
 
-export const ImageBadge: React.FC<Partial<Type.EntImageInterface>> = (
+export const ImageBadge: React.FC<Partial<Type.QWEImageInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -380,7 +380,7 @@ export const ImageBadge: React.FC<Partial<Type.EntImageInterface>> = (
     );
 };
 
-export const LocationBadge: React.FC<Partial<Type.EntLocationInterface>> = (
+export const LocationBadge: React.FC<Partial<Type.QWELocationInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -408,7 +408,7 @@ export const LocationBadge: React.FC<Partial<Type.EntLocationInterface>> = (
     );
 };
 
-export const PhoneBadge: React.FC<Partial<Type.EntPhoneInterface>> = (
+export const PhoneBadge: React.FC<Partial<Type.QWEPhoneInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -436,7 +436,7 @@ export const PhoneBadge: React.FC<Partial<Type.EntPhoneInterface>> = (
     );
 };
 
-export const ProductBadge: React.FC<Partial<Type.EntProductInterface>> = (
+export const ProductBadge: React.FC<Partial<Type.QWEProductInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -468,7 +468,7 @@ export const ProductBadge: React.FC<Partial<Type.EntProductInterface>> = (
     );
 };
 
-export const VendorBadge: React.FC<Partial<Type.EntVendorInterface>> = (
+export const VendorBadge: React.FC<Partial<Type.QWEVendorInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -496,7 +496,7 @@ export const VendorBadge: React.FC<Partial<Type.EntVendorInterface>> = (
     );
 };
 
-export const WarehouseBadge: React.FC<Partial<Type.EntWarehouseInterface>> = (
+export const WarehouseBadge: React.FC<Partial<Type.QWEWarehouseInterface>> = (
     props,
 ) => {
     const Link = useLink();
@@ -524,7 +524,7 @@ export const WarehouseBadge: React.FC<Partial<Type.EntWarehouseInterface>> = (
     );
 };
 
-export const WebsiteBadge: React.FC<Partial<Type.EntWebsiteInterface>> = (
+export const WebsiteBadge: React.FC<Partial<Type.QWEWebsiteInterface>> = (
     props,
 ) => {
     const Link = useLink();

@@ -31,6 +31,7 @@
     "gql-query-builder": "^3.5.5",
     "graphql": "^15.6.1",
     "graphql-request": "^4.3.0",
+    "@react-keycloak/web": "^3.4.0",
     "keycloak-js": "^20.0.5",
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",

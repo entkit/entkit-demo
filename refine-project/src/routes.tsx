@@ -12,6 +12,7 @@ import {
     NavigateToResource,
     CatchAllNavigate,
 } from "@refinedev/react-router-v6";
+import { usePermissions } from "@refinedev/core";
 
 export const RoutesBundle: React.FC = () => {
     return (

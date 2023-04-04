@@ -3,14 +3,19 @@ import { createRoot } from "react-dom/client";
 
 import App from "./app";
 import * as environment from "./environment";
+import Keycloak from "keycloak-js";
+import { ReactKeycloakProvider } from "@react-keycloak/web";
 
+const keycloak = new Keycloak(environment.keycloak);
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
 root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+    <ReactKeycloakProvider authClient={keycloak}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </ReactKeycloakProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

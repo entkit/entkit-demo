@@ -11,6 +11,7 @@ import (
 	"entgo.io/contrib/entgql"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
+	"github.com/Nerzal/gocloak/v12"
 	"github.com/entkit/entkit"
 	"log"
 	"os"
@@ -37,44 +38,44 @@ func main() {
 		graphqlUri = "http://localhost/query"
 	}
 	entRefine, err := entkit.NewExtension(
-		entkit.WithUIs(
-			entkit.NewUI(filepath.Join("..", "typescript-project"), entkit.TypescriptAdapter),
-			entkit.NewUI(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
-		),
+		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.TypescriptAdapter),
+		entkit.WithGenerator(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
+
+		entkit.WithPrefix("QWE"),
 		entkit.WithGraphqlURL(graphqlUri),
 		entkit.IgnoreUncommittedChanges(),
-		//entkit.WithAuth(
-		//	entkit.AuthWithKeycloak(
-		//		entkit.NewKeycloak(
-		//			"http://localhost:8080",
-		//			"entkit",
-		//			"admin",
-		//			"admin",
-		//			"entadmin",
-		//			"entadmin",
-		//			&gocloak.Client{
-		//				ClientID: gocloak.StringP("xcontain-backend"),
-		//				Secret:   gocloak.StringP("test-secret"),
-		//			},
-		//			[]*gocloak.Client{
-		//				{
-		//					ClientID: gocloak.StringP("xcontain-frontend"),
-		//					RootURL:  gocloak.StringP("https://console.xcontain.com"),
-		//					RedirectURIs: &[]string{
-		//						"https://console.xcontain.com/*",
-		//						"http://localhost:3000/*",
-		//					},
-		//					Attributes: &map[string]string{
-		//						"post.logout.redirect.uris": "+",
-		//					},
-		//					WebOrigins: &[]string{
-		//						"+",
-		//					},
-		//				},
-		//			},
-		//		),
-		//	),
-		//),
+		entkit.WithAuth(
+			entkit.AuthWithKeycloak(
+				entkit.NewKeycloak(
+					"http://localhost:8080",
+					"entkit",
+					"admin",
+					"admin",
+					"entadmin",
+					"entadmin",
+					&gocloak.Client{
+						ClientID: gocloak.StringP("xcontain-backend"),
+						Secret:   gocloak.StringP("test-secret"),
+					},
+					[]*gocloak.Client{
+						{
+							ClientID: gocloak.StringP("xcontain-frontend"),
+							RootURL:  gocloak.StringP("https://console.xcontain.com"),
+							RedirectURIs: &[]string{
+								"https://console.xcontain.com/*",
+								"http://localhost:3000/*",
+							},
+							Attributes: &map[string]string{
+								"post.logout.redirect.uris": "+",
+							},
+							WebOrigins: &[]string{
+								"+",
+							},
+						},
+					},
+				),
+			),
+		),
 	)
 	if err != nil {
 		log.Fatalf("creating entkit extension: %v", err)

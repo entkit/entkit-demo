@@ -8,3 +8,16 @@ services:
         GRAPHQL_URI: "https://demo.entkit.dev/query"
     ports:
       - "80:80"
+  keycloak:
+    command: [ "start-dev" ]
+    image: quay.io/keycloak/keycloak:21.0.0
+    volumes:
+      - ./runtime/keycloak:/opt/keycloak/data/
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      #KC_HOSTNAME: localhost
+      #KC_DB: postgres
+      #KC_DB_URL: jdbc:postgresql://db/keycloak_db?currentSchema=public&user=keycloak_user&password=keycloak_pass
+    ports:
+      - "8080:8080"

@@ -10,9 +10,9 @@ import * as View from "./view";
 import * as Action from "./action";
 
 export type CompanyTableProps =
-    Antd.TableProps<Interfaces.EntCompanyInterface> & {
+    Antd.TableProps<Interfaces.QWECompanyInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntCompanyInterface,
+            Interfaces.QWECompanyInterface,
             HttpError
         >;
     };
@@ -22,7 +22,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntCompanyInterface>({
+    const table = RA.useTable<Interfaces.QWECompanyInterface>({
         resource: "company",
         initialSorter: [
             {
@@ -184,7 +184,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -270,7 +270,7 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntCompanyInterface>
+                <Antd.Table.Column<Interfaces.QWECompanyInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -358,9 +358,9 @@ export const CompanyTable: React.FC<CompanyTableProps> = ({
     );
 };
 export type CountryTableProps =
-    Antd.TableProps<Interfaces.EntCountryInterface> & {
+    Antd.TableProps<Interfaces.QWECountryInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntCountryInterface,
+            Interfaces.QWECountryInterface,
             HttpError
         >;
     };
@@ -370,7 +370,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntCountryInterface>({
+    const table = RA.useTable<Interfaces.QWECountryInterface>({
         resource: "country",
         initialSorter: [
             {
@@ -515,7 +515,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -532,7 +532,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
                     title="Name"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -549,7 +549,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
                     title="Code"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -601,7 +601,7 @@ export const CountryTable: React.FC<CountryTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntCountryInterface>
+                <Antd.Table.Column<Interfaces.QWECountryInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -688,8 +688,8 @@ export const CountryTable: React.FC<CountryTableProps> = ({
         </>
     );
 };
-export type EmailTableProps = Antd.TableProps<Interfaces.EntEmailInterface> & {
-    extendTable?: RA.useTableProps<Interfaces.EntEmailInterface, HttpError>;
+export type EmailTableProps = Antd.TableProps<Interfaces.QWEEmailInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.QWEEmailInterface, HttpError>;
 };
 export const EmailTable: React.FC<EmailTableProps> = ({
     extendTable,
@@ -697,7 +697,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntEmailInterface>({
+    const table = RA.useTable<Interfaces.QWEEmailInterface>({
         resource: "email",
         initialSorter: [
             {
@@ -761,7 +761,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -778,7 +778,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                     title="Title"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -795,7 +795,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                     title="Description"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -812,7 +812,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                     title="Address"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -839,7 +839,7 @@ export const EmailTable: React.FC<EmailTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntEmailInterface>
+                <Antd.Table.Column<Interfaces.QWEEmailInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -926,8 +926,8 @@ export const EmailTable: React.FC<EmailTableProps> = ({
         </>
     );
 };
-export type ImageTableProps = Antd.TableProps<Interfaces.EntImageInterface> & {
-    extendTable?: RA.useTableProps<Interfaces.EntImageInterface, HttpError>;
+export type ImageTableProps = Antd.TableProps<Interfaces.QWEImageInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.QWEImageInterface, HttpError>;
 };
 export const ImageTable: React.FC<ImageTableProps> = ({
     extendTable,
@@ -935,7 +935,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntImageInterface>({
+    const table = RA.useTable<Interfaces.QWEImageInterface>({
         resource: "image",
         initialSorter: [
             {
@@ -996,7 +996,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1013,7 +1013,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
                     title="Title"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1030,7 +1030,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
                     title="Original Url"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntImageViewOnList value={value} />;
+                        return <View.QWEImageViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1062,7 +1062,7 @@ export const ImageTable: React.FC<ImageTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntImageInterface>
+                <Antd.Table.Column<Interfaces.QWEImageInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1150,9 +1150,9 @@ export const ImageTable: React.FC<ImageTableProps> = ({
     );
 };
 export type LocationTableProps =
-    Antd.TableProps<Interfaces.EntLocationInterface> & {
+    Antd.TableProps<Interfaces.QWELocationInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntLocationInterface,
+            Interfaces.QWELocationInterface,
             HttpError
         >;
     };
@@ -1162,7 +1162,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntLocationInterface>({
+    const table = RA.useTable<Interfaces.QWELocationInterface>({
         resource: "location",
         initialSorter: [
             {
@@ -1274,7 +1274,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1291,7 +1291,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Title"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1308,7 +1308,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Description"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1325,7 +1325,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Latitude"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1342,7 +1342,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Longitude"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1359,7 +1359,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Address"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1376,7 +1376,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Postcode"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1393,7 +1393,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Type"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1410,7 +1410,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="State"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1427,7 +1427,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Suburb"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1444,7 +1444,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Street Type"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1461,7 +1461,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                     title="Street Name"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1488,7 +1488,7 @@ export const LocationTable: React.FC<LocationTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntLocationInterface>
+                <Antd.Table.Column<Interfaces.QWELocationInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1575,8 +1575,8 @@ export const LocationTable: React.FC<LocationTableProps> = ({
         </>
     );
 };
-export type PhoneTableProps = Antd.TableProps<Interfaces.EntPhoneInterface> & {
-    extendTable?: RA.useTableProps<Interfaces.EntPhoneInterface, HttpError>;
+export type PhoneTableProps = Antd.TableProps<Interfaces.QWEPhoneInterface> & {
+    extendTable?: RA.useTableProps<Interfaces.QWEPhoneInterface, HttpError>;
 };
 export const PhoneTable: React.FC<PhoneTableProps> = ({
     extendTable,
@@ -1584,7 +1584,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntPhoneInterface>({
+    const table = RA.useTable<Interfaces.QWEPhoneInterface>({
         resource: "phone",
         initialSorter: [
             {
@@ -1654,7 +1654,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1671,7 +1671,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                     title="Title"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1688,7 +1688,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                     title="Description"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1705,7 +1705,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                     title="Number"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1722,7 +1722,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                     title="Type"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1749,7 +1749,7 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntPhoneInterface>
+                <Antd.Table.Column<Interfaces.QWEPhoneInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -1837,9 +1837,9 @@ export const PhoneTable: React.FC<PhoneTableProps> = ({
     );
 };
 export type ProductTableProps =
-    Antd.TableProps<Interfaces.EntProductInterface> & {
+    Antd.TableProps<Interfaces.QWEProductInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntProductInterface,
+            Interfaces.QWEProductInterface,
             HttpError
         >;
     };
@@ -1849,7 +1849,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntProductInterface>({
+    const table = RA.useTable<Interfaces.QWEProductInterface>({
         resource: "product",
         initialSorter: [
             {
@@ -1945,7 +1945,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1962,7 +1962,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     title="Name"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1979,7 +1979,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     title="Image"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntImageViewOnList value={value} />;
+                        return <View.QWEImageViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -1996,7 +1996,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     title="Url"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntURLViewOnList value={value} />;
+                        return <View.QWEURLViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2013,7 +2013,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     title="Last Sell"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntDateViewOnList value={value} />;
+                        return <View.QWEDateViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2030,7 +2030,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     title="Created At"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntDateViewOnList value={value} />;
+                        return <View.QWEDateViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2048,7 +2048,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     sorter={{}}
                     render={(value) => {
                         return (
-                            <View.EntEnumsProcessStatusViewOnList
+                            <View.QWEEnumsProcessStatusViewOnList
                                 value={value}
                             />
                         );
@@ -2093,7 +2093,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                     sorter={{}}
                     render={(value) => {
                         return (
-                            <View.EntEnumsProcessStatusViewOnList
+                            <View.QWEEnumsProcessStatusViewOnList
                                 value={value}
                             />
                         );
@@ -2147,7 +2147,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntProductInterface>
+                <Antd.Table.Column<Interfaces.QWEProductInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2235,9 +2235,9 @@ export const ProductTable: React.FC<ProductTableProps> = ({
     );
 };
 export type VendorTableProps =
-    Antd.TableProps<Interfaces.EntVendorInterface> & {
+    Antd.TableProps<Interfaces.QWEVendorInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntVendorInterface,
+            Interfaces.QWEVendorInterface,
             HttpError
         >;
     };
@@ -2247,7 +2247,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntVendorInterface>({
+    const table = RA.useTable<Interfaces.QWEVendorInterface>({
         resource: "vendor",
         initialSorter: [
             {
@@ -2340,7 +2340,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2357,7 +2357,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
                     title="Name"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2374,7 +2374,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
                     title="Schema"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntCodeViewOnList value={value} />;
+                        return <View.QWECodeViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2405,7 +2405,7 @@ export const VendorTable: React.FC<VendorTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntVendorInterface>
+                <Antd.Table.Column<Interfaces.QWEVendorInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2493,9 +2493,9 @@ export const VendorTable: React.FC<VendorTableProps> = ({
     );
 };
 export type WarehouseTableProps =
-    Antd.TableProps<Interfaces.EntWarehouseInterface> & {
+    Antd.TableProps<Interfaces.QWEWarehouseInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntWarehouseInterface,
+            Interfaces.QWEWarehouseInterface,
             HttpError
         >;
     };
@@ -2505,7 +2505,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntWarehouseInterface>({
+    const table = RA.useTable<Interfaces.QWEWarehouseInterface>({
         resource: "warehouse",
         initialSorter: [
             {
@@ -2600,7 +2600,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2617,7 +2617,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     title="Name"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2634,7 +2634,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     title="Last Update"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntDateViewOnList value={value} />;
+                        return <View.QWEDateViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2650,7 +2650,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     dataIndex="originalData"
                     title="Original Data"
                     render={(value) => {
-                        return <View.EntCodeViewOnList value={value} />;
+                        return <View.QWECodeViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2667,7 +2667,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     title="Enabled"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntBooleanViewOnList value={value} />;
+                        return <View.QWEBooleanViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2683,7 +2683,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                     dataIndex="filters"
                     title="Filters"
                     render={(value) => {
-                        return <View.EntStringListViewOnList value={value} />;
+                        return <View.QWEStringListViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2712,7 +2712,7 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntWarehouseInterface>
+                <Antd.Table.Column<Interfaces.QWEWarehouseInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (
@@ -2800,9 +2800,9 @@ export const WarehouseTable: React.FC<WarehouseTableProps> = ({
     );
 };
 export type WebsiteTableProps =
-    Antd.TableProps<Interfaces.EntWebsiteInterface> & {
+    Antd.TableProps<Interfaces.QWEWebsiteInterface> & {
         extendTable?: RA.useTableProps<
-            Interfaces.EntWebsiteInterface,
+            Interfaces.QWEWebsiteInterface,
             HttpError
         >;
     };
@@ -2812,7 +2812,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
 }) => {
     const [cursors, setCursors] = useState<Cursors>({ first: 10 });
     const [perPage, setPerPage] = useState<number>(10);
-    const table = RA.useTable<Interfaces.EntWebsiteInterface>({
+    const table = RA.useTable<Interfaces.QWEWebsiteInterface>({
         resource: "website",
         initialSorter: [
             {
@@ -2876,7 +2876,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                     dataIndex="id"
                     title="Id"
                     render={(value) => {
-                        return <View.EntUUIDViewOnList value={value} />;
+                        return <View.QWEUUIDViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2893,7 +2893,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                     title="Title"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2910,7 +2910,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                     title="Description"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntStringViewOnList value={value} />;
+                        return <View.QWEStringViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2927,7 +2927,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                     title="Url"
                     sorter={{}}
                     render={(value) => {
-                        return <View.EntURLViewOnList value={value} />;
+                        return <View.QWEURLViewOnList value={value} />;
                     }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
@@ -2954,7 +2954,7 @@ export const WebsiteTable: React.FC<WebsiteTableProps> = ({
                 />
                 {/* endregion Edges*/}
 
-                <Antd.Table.Column<Interfaces.EntWebsiteInterface>
+                <Antd.Table.Column<Interfaces.QWEWebsiteInterface>
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => (

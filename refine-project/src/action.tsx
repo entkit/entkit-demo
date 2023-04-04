@@ -15,12 +15,13 @@ import {
 } from "@refinedev/core";
 import * as Custom from "./custom";
 import * as Type from "./typedefs";
+import { usePermissions } from "@refinedev/core";
 
 export type CompanyListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -30,7 +31,8 @@ export const CompanyListAction: React.FC<CompanyListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -51,7 +53,7 @@ export type CompanyShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -61,7 +63,8 @@ export const CompanyShowAction: React.FC<CompanyShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -82,7 +85,7 @@ export type CompanyDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -92,12 +95,13 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntCompanyInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWECompanyInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -130,7 +134,7 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "company",
                                     invalidates: ["resourceAll"],
@@ -168,7 +172,7 @@ export type CompanyEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -178,7 +182,8 @@ export const CompanyEditAction: React.FC<CompanyEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -199,7 +204,7 @@ export type CountryListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -209,7 +214,8 @@ export const CountryListAction: React.FC<CountryListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -230,7 +236,7 @@ export type CountryShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -240,7 +246,8 @@ export const CountryShowAction: React.FC<CountryShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -261,7 +268,7 @@ export type CountryDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -271,12 +278,13 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntCountryInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWECountryInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -309,7 +317,7 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "country",
                                     invalidates: ["resourceAll"],
@@ -347,7 +355,7 @@ export type CountryEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -357,7 +365,8 @@ export const CountryEditAction: React.FC<CountryEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -378,7 +387,7 @@ export type EmailListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -388,7 +397,8 @@ export const EmailListAction: React.FC<EmailListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -409,7 +419,7 @@ export type EmailShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -419,7 +429,8 @@ export const EmailShowAction: React.FC<EmailShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -440,7 +451,7 @@ export type EmailDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -450,12 +461,13 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntEmailInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEEmailInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -488,7 +500,7 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "email",
                                     invalidates: ["resourceAll"],
@@ -526,7 +538,7 @@ export type EmailEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -536,7 +548,8 @@ export const EmailEditAction: React.FC<EmailEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -557,7 +570,7 @@ export type ImageListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -567,7 +580,8 @@ export const ImageListAction: React.FC<ImageListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -588,7 +602,7 @@ export type ImageShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -598,7 +612,8 @@ export const ImageShowAction: React.FC<ImageShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -619,7 +634,7 @@ export type ImageDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -629,12 +644,13 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntImageInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEImageInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -667,7 +683,7 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "image",
                                     invalidates: ["resourceAll"],
@@ -705,7 +721,7 @@ export type ImageEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -715,7 +731,8 @@ export const ImageEditAction: React.FC<ImageEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -736,7 +753,7 @@ export type LocationListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -746,7 +763,8 @@ export const LocationListAction: React.FC<LocationListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -767,7 +785,7 @@ export type LocationShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -777,7 +795,8 @@ export const LocationShowAction: React.FC<LocationShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -800,7 +819,7 @@ export type LocationDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -810,12 +829,13 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntLocationInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWELocationInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -848,7 +868,7 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "location",
                                     invalidates: ["resourceAll"],
@@ -886,7 +906,7 @@ export type LocationEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -896,7 +916,8 @@ export const LocationEditAction: React.FC<LocationEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -919,7 +940,7 @@ export type PhoneListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -929,7 +950,8 @@ export const PhoneListAction: React.FC<PhoneListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -950,7 +972,7 @@ export type PhoneShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -960,7 +982,8 @@ export const PhoneShowAction: React.FC<PhoneShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -981,7 +1004,7 @@ export type PhoneDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -991,12 +1014,13 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntPhoneInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEPhoneInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1029,7 +1053,7 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "phone",
                                     invalidates: ["resourceAll"],
@@ -1067,7 +1091,7 @@ export type PhoneEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1077,7 +1101,8 @@ export const PhoneEditAction: React.FC<PhoneEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1098,7 +1123,7 @@ export type ProductListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1108,7 +1133,8 @@ export const ProductListAction: React.FC<ProductListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1129,7 +1155,7 @@ export type ProductShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1139,7 +1165,8 @@ export const ProductShowAction: React.FC<ProductShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1160,7 +1187,7 @@ export type ProductEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1170,7 +1197,8 @@ export const ProductEditAction: React.FC<ProductEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1191,7 +1219,7 @@ export type ProductDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1201,12 +1229,13 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1239,7 +1268,7 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "product",
                                     invalidates: ["resourceAll"],
@@ -1277,19 +1306,20 @@ export type ProductMyCustomActionButtonActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
 export const ProductMyCustomActionButtonAction: React.FC<
     ProductMyCustomActionButtonActionProps
 > = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("MyCustomActionButton"));
     const additionalProps = null || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1322,7 +1352,7 @@ export const ProductMyCustomActionButtonAction: React.FC<
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "product",
                                     invalidates: ["resourceAll"],
@@ -1360,7 +1390,7 @@ export type VendorListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1370,7 +1400,8 @@ export const VendorListAction: React.FC<VendorListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1391,7 +1422,7 @@ export type VendorShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1401,7 +1432,8 @@ export const VendorShowAction: React.FC<VendorShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1422,7 +1454,7 @@ export type VendorDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1432,12 +1464,13 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntVendorInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEVendorInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1470,7 +1503,7 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "vendor",
                                     invalidates: ["resourceAll"],
@@ -1508,7 +1541,7 @@ export type VendorEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1518,7 +1551,8 @@ export const VendorEditAction: React.FC<VendorEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1539,7 +1573,7 @@ export type WarehouseListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1549,7 +1583,8 @@ export const WarehouseListAction: React.FC<WarehouseListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1570,7 +1605,7 @@ export type WarehouseShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1580,7 +1615,8 @@ export const WarehouseShowAction: React.FC<WarehouseShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1603,7 +1639,7 @@ export type WarehouseDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1613,12 +1649,13 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntWarehouseInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEWarehouseInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1651,7 +1688,7 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "warehouse",
                                     invalidates: ["resourceAll"],
@@ -1689,7 +1726,7 @@ export type WarehouseEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1699,7 +1736,8 @@ export const WarehouseEditAction: React.FC<WarehouseEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1722,7 +1760,7 @@ export type WebsiteListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1732,7 +1770,8 @@ export const WebsiteListAction: React.FC<WebsiteListActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1753,7 +1792,7 @@ export type WebsiteShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1763,7 +1802,8 @@ export const WebsiteShowAction: React.FC<WebsiteShowActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Read"));
     const additionalProps = null || {};
     const Link = useLink();
 
@@ -1784,7 +1824,7 @@ export type WebsiteDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1794,12 +1834,13 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Delete"));
     const additionalProps = { danger: true } || {};
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.EntWebsiteInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.QWEWebsiteInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1832,7 +1873,7 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.EntID) => {
+                            recordItemIDs.forEach((id: Type.QWEID) => {
                                 invalidate({
                                     resource: "website",
                                     invalidates: ["resourceAll"],
@@ -1870,7 +1911,7 @@ export type WebsiteEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.EntID[];
+        recordItemIDs: Type.QWEID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1880,7 +1921,8 @@ export const WebsiteEditAction: React.FC<WebsiteEditActionProps> = ({
     onSuccess,
     ...props
 }) => {
-    const can = true;
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Edit"));
     const additionalProps = null || {};
     const Link = useLink();
 
