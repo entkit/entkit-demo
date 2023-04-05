@@ -6,7 +6,7 @@ import * as Edit from "./edit";
 import { Login } from "./login";
 import { Header } from "./header";
 import { Authenticated } from "@refinedev/core";
-import { ErrorComponent, Layout } from "@refinedev/antd";
+import { ErrorComponent, ThemedLayout } from "@refinedev/antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import {
     NavigateToResource,
@@ -20,9 +20,9 @@ export const RoutesBundle: React.FC = () => {
             <Route
                 element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                        <Layout Header={Header}>
+                        <ThemedLayout Header={Header}>
                             <Outlet />
-                        </Layout>
+                        </ThemedLayout>
                     </Authenticated>
                 }
             >
@@ -98,22 +98,22 @@ export const RoutesBundle: React.FC = () => {
                 </Route>
             </Route>
 
-            <Route
-                element={
-                    <Authenticated fallback={<Outlet />}>
-                        <NavigateToResource resource="posts" />
-                    </Authenticated>
-                }
-            >
-                <Route path="/login" element={<Login />} />
-            </Route>
+            {/*<Route
+            element={
+                <Authenticated fallback={<Outlet />}>
+                    <NavigateToResource resource="posts" />
+                </Authenticated>
+            }
+        >
+            <Route path="/login" element={<Login />} />
+        </Route>*/}
 
             <Route
                 element={
                     <Authenticated>
-                        <Layout>
+                        <ThemedLayout>
                             <Outlet />
-                        </Layout>
+                        </ThemedLayout>
                     </Authenticated>
                 }
             >

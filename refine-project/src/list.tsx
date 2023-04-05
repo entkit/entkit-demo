@@ -14,7 +14,7 @@ export const CompanyList: React.FC<CompanyListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Company?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -54,7 +54,7 @@ export const CountryList: React.FC<CountryListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Country?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -94,7 +94,7 @@ export const EmailList: React.FC<EmailListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Email?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -134,7 +134,7 @@ export const ImageList: React.FC<ImageListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Image?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -174,7 +174,7 @@ export const LocationList: React.FC<LocationListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Location?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -214,7 +214,7 @@ export const PhoneList: React.FC<PhoneListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Phone?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -254,7 +254,7 @@ export const ProductList: React.FC<ProductListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Product?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -294,7 +294,7 @@ export const VendorList: React.FC<VendorListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Vendor?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -334,7 +334,7 @@ export const WarehouseList: React.FC<WarehouseListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Warehouse?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (
@@ -377,7 +377,7 @@ export const WebsiteList: React.FC<WebsiteListProps> = ({
     const { data: permissions } = usePermissions<Record<string, string[]>>();
     const can = Boolean(permissions?.Website?.includes("Read"));
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.QWEID[]>([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState<Type.EntID[]>([]);
     const rowSelection = { selectedRowKeys, onChange: setSelectedRowKeys };
 
     return can ? (

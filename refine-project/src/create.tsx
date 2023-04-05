@@ -11,11 +11,11 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 export const CompanyCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWECompanyInterface>();
+        RA.useForm<Interfaces.EntCompanyInterface>();
 
     const [countriesCursors, setCountriesCursors] = useState<Cursors>({});
     const { selectProps: countriesSelectProps } =
-        RA.useSelect<Interfaces.QWECountryInterface>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -33,7 +33,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
     const { selectProps: phonesSelectProps } =
-        RA.useSelect<Interfaces.QWEPhoneInterface>({
+        RA.useSelect<Interfaces.EntPhoneInterface>({
             resource: "Phone",
             optionLabel: "title",
             optionValue: "id",
@@ -51,7 +51,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
     const { selectProps: emailsSelectProps } =
-        RA.useSelect<Interfaces.QWEEmailInterface>({
+        RA.useSelect<Interfaces.EntEmailInterface>({
             resource: "Email",
             optionLabel: "title",
             optionValue: "id",
@@ -69,7 +69,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
     const { selectProps: websitesSelectProps } =
-        RA.useSelect<Interfaces.QWEWebsiteInterface>({
+        RA.useSelect<Interfaces.EntWebsiteInterface>({
             resource: "Website",
             optionLabel: "title",
             optionValue: "id",
@@ -87,7 +87,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
     const { selectProps: locationsSelectProps } =
-        RA.useSelect<Interfaces.QWELocationInterface>({
+        RA.useSelect<Interfaces.EntLocationInterface>({
             resource: "Location",
             optionLabel: "title",
             optionValue: "id",
@@ -105,7 +105,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [logo_imageCursors, setLogoImageCursors] = useState<Cursors>({});
     const { selectProps: logo_imageSelectProps } =
-        RA.useSelect<Interfaces.QWEImageInterface>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -123,7 +123,7 @@ export const CompanyCreate: React.FC = () => {
         });
     const [cover_imageCursors, setCoverImageCursors] = useState<Cursors>({});
     const { selectProps: cover_imageSelectProps } =
-        RA.useSelect<Interfaces.QWEImageInterface>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -143,7 +143,7 @@ export const CompanyCreate: React.FC = () => {
         {},
     );
     const { selectProps: gallery_imagesSelectProps } =
-        RA.useSelect<Interfaces.QWEImageInterface>({
+        RA.useSelect<Interfaces.EntImageInterface>({
             resource: "Image",
             optionLabel: "title",
             optionValue: "id",
@@ -168,14 +168,14 @@ export const CompanyCreate: React.FC = () => {
                     label="Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWERichTextViewOnForm />
+                    <View.EntRichTextViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -243,11 +243,11 @@ export const CompanyCreate: React.FC = () => {
 };
 export const CountryCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWECountryInterface>();
+        RA.useForm<Interfaces.EntCountryInterface>();
 
     const [companiesCursors, setCompaniesCursors] = useState<Cursors>({});
     const { selectProps: companiesSelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -265,7 +265,7 @@ export const CountryCreate: React.FC = () => {
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
     const { selectProps: phonesSelectProps } =
-        RA.useSelect<Interfaces.QWEPhoneInterface>({
+        RA.useSelect<Interfaces.EntPhoneInterface>({
             resource: "Phone",
             optionLabel: "title",
             optionValue: "id",
@@ -283,7 +283,7 @@ export const CountryCreate: React.FC = () => {
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
     const { selectProps: emailsSelectProps } =
-        RA.useSelect<Interfaces.QWEEmailInterface>({
+        RA.useSelect<Interfaces.EntEmailInterface>({
             resource: "Email",
             optionLabel: "title",
             optionValue: "id",
@@ -301,7 +301,7 @@ export const CountryCreate: React.FC = () => {
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
     const { selectProps: websitesSelectProps } =
-        RA.useSelect<Interfaces.QWEWebsiteInterface>({
+        RA.useSelect<Interfaces.EntWebsiteInterface>({
             resource: "Website",
             optionLabel: "title",
             optionValue: "id",
@@ -319,7 +319,7 @@ export const CountryCreate: React.FC = () => {
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
     const { selectProps: locationsSelectProps } =
-        RA.useSelect<Interfaces.QWELocationInterface>({
+        RA.useSelect<Interfaces.EntLocationInterface>({
             resource: "Location",
             optionLabel: "title",
             optionValue: "id",
@@ -344,14 +344,14 @@ export const CountryCreate: React.FC = () => {
                     label="Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="code"
                     label="Code"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -395,11 +395,11 @@ export const CountryCreate: React.FC = () => {
 };
 export const EmailCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEEmailInterface>();
+        RA.useForm<Interfaces.EntEmailInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -417,7 +417,7 @@ export const EmailCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.QWECountryInterface>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -442,21 +442,21 @@ export const EmailCreate: React.FC = () => {
                     label="Title"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="address"
                     label="Address"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -479,12 +479,12 @@ export const EmailCreate: React.FC = () => {
 };
 export const ImageCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEImageInterface>();
+        RA.useForm<Interfaces.EntImageInterface>();
 
     const [gallery_companyCursors, setGalleryCompanyCursors] =
         useState<Cursors>({});
     const { selectProps: gallery_companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -502,7 +502,7 @@ export const ImageCreate: React.FC = () => {
         });
     const [logo_companyCursors, setLogoCompanyCursors] = useState<Cursors>({});
     const { selectProps: logo_companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -522,7 +522,7 @@ export const ImageCreate: React.FC = () => {
         {},
     );
     const { selectProps: cover_companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -547,14 +547,14 @@ export const ImageCreate: React.FC = () => {
                     label="Title"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="originalURL"
                     label="Original Url"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEImageViewOnForm />
+                    <View.EntImageViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -593,11 +593,11 @@ export const ImageCreate: React.FC = () => {
 };
 export const LocationCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWELocationInterface>();
+        RA.useForm<Interfaces.EntLocationInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -615,7 +615,7 @@ export const LocationCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.QWECountryInterface>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -640,77 +640,77 @@ export const LocationCreate: React.FC = () => {
                     label="Title"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="latitude"
                     label="Latitude"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="longitude"
                     label="Longitude"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="address"
                     label="Address"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="postcode"
                     label="Postcode"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="type"
                     label="Type"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="state"
                     label="State"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="suburb"
                     label="Suburb"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="streetType"
                     label="Street Type"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="streetName"
                     label="Street Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -733,11 +733,11 @@ export const LocationCreate: React.FC = () => {
 };
 export const PhoneCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEPhoneInterface>();
+        RA.useForm<Interfaces.EntPhoneInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -755,7 +755,7 @@ export const PhoneCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.QWECountryInterface>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -780,28 +780,28 @@ export const PhoneCreate: React.FC = () => {
                     label="Title"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="number"
                     label="Number"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="type"
                     label="Type"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -824,11 +824,11 @@ export const PhoneCreate: React.FC = () => {
 };
 export const ProductCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEProductInterface>();
+        RA.useForm<Interfaces.EntProductInterface>();
 
     const [warehouseCursors, setWarehouseCursors] = useState<Cursors>({});
     const { selectProps: warehouseSelectProps } =
-        RA.useSelect<Interfaces.QWEWarehouseInterface>({
+        RA.useSelect<Interfaces.EntWarehouseInterface>({
             resource: "Warehouse",
             optionLabel: "name",
             optionValue: "id",
@@ -846,7 +846,7 @@ export const ProductCreate: React.FC = () => {
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
     const { selectProps: vendorSelectProps } =
-        RA.useSelect<Interfaces.QWEVendorInterface>({
+        RA.useSelect<Interfaces.EntVendorInterface>({
             resource: "Vendor",
             optionLabel: "name",
             optionValue: "id",
@@ -871,42 +871,42 @@ export const ProductCreate: React.FC = () => {
                     label="Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWERichTextViewOnForm />
+                    <View.EntRichTextViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="image"
                     label="Image"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEImageViewOnForm />
+                    <View.EntImageViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="url"
                     label="Url"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEURLViewOnForm />
+                    <View.EntURLViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="status"
                     label="Status"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEEnumsProcessStatusViewOnForm />
+                    <View.EntEnumsProcessStatusViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="buildStatus"
                     label="Build Status"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEEnumsProcessStatusViewOnForm />
+                    <View.EntEnumsProcessStatusViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -929,11 +929,11 @@ export const ProductCreate: React.FC = () => {
 };
 export const VendorCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEVendorInterface>();
+        RA.useForm<Interfaces.EntVendorInterface>();
 
     const [warehousesCursors, setWarehousesCursors] = useState<Cursors>({});
     const { selectProps: warehousesSelectProps } =
-        RA.useSelect<Interfaces.QWEWarehouseInterface>({
+        RA.useSelect<Interfaces.EntWarehouseInterface>({
             resource: "Warehouse",
             optionLabel: "name",
             optionValue: "id",
@@ -951,7 +951,7 @@ export const VendorCreate: React.FC = () => {
         });
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
     const { selectProps: productsSelectProps } =
-        RA.useSelect<Interfaces.QWEProductInterface>({
+        RA.useSelect<Interfaces.EntProductInterface>({
             resource: "Product",
             optionLabel: "url",
             optionValue: "id",
@@ -976,14 +976,14 @@ export const VendorCreate: React.FC = () => {
                     label="Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="schema"
                     label="Schema"
                     rules={[{ required: true }]}
                 >
-                    <View.QWECodeViewOnForm />
+                    <View.EntCodeViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -1006,11 +1006,11 @@ export const VendorCreate: React.FC = () => {
 };
 export const WarehouseCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEWarehouseInterface>();
+        RA.useForm<Interfaces.EntWarehouseInterface>();
 
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
     const { selectProps: productsSelectProps } =
-        RA.useSelect<Interfaces.QWEProductInterface>({
+        RA.useSelect<Interfaces.EntProductInterface>({
             resource: "Product",
             optionLabel: "url",
             optionValue: "id",
@@ -1028,7 +1028,7 @@ export const WarehouseCreate: React.FC = () => {
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
     const { selectProps: vendorSelectProps } =
-        RA.useSelect<Interfaces.QWEVendorInterface>({
+        RA.useSelect<Interfaces.EntVendorInterface>({
             resource: "Vendor",
             optionLabel: "name",
             optionValue: "id",
@@ -1053,28 +1053,28 @@ export const WarehouseCreate: React.FC = () => {
                     label="Name"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="originalData"
                     label="Original Data"
                     rules={[{ required: false }]}
                 >
-                    <View.QWECodeViewOnForm />
+                    <View.EntCodeViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="enabled"
                     label="Enabled"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEBooleanViewOnForm />
+                    <View.EntBooleanViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="filters"
                     label="Filters"
                     rules={[{ required: false }]}
                 >
-                    <View.QWEStringListViewOnForm />
+                    <View.EntStringListViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item
@@ -1097,11 +1097,11 @@ export const WarehouseCreate: React.FC = () => {
 };
 export const WebsiteCreate: React.FC = () => {
     const { formProps, saveButtonProps, queryResult } =
-        RA.useForm<Interfaces.QWEWebsiteInterface>();
+        RA.useForm<Interfaces.EntWebsiteInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
     const { selectProps: companySelectProps } =
-        RA.useSelect<Interfaces.QWECompanyInterface>({
+        RA.useSelect<Interfaces.EntCompanyInterface>({
             resource: "Company",
             optionLabel: "name",
             optionValue: "id",
@@ -1119,7 +1119,7 @@ export const WebsiteCreate: React.FC = () => {
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
     const { selectProps: countrySelectProps } =
-        RA.useSelect<Interfaces.QWECountryInterface>({
+        RA.useSelect<Interfaces.EntCountryInterface>({
             resource: "Country",
             optionLabel: "name",
             optionValue: "id",
@@ -1144,21 +1144,21 @@ export const WebsiteCreate: React.FC = () => {
                     label="Title"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="description"
                     label="Description"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEStringViewOnForm />
+                    <View.EntStringViewOnForm />
                 </Antd.Form.Item>
                 <Antd.Form.Item
                     name="url"
                     label="Url"
                     rules={[{ required: true }]}
                 >
-                    <View.QWEURLViewOnForm />
+                    <View.EntURLViewOnForm />
                 </Antd.Form.Item>
 
                 <Antd.Form.Item

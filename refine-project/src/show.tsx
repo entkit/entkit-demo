@@ -12,7 +12,7 @@ import * as Custom from "./custom";
 import * as Action from "./action";
 
 export type CompanyShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const CompanyShow: React.FC<CompanyShowProps> = ({
@@ -20,7 +20,7 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWECompanyInterface>({
+    const { queryResult } = useShow<Interfaces.EntCompanyInterface>({
         resource: "company",
         id,
         metaData: {
@@ -405,7 +405,7 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Name
                     </Antd.Typography.Title>
@@ -414,7 +414,7 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWERichTextViewOnShow value={record?.description} />
+                    <View.EntRichTextViewOnShow value={record?.description} />
 
                     {withEdges ? (
                         <>
@@ -638,7 +638,7 @@ export const CompanyPartialShow: React.FC = () => {
 };
 
 export type CountryShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const CountryShow: React.FC<CountryShowProps> = ({
@@ -646,7 +646,7 @@ export const CountryShow: React.FC<CountryShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWECountryInterface>({
+    const { queryResult } = useShow<Interfaces.EntCountryInterface>({
         resource: "country",
         id,
         metaData: {
@@ -952,15 +952,15 @@ export const CountryShow: React.FC<CountryShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Name
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.name} />
+                    <View.EntStringViewOnShow value={record?.name} />
                     <Antd.Typography.Title level={5}>
                         Code
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.code} />
+                    <View.EntStringViewOnShow value={record?.code} />
 
                     {withEdges ? (
                         <>
@@ -1146,7 +1146,7 @@ export const CountryPartialShow: React.FC = () => {
 };
 
 export type EmailShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const EmailShow: React.FC<EmailShowProps> = ({
@@ -1154,7 +1154,7 @@ export const EmailShow: React.FC<EmailShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEEmailInterface>({
+    const { queryResult } = useShow<Interfaces.EntEmailInterface>({
         resource: "email",
         id,
         metaData: {
@@ -1244,19 +1244,19 @@ export const EmailShow: React.FC<EmailShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Title
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.title} />
+                    <View.EntStringViewOnShow value={record?.title} />
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.description} />
+                    <View.EntStringViewOnShow value={record?.description} />
                     <Antd.Typography.Title level={5}>
                         Address
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.address} />
+                    <View.EntStringViewOnShow value={record?.address} />
 
                     {withEdges ? (
                         <>
@@ -1300,7 +1300,7 @@ export const EmailPartialShow: React.FC = () => {
 };
 
 export type ImageShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const ImageShow: React.FC<ImageShowProps> = ({
@@ -1308,7 +1308,7 @@ export const ImageShow: React.FC<ImageShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEImageInterface>({
+    const { queryResult } = useShow<Interfaces.EntImageInterface>({
         resource: "image",
         id,
         metaData: {
@@ -1413,15 +1413,15 @@ export const ImageShow: React.FC<ImageShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Title
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.title} />
+                    <View.EntStringViewOnShow value={record?.title} />
                     <Antd.Typography.Title level={5}>
                         Original Url
                     </Antd.Typography.Title>
-                    <View.QWEImageViewOnShow value={record?.originalURL} />
+                    <View.EntImageViewOnShow value={record?.originalURL} />
 
                     {withEdges ? (
                         <>
@@ -1474,7 +1474,7 @@ export const ImagePartialShow: React.FC = () => {
 };
 
 export type LocationShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const LocationShow: React.FC<LocationShowProps> = ({
@@ -1482,7 +1482,7 @@ export const LocationShow: React.FC<LocationShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWELocationInterface>({
+    const { queryResult } = useShow<Interfaces.EntLocationInterface>({
         resource: "location",
         id,
         metaData: {
@@ -1580,51 +1580,51 @@ export const LocationShow: React.FC<LocationShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Title
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.title} />
+                    <View.EntStringViewOnShow value={record?.title} />
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.description} />
+                    <View.EntStringViewOnShow value={record?.description} />
                     <Antd.Typography.Title level={5}>
                         Latitude
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.latitude} />
+                    <View.EntStringViewOnShow value={record?.latitude} />
                     <Antd.Typography.Title level={5}>
                         Longitude
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.longitude} />
+                    <View.EntStringViewOnShow value={record?.longitude} />
                     <Antd.Typography.Title level={5}>
                         Address
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.address} />
+                    <View.EntStringViewOnShow value={record?.address} />
                     <Antd.Typography.Title level={5}>
                         Postcode
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.postcode} />
+                    <View.EntStringViewOnShow value={record?.postcode} />
                     <Antd.Typography.Title level={5}>
                         Type
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.type} />
+                    <View.EntStringViewOnShow value={record?.type} />
                     <Antd.Typography.Title level={5}>
                         State
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.state} />
+                    <View.EntStringViewOnShow value={record?.state} />
                     <Antd.Typography.Title level={5}>
                         Suburb
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.suburb} />
+                    <View.EntStringViewOnShow value={record?.suburb} />
                     <Antd.Typography.Title level={5}>
                         Street Type
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.streetType} />
+                    <View.EntStringViewOnShow value={record?.streetType} />
                     <Antd.Typography.Title level={5}>
                         Street Name
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.streetName} />
+                    <View.EntStringViewOnShow value={record?.streetName} />
 
                     {withEdges ? (
                         <>
@@ -1668,7 +1668,7 @@ export const LocationPartialShow: React.FC = () => {
 };
 
 export type PhoneShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const PhoneShow: React.FC<PhoneShowProps> = ({
@@ -1676,7 +1676,7 @@ export const PhoneShow: React.FC<PhoneShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEPhoneInterface>({
+    const { queryResult } = useShow<Interfaces.EntPhoneInterface>({
         resource: "phone",
         id,
         metaData: {
@@ -1767,23 +1767,23 @@ export const PhoneShow: React.FC<PhoneShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Title
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.title} />
+                    <View.EntStringViewOnShow value={record?.title} />
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.description} />
+                    <View.EntStringViewOnShow value={record?.description} />
                     <Antd.Typography.Title level={5}>
                         Number
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.number} />
+                    <View.EntStringViewOnShow value={record?.number} />
                     <Antd.Typography.Title level={5}>
                         Type
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.type} />
+                    <View.EntStringViewOnShow value={record?.type} />
 
                     {withEdges ? (
                         <>
@@ -1827,7 +1827,7 @@ export const PhonePartialShow: React.FC = () => {
 };
 
 export type ProductShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const ProductShow: React.FC<ProductShowProps> = ({
@@ -1835,7 +1835,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEProductInterface>({
+    const { queryResult } = useShow<Interfaces.EntProductInterface>({
         resource: "product",
         id,
         metaData: {
@@ -1937,39 +1937,39 @@ export const ProductShow: React.FC<ProductShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Name
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.name} />
+                    <View.EntStringViewOnShow value={record?.name} />
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWERichTextViewOnShow value={record?.description} />
+                    <View.EntRichTextViewOnShow value={record?.description} />
                     <Antd.Typography.Title level={5}>
                         Image
                     </Antd.Typography.Title>
-                    <View.QWEImageViewOnShow value={record?.image} />
+                    <View.EntImageViewOnShow value={record?.image} />
                     <Antd.Typography.Title level={5}>Url</Antd.Typography.Title>
-                    <View.QWEURLViewOnShow value={record?.url} />
+                    <View.EntURLViewOnShow value={record?.url} />
                     <Antd.Typography.Title level={5}>
                         Last Sell
                     </Antd.Typography.Title>
-                    <View.QWEDateViewOnShow value={record?.lastSell} />
+                    <View.EntDateViewOnShow value={record?.lastSell} />
                     <Antd.Typography.Title level={5}>
                         Created At
                     </Antd.Typography.Title>
-                    <View.QWEDateViewOnShow value={record?.createdAt} />
+                    <View.EntDateViewOnShow value={record?.createdAt} />
                     <Antd.Typography.Title level={5}>
                         Status
                     </Antd.Typography.Title>
-                    <View.QWEEnumsProcessStatusViewOnShow
+                    <View.EntEnumsProcessStatusViewOnShow
                         value={record?.status}
                     />
                     <Antd.Typography.Title level={5}>
                         Build Status
                     </Antd.Typography.Title>
-                    <View.QWEEnumsProcessStatusViewOnShow
+                    <View.EntEnumsProcessStatusViewOnShow
                         value={record?.buildStatus}
                     />
 
@@ -2017,7 +2017,7 @@ export const ProductPartialShow: React.FC = () => {
 };
 
 export type VendorShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const VendorShow: React.FC<VendorShowProps> = ({
@@ -2025,7 +2025,7 @@ export const VendorShow: React.FC<VendorShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEVendorInterface>({
+    const { queryResult } = useShow<Interfaces.EntVendorInterface>({
         resource: "vendor",
         id,
         metaData: {
@@ -2191,15 +2191,15 @@ export const VendorShow: React.FC<VendorShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Name
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.name} />
+                    <View.EntStringViewOnShow value={record?.name} />
                     <Antd.Typography.Title level={5}>
                         Schema
                     </Antd.Typography.Title>
-                    <View.QWECodeViewOnShow value={record?.schema} />
+                    <View.EntCodeViewOnShow value={record?.schema} />
 
                     {withEdges ? (
                         <>
@@ -2298,7 +2298,7 @@ export const VendorPartialShow: React.FC = () => {
 };
 
 export type WarehouseShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const WarehouseShow: React.FC<WarehouseShowProps> = ({
@@ -2306,7 +2306,7 @@ export const WarehouseShow: React.FC<WarehouseShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEWarehouseInterface>({
+    const { queryResult } = useShow<Interfaces.EntWarehouseInterface>({
         resource: "warehouse",
         id,
         metaData: {
@@ -2437,27 +2437,27 @@ export const WarehouseShow: React.FC<WarehouseShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Name
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.name} />
+                    <View.EntStringViewOnShow value={record?.name} />
                     <Antd.Typography.Title level={5}>
                         Last Update
                     </Antd.Typography.Title>
-                    <View.QWEDateViewOnShow value={record?.lastUpdate} />
+                    <View.EntDateViewOnShow value={record?.lastUpdate} />
                     <Antd.Typography.Title level={5}>
                         Original Data
                     </Antd.Typography.Title>
-                    <View.QWECodeViewOnShow value={record?.originalData} />
+                    <View.EntCodeViewOnShow value={record?.originalData} />
                     <Antd.Typography.Title level={5}>
                         Enabled
                     </Antd.Typography.Title>
-                    <View.QWEBooleanViewOnShow value={record?.enabled} />
+                    <View.EntBooleanViewOnShow value={record?.enabled} />
                     <Antd.Typography.Title level={5}>
                         Filters
                     </Antd.Typography.Title>
-                    <View.QWEStringListViewOnShow value={record?.filters} />
+                    <View.EntStringListViewOnShow value={record?.filters} />
 
                     {withEdges ? (
                         <>
@@ -2531,7 +2531,7 @@ export const WarehousePartialShow: React.FC = () => {
 };
 
 export type WebsiteShowProps = {
-    id?: Interfaces.QWEID;
+    id?: Interfaces.EntID;
     withEdges?: boolean;
 } & RA.ShowProps;
 export const WebsiteShow: React.FC<WebsiteShowProps> = ({
@@ -2539,7 +2539,7 @@ export const WebsiteShow: React.FC<WebsiteShowProps> = ({
     withEdges,
     ...showProps
 }) => {
-    const { queryResult } = useShow<Interfaces.QWEWebsiteInterface>({
+    const { queryResult } = useShow<Interfaces.EntWebsiteInterface>({
         resource: "website",
         id,
         metaData: {
@@ -2629,17 +2629,17 @@ export const WebsiteShow: React.FC<WebsiteShowProps> = ({
             {!edgesDiagram ? (
                 <>
                     <Antd.Typography.Title level={5}>Id</Antd.Typography.Title>
-                    <View.QWEUUIDViewOnShow value={record?.id} />
+                    <View.EntUUIDViewOnShow value={record?.id} />
                     <Antd.Typography.Title level={5}>
                         Title
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.title} />
+                    <View.EntStringViewOnShow value={record?.title} />
                     <Antd.Typography.Title level={5}>
                         Description
                     </Antd.Typography.Title>
-                    <View.QWEStringViewOnShow value={record?.description} />
+                    <View.EntStringViewOnShow value={record?.description} />
                     <Antd.Typography.Title level={5}>Url</Antd.Typography.Title>
-                    <View.QWEURLViewOnShow value={record?.url} />
+                    <View.EntURLViewOnShow value={record?.url} />
 
                     {withEdges ? (
                         <>

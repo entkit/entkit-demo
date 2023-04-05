@@ -30,8 +30,8 @@ export function getPermissions(keycloak: Keycloak) {
                         const res: Record<string, string[]> = {};
                         data.forEach(
                             (p: { rsname: string; scopes: string[] }) => {
-                                res[p.rsname.replace(/^QWE/, "")] =
-                                    p.scopes.map((s) => s.replace(/^QWE/, ""));
+                                res[p.rsname.replace(/^Ent/, "")] =
+                                    p.scopes.map((s) => s.replace(/^Ent/, ""));
                             },
                         );
                         return res;

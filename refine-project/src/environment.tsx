@@ -4,10 +4,10 @@ export const meta = {};
 
 export const keycloak: KeycloakConfig = {
     url: "http://localhost:8080",
-    realm: "entkit",
-    clientId: "xcontain-frontend",
+    realm: "entkit-demo-2",
+    clientId: "frontend",
 };
 
-export const keycloakBackendClientId = "xcontain-backend";
+export const keycloakBackendClientId = "backend";
 
 export const graphqlUrl = "http://localhost/query";

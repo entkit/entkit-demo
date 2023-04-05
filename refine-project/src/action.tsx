@@ -21,7 +21,7 @@ export type CompanyListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -53,7 +53,7 @@ export type CompanyShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -85,7 +85,7 @@ export type CompanyDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -101,7 +101,7 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWECompanyInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntCompanyInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -134,7 +134,7 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "company",
                                     invalidates: ["resourceAll"],
@@ -172,7 +172,7 @@ export type CompanyEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -204,7 +204,7 @@ export type CountryListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -236,7 +236,7 @@ export type CountryShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -268,7 +268,7 @@ export type CountryDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -284,7 +284,7 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWECountryInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntCountryInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -317,7 +317,7 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "country",
                                     invalidates: ["resourceAll"],
@@ -355,7 +355,7 @@ export type CountryEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -387,7 +387,7 @@ export type EmailListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -419,7 +419,7 @@ export type EmailShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -451,7 +451,7 @@ export type EmailDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -467,7 +467,7 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEEmailInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntEmailInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -500,7 +500,7 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "email",
                                     invalidates: ["resourceAll"],
@@ -538,7 +538,7 @@ export type EmailEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -570,7 +570,7 @@ export type ImageListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -602,7 +602,7 @@ export type ImageShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -634,7 +634,7 @@ export type ImageDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -650,7 +650,7 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEImageInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntImageInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -683,7 +683,7 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "image",
                                     invalidates: ["resourceAll"],
@@ -721,7 +721,7 @@ export type ImageEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -753,7 +753,7 @@ export type LocationListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -785,7 +785,7 @@ export type LocationShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -819,7 +819,7 @@ export type LocationDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -835,7 +835,7 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWELocationInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntLocationInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -868,7 +868,7 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "location",
                                     invalidates: ["resourceAll"],
@@ -906,7 +906,7 @@ export type LocationEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -940,7 +940,7 @@ export type PhoneListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -972,7 +972,7 @@ export type PhoneShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1004,7 +1004,7 @@ export type PhoneDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1020,7 +1020,7 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEPhoneInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntPhoneInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1053,7 +1053,7 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "phone",
                                     invalidates: ["resourceAll"],
@@ -1091,7 +1091,7 @@ export type PhoneEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1123,7 +1123,7 @@ export type ProductListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1155,7 +1155,7 @@ export type ProductShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1187,7 +1187,7 @@ export type ProductEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1219,7 +1219,7 @@ export type ProductDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1235,7 +1235,7 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEProductInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1268,7 +1268,7 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "product",
                                     invalidates: ["resourceAll"],
@@ -1306,7 +1306,7 @@ export type ProductMyCustomActionButtonActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1319,7 +1319,7 @@ export const ProductMyCustomActionButtonAction: React.FC<
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEProductInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntProductInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1352,7 +1352,7 @@ export const ProductMyCustomActionButtonAction: React.FC<
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "product",
                                     invalidates: ["resourceAll"],
@@ -1390,7 +1390,7 @@ export type VendorListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1422,7 +1422,7 @@ export type VendorShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1454,7 +1454,7 @@ export type VendorDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1470,7 +1470,7 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEVendorInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntVendorInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1503,7 +1503,7 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "vendor",
                                     invalidates: ["resourceAll"],
@@ -1541,7 +1541,7 @@ export type VendorEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1573,7 +1573,7 @@ export type WarehouseListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1605,7 +1605,7 @@ export type WarehouseShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1639,7 +1639,7 @@ export type WarehouseDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1655,7 +1655,7 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEWarehouseInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntWarehouseInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1688,7 +1688,7 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "warehouse",
                                     invalidates: ["resourceAll"],
@@ -1726,7 +1726,7 @@ export type WarehouseEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1760,7 +1760,7 @@ export type WebsiteListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1792,7 +1792,7 @@ export type WebsiteShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1824,7 +1824,7 @@ export type WebsiteDeleteActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 
@@ -1840,7 +1840,7 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
 
     const notification = useNotification();
     const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.QWEWebsiteInterface>();
+    //const { mutate, isLoading } = useCustomMutation<Type.EntWebsiteInterface>();
     const invalidate = useInvalidate();
 
     return can ? (
@@ -1873,7 +1873,7 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
                     },
                     {
                         onSuccess: (resp) => {
-                            recordItemIDs.forEach((id: Type.QWEID) => {
+                            recordItemIDs.forEach((id: Type.EntID) => {
                                 invalidate({
                                     resource: "website",
                                     invalidates: ["resourceAll"],
@@ -1911,7 +1911,7 @@ export type WebsiteEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
-        recordItemIDs: Type.QWEID[];
+        recordItemIDs: Type.EntID[];
         onSuccess?: (data: any) => void;
     };
 

@@ -41,29 +41,30 @@ func main() {
 		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.TypescriptAdapter),
 		entkit.WithGenerator(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
 
-		entkit.WithPrefix("QWE"),
+		//entkit.WithPrefix("QWE"),
 		entkit.WithGraphqlURL(graphqlUri),
 		entkit.IgnoreUncommittedChanges(),
 		entkit.WithAuth(
 			entkit.AuthWithKeycloak(
 				entkit.NewKeycloak(
 					"http://localhost:8080",
-					"entkit",
+					"entkit-demo-2",
 					"admin",
 					"admin",
 					"entadmin",
 					"entadmin",
 					&gocloak.Client{
-						ClientID: gocloak.StringP("xcontain-backend"),
+						ClientID: gocloak.StringP("backend"),
 						Secret:   gocloak.StringP("test-secret"),
 					},
 					[]*gocloak.Client{
 						{
-							ClientID: gocloak.StringP("xcontain-frontend"),
-							RootURL:  gocloak.StringP("https://console.xcontain.com"),
+							ClientID: gocloak.StringP("frontend"),
+							RootURL:  gocloak.StringP("https://demo.entkit.com"),
 							RedirectURIs: &[]string{
-								"https://console.xcontain.com/*",
+								"https://demo.entkit.com/*",
 								"http://localhost:3000/*",
+								"http://localhost/*",
 							},
 							Attributes: &map[string]string{
 								"post.logout.redirect.uris": "+",
