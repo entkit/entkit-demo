@@ -55,12 +55,7 @@ func main() {
 	srv.Use(entgql.Transactioner{TxOpener: client})
 	//srv.Use(&debug.Tracer{})
 	mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
-	mux.HandleFunc("/query", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Header().Set("Access-Control-Allow-Origin", "*")
-		writer.Header().Set("Access-Control-Allow-Methods", "POST, GET")
-		writer.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-		srv.ServeHTTP(writer, request)
-	})
+	mux.Handle("/query", ent.EntkitAuthMiddleware(srv))
 
 	if os.Getenv("SKIP_EMBED_SERVER") != "true" {
 		println("Embed Server...")

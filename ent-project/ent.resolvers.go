@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/entkit/entkit"
 	"github.com/entkit/entkit-demo/ent-project/core/ent"
 	"github.com/google/uuid"
 )
@@ -24,6 +25,10 @@ func (r *queryResolver) Nodes(ctx context.Context, ids []uuid.UUID) ([]ent.Noder
 
 // Companies is the resolver for the companies field.
 func (r *queryResolver) Companies(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.CompanyOrder, where *ent.CompanyWhereInput, q *string) (*ent.CompanyConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Company", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Company.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithCompanyOrder(orderBy),
@@ -33,6 +38,10 @@ func (r *queryResolver) Companies(ctx context.Context, after *ent.Cursor, first 
 
 // Countries is the resolver for the countries field.
 func (r *queryResolver) Countries(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.CountryOrder, where *ent.CountryWhereInput, q *string) (*ent.CountryConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Country", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Country.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithCountryOrder(orderBy),
@@ -42,6 +51,10 @@ func (r *queryResolver) Countries(ctx context.Context, after *ent.Cursor, first 
 
 // Emails is the resolver for the emails field.
 func (r *queryResolver) Emails(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.EmailOrder, where *ent.EmailWhereInput, q *string) (*ent.EmailConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Email", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Email.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithEmailOrder(orderBy),
@@ -51,6 +64,10 @@ func (r *queryResolver) Emails(ctx context.Context, after *ent.Cursor, first *in
 
 // Images is the resolver for the images field.
 func (r *queryResolver) Images(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.ImageOrder, where *ent.ImageWhereInput, q *string) (*ent.ImageConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Image", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Image.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithImageOrder(orderBy),
@@ -60,6 +77,10 @@ func (r *queryResolver) Images(ctx context.Context, after *ent.Cursor, first *in
 
 // Locations is the resolver for the locations field.
 func (r *queryResolver) Locations(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.LocationOrder, where *ent.LocationWhereInput, q *string) (*ent.LocationConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Location", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Location.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithLocationOrder(orderBy),
@@ -69,6 +90,10 @@ func (r *queryResolver) Locations(ctx context.Context, after *ent.Cursor, first 
 
 // Phones is the resolver for the phones field.
 func (r *queryResolver) Phones(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.PhoneOrder, where *ent.PhoneWhereInput, q *string) (*ent.PhoneConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Phone", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Phone.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithPhoneOrder(orderBy),
@@ -78,6 +103,10 @@ func (r *queryResolver) Phones(ctx context.Context, after *ent.Cursor, first *in
 
 // Products is the resolver for the products field.
 func (r *queryResolver) Products(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.ProductOrder, where *ent.ProductWhereInput, q *string) (*ent.ProductConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Product", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Product.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithProductOrder(orderBy),
@@ -87,6 +116,10 @@ func (r *queryResolver) Products(ctx context.Context, after *ent.Cursor, first *
 
 // Vendors is the resolver for the vendors field.
 func (r *queryResolver) Vendors(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.VendorOrder, where *ent.VendorWhereInput, q *string) (*ent.VendorConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Vendor", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Vendor.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithVendorOrder(orderBy),
@@ -96,6 +129,10 @@ func (r *queryResolver) Vendors(ctx context.Context, after *ent.Cursor, first *i
 
 // Warehouses is the resolver for the warehouses field.
 func (r *queryResolver) Warehouses(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.WarehouseOrder, where *ent.WarehouseWhereInput, q *string) (*ent.WarehouseConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Warehouse", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Warehouse.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithWarehouseOrder(orderBy),
@@ -105,6 +142,10 @@ func (r *queryResolver) Warehouses(ctx context.Context, after *ent.Cursor, first
 
 // Websites is the resolver for the websites field.
 func (r *queryResolver) Websites(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.WebsiteOrder, where *ent.WebsiteWhereInput, q *string) (*ent.WebsiteConnection, error) {
+	err := ent.EntkitAuthorizeByResource(ctx, "Website", entkit.ActionRead)
+	if err != nil {
+		return nil, err
+	}
 	return r.client.Website.Query().
 		Paginate(ctx, after, first, before, last,
 			ent.WithWebsiteOrder(orderBy),

@@ -98,15 +98,15 @@ export const RoutesBundle: React.FC = () => {
                 </Route>
             </Route>
 
-            {/*<Route
-            element={
-                <Authenticated fallback={<Outlet />}>
-                    <NavigateToResource resource="posts" />
-                </Authenticated>
-            }
-        >
-            <Route path="/login" element={<Login />} />
-        </Route>*/}
+            <Route
+                element={
+                    <Authenticated fallback={<Outlet />}>
+                        <NavigateToResource resource="company" />
+                    </Authenticated>
+                }
+            >
+                <Route path="/login" element={<Login />} />
+            </Route>
 
             <Route
                 element={

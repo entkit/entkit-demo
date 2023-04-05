@@ -57,21 +57,19 @@ func main() {
 						ClientID: gocloak.StringP("backend"),
 						Secret:   gocloak.StringP("test-secret"),
 					},
-					[]*gocloak.Client{
-						{
-							ClientID: gocloak.StringP("frontend"),
-							RootURL:  gocloak.StringP("https://demo.entkit.com"),
-							RedirectURIs: &[]string{
-								"https://demo.entkit.com/*",
-								"http://localhost:3000/*",
-								"http://localhost/*",
-							},
-							Attributes: &map[string]string{
-								"post.logout.redirect.uris": "+",
-							},
-							WebOrigins: &[]string{
-								"+",
-							},
+					&gocloak.Client{
+						ClientID: gocloak.StringP("frontend"),
+						RootURL:  gocloak.StringP("https://demo.entkit.com"),
+						RedirectURIs: &[]string{
+							"https://demo.entkit.com/*",
+							"http://localhost:3000/*",
+							"http://localhost/*",
+						},
+						Attributes: &map[string]string{
+							"post.logout.redirect.uris": "+",
+						},
+						WebOrigins: &[]string{
+							"+",
 						},
 					},
 				),
