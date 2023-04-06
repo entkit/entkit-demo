@@ -41,14 +41,14 @@ func main() {
 		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.TypescriptAdapter),
 		entkit.WithGenerator(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
 
-		//entkit.WithPrefix("QWE"),
+		entkit.WithPrefix("Demo"),
 		entkit.WithGraphqlURL(graphqlUri),
 		entkit.IgnoreUncommittedChanges(),
 		entkit.WithAuth(
 			entkit.AuthWithKeycloak(
 				entkit.NewKeycloak(
 					"http://localhost:8080",
-					"entkit-demo-2",
+					"entkit-demo-3",
 					"admin",
 					"admin",
 					"entadmin",

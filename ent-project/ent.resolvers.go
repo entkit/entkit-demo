@@ -25,7 +25,7 @@ func (r *queryResolver) Nodes(ctx context.Context, ids []uuid.UUID) ([]ent.Noder
 
 // Companies is the resolver for the companies field.
 func (r *queryResolver) Companies(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.CompanyOrder, where *ent.CompanyWhereInput, q *string) (*ent.CompanyConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Company", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Company", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (r *queryResolver) Companies(ctx context.Context, after *ent.Cursor, first 
 
 // Countries is the resolver for the countries field.
 func (r *queryResolver) Countries(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.CountryOrder, where *ent.CountryWhereInput, q *string) (*ent.CountryConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Country", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Country", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (r *queryResolver) Countries(ctx context.Context, after *ent.Cursor, first 
 
 // Emails is the resolver for the emails field.
 func (r *queryResolver) Emails(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.EmailOrder, where *ent.EmailWhereInput, q *string) (*ent.EmailConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Email", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Email", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (r *queryResolver) Emails(ctx context.Context, after *ent.Cursor, first *in
 
 // Images is the resolver for the images field.
 func (r *queryResolver) Images(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.ImageOrder, where *ent.ImageWhereInput, q *string) (*ent.ImageConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Image", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Image", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (r *queryResolver) Images(ctx context.Context, after *ent.Cursor, first *in
 
 // Locations is the resolver for the locations field.
 func (r *queryResolver) Locations(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.LocationOrder, where *ent.LocationWhereInput, q *string) (*ent.LocationConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Location", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Location", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ func (r *queryResolver) Locations(ctx context.Context, after *ent.Cursor, first 
 
 // Phones is the resolver for the phones field.
 func (r *queryResolver) Phones(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.PhoneOrder, where *ent.PhoneWhereInput, q *string) (*ent.PhoneConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Phone", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Phone", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ func (r *queryResolver) Phones(ctx context.Context, after *ent.Cursor, first *in
 
 // Products is the resolver for the products field.
 func (r *queryResolver) Products(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.ProductOrder, where *ent.ProductWhereInput, q *string) (*ent.ProductConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Product", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Product", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func (r *queryResolver) Products(ctx context.Context, after *ent.Cursor, first *
 
 // Vendors is the resolver for the vendors field.
 func (r *queryResolver) Vendors(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.VendorOrder, where *ent.VendorWhereInput, q *string) (*ent.VendorConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Vendor", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Vendor", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ func (r *queryResolver) Vendors(ctx context.Context, after *ent.Cursor, first *i
 
 // Warehouses is the resolver for the warehouses field.
 func (r *queryResolver) Warehouses(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.WarehouseOrder, where *ent.WarehouseWhereInput, q *string) (*ent.WarehouseConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Warehouse", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Warehouse", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ func (r *queryResolver) Warehouses(ctx context.Context, after *ent.Cursor, first
 
 // Websites is the resolver for the websites field.
 func (r *queryResolver) Websites(ctx context.Context, after *ent.Cursor, first *int, before *ent.Cursor, last *int, orderBy *ent.WebsiteOrder, where *ent.WebsiteWhereInput, q *string) (*ent.WebsiteConnection, error) {
-	err := ent.EntkitAuthorizeByResource(ctx, "Website", entkit.ActionRead)
+	err := ent.EntkitAuthorizeByResource(ctx, "Website", entkit.ActionReadScope)
 	if err != nil {
 		return nil, err
 	}

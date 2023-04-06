@@ -1,18 +1,20 @@
-// Custom types
-export type EntString = string;
-export type EntNumber = number;
-export type EntBoolean = boolean;
-export type EntDate = Date;
-export type EntUUID = string;
-export type EntImage = string;
-export type EntCode = string;
-export type EntURL = string;
-export type EntRichText = string;
-export type EntStringList = EntString[];
-export type EntNumberList = EntNumber[];
-export type EntID = EntUUID | EntNumber;
 
-export enum EntEnumsProcessStatus {
+// Custom types
+export type DemoString = string
+export type DemoNumber = number
+export type DemoBoolean = boolean
+export type DemoDate = Date
+export type DemoUUID = string
+export type DemoImage = string
+export type DemoCode = string
+export type DemoURL = string
+export type DemoRichText = string
+export type DemoStringList = DemoString[]
+export type DemoNumberList = DemoNumber[]
+export type DemoID = DemoUUID | DemoNumber
+
+
+export enum DemoEnumsProcessStatus{
     "none" = "none",
     "done" = "done",
     "enqueued" = "enqueued",
@@ -22,124 +24,125 @@ export enum EntEnumsProcessStatus {
 
 interface gqlField<T> {
     edges?: {
-        nodes?: Array<T>;
-    };
-    totalCount?: number;
+        nodes?: Array<T>
+    },
+    totalCount?: number,
 }
 
-export interface EntCompanyInterface {
-    id: EntUUID; // uuid.UUID
-    name: EntString; // string
-    description: EntRichText; // string
-    countries?: EntCountryInterface[];
-    _countries?: gqlField<EntCountryInterface>;
-    phones?: EntPhoneInterface[];
-    _phones?: gqlField<EntPhoneInterface>;
-    emails?: EntEmailInterface[];
-    _emails?: gqlField<EntEmailInterface>;
-    websites?: EntWebsiteInterface[];
-    _websites?: gqlField<EntWebsiteInterface>;
-    locations?: EntLocationInterface[];
-    _locations?: gqlField<EntLocationInterface>;
-    logoImage?: EntImageInterface;
-    coverImage?: EntImageInterface;
-    galleryImages?: EntImageInterface[];
-    _galleryImages?: gqlField<EntImageInterface>;
+
+export interface DemoCompanyInterface {
+    id: DemoUUID, // uuid.UUID
+    name: DemoString, // string
+    description: DemoRichText, // string
+    countries?: DemoCountryInterface[],
+    _countries?: gqlField<DemoCountryInterface>,
+    phones?: DemoPhoneInterface[],
+    _phones?: gqlField<DemoPhoneInterface>,
+    emails?: DemoEmailInterface[],
+    _emails?: gqlField<DemoEmailInterface>,
+    websites?: DemoWebsiteInterface[],
+    _websites?: gqlField<DemoWebsiteInterface>,
+    locations?: DemoLocationInterface[],
+    _locations?: gqlField<DemoLocationInterface>,
+    logoImage?: DemoImageInterface,
+    coverImage?: DemoImageInterface,
+    galleryImages?: DemoImageInterface[],
+    _galleryImages?: gqlField<DemoImageInterface>,
 }
-export interface EntCountryInterface {
-    id: EntUUID; // uuid.UUID
-    name: EntString; // string
-    code: EntString; // string
-    companies?: EntCompanyInterface[];
-    _companies?: gqlField<EntCompanyInterface>;
-    phones?: EntPhoneInterface[];
-    _phones?: gqlField<EntPhoneInterface>;
-    emails?: EntEmailInterface[];
-    _emails?: gqlField<EntEmailInterface>;
-    websites?: EntWebsiteInterface[];
-    _websites?: gqlField<EntWebsiteInterface>;
-    locations?: EntLocationInterface[];
-    _locations?: gqlField<EntLocationInterface>;
+export interface DemoCountryInterface {
+    id: DemoUUID, // uuid.UUID
+    name: DemoString, // string
+    code: DemoString, // string
+    companies?: DemoCompanyInterface[],
+    _companies?: gqlField<DemoCompanyInterface>,
+    phones?: DemoPhoneInterface[],
+    _phones?: gqlField<DemoPhoneInterface>,
+    emails?: DemoEmailInterface[],
+    _emails?: gqlField<DemoEmailInterface>,
+    websites?: DemoWebsiteInterface[],
+    _websites?: gqlField<DemoWebsiteInterface>,
+    locations?: DemoLocationInterface[],
+    _locations?: gqlField<DemoLocationInterface>,
 }
-export interface EntEmailInterface {
-    id: EntUUID; // uuid.UUID
-    title: EntString; // string
-    description: EntString; // string
-    address: EntString; // string
-    company?: EntCompanyInterface;
-    country?: EntCountryInterface;
+export interface DemoEmailInterface {
+    id: DemoUUID, // uuid.UUID
+    title: DemoString, // string
+    description: DemoString, // string
+    address: DemoString, // string
+    company?: DemoCompanyInterface,
+    country?: DemoCountryInterface,
 }
-export interface EntImageInterface {
-    id: EntUUID; // uuid.UUID
-    title: EntString; // string
-    originalURL: EntImage; // string
-    galleryCompany?: EntCompanyInterface;
-    logoCompany?: EntCompanyInterface;
-    coverCompany?: EntCompanyInterface;
+export interface DemoImageInterface {
+    id: DemoUUID, // uuid.UUID
+    title: DemoString, // string
+    originalURL: DemoImage, // string
+    galleryCompany?: DemoCompanyInterface,
+    logoCompany?: DemoCompanyInterface,
+    coverCompany?: DemoCompanyInterface,
 }
-export interface EntLocationInterface {
-    id: EntUUID; // uuid.UUID
-    title: EntString; // string
-    description: EntString; // string
-    latitude: EntString; // float64
-    longitude: EntString; // float64
-    address: EntString; // string
-    postcode: EntString; // string
-    type: EntString; // string
-    state: EntString; // string
-    suburb: EntString; // string
-    streetType: EntString; // string
-    streetName: EntString; // string
-    company?: EntCompanyInterface;
-    country?: EntCountryInterface;
+export interface DemoLocationInterface {
+    id: DemoUUID, // uuid.UUID
+    title: DemoString, // string
+    description: DemoString, // string
+    latitude: DemoString, // float64
+    longitude: DemoString, // float64
+    address: DemoString, // string
+    postcode: DemoString, // string
+    type: DemoString, // string
+    state: DemoString, // string
+    suburb: DemoString, // string
+    streetType: DemoString, // string
+    streetName: DemoString, // string
+    company?: DemoCompanyInterface,
+    country?: DemoCountryInterface,
 }
-export interface EntPhoneInterface {
-    id: EntUUID; // uuid.UUID
-    title: EntString; // string
-    description: EntString; // string
-    number: EntString; // string
-    type: EntString; // string
-    company?: EntCompanyInterface;
-    country?: EntCountryInterface;
+export interface DemoPhoneInterface {
+    id: DemoUUID, // uuid.UUID
+    title: DemoString, // string
+    description: DemoString, // string
+    number: DemoString, // string
+    type: DemoString, // string
+    company?: DemoCompanyInterface,
+    country?: DemoCountryInterface,
 }
-export interface EntProductInterface {
-    id: EntUUID; // uuid.UUID
-    name: EntString; // string
-    description: EntRichText; // string
-    image: EntImage; // string
-    url: EntURL; // string
-    lastSell: EntDate; // time.Time
-    createdAt: EntDate; // time.Time
-    status: EntEnumsProcessStatus; // enums.ProcessStatus
-    buildStatus: EntEnumsProcessStatus; // enums.ProcessStatus
-    warehouse?: EntWarehouseInterface;
-    vendor?: EntVendorInterface;
+export interface DemoProductInterface {
+    id: DemoUUID, // uuid.UUID
+    name: DemoString, // string
+    description: DemoRichText, // string
+    image: DemoImage, // string
+    url: DemoURL, // string
+    lastSell: DemoDate, // time.Time
+    createdAt: DemoDate, // time.Time
+    status: DemoEnumsProcessStatus, // enums.ProcessStatus
+    buildStatus: DemoEnumsProcessStatus, // enums.ProcessStatus
+    warehouse?: DemoWarehouseInterface,
+    vendor?: DemoVendorInterface,
 }
-export interface EntVendorInterface {
-    id: EntUUID; // uuid.UUID
-    name: EntString; // string
-    schema: EntCode; // string
-    warehouses?: EntWarehouseInterface[];
-    _warehouses?: gqlField<EntWarehouseInterface>;
-    products?: EntProductInterface[];
-    _products?: gqlField<EntProductInterface>;
+export interface DemoVendorInterface {
+    id: DemoUUID, // uuid.UUID
+    name: DemoString, // string
+    schema: DemoCode, // string
+    warehouses?: DemoWarehouseInterface[],
+    _warehouses?: gqlField<DemoWarehouseInterface>,
+    products?: DemoProductInterface[],
+    _products?: gqlField<DemoProductInterface>,
 }
-export interface EntWarehouseInterface {
-    id: EntUUID; // uuid.UUID
-    name: EntString; // string
-    lastUpdate: EntDate; // time.Time
-    originalData: EntCode; // string
-    enabled: EntBoolean; // bool
-    filters: EntStringList; // []string
-    products?: EntProductInterface[];
-    _products?: gqlField<EntProductInterface>;
-    vendor?: EntVendorInterface;
+export interface DemoWarehouseInterface {
+    id: DemoUUID, // uuid.UUID
+    name: DemoString, // string
+    lastUpdate: DemoDate, // time.Time
+    originalData: DemoCode, // string
+    enabled: DemoBoolean, // bool
+    filters: DemoStringList, // []string
+    products?: DemoProductInterface[],
+    _products?: gqlField<DemoProductInterface>,
+    vendor?: DemoVendorInterface,
 }
-export interface EntWebsiteInterface {
-    id: EntUUID; // uuid.UUID
-    title: EntString; // string
-    description: EntString; // string
-    url: EntURL; // string
-    company?: EntCompanyInterface;
-    country?: EntCountryInterface;
+export interface DemoWebsiteInterface {
+    id: DemoUUID, // uuid.UUID
+    title: DemoString, // string
+    description: DemoString, // string
+    url: DemoURL, // string
+    company?: DemoCompanyInterface,
+    country?: DemoCountryInterface,
 }

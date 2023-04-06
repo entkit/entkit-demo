@@ -1,10 +1,10 @@
-import { KeycloakConfig } from "keycloak-js";
+import {KeycloakConfig} from "keycloak-js";
 
-export const meta = {};
+export const meta = {}
 
 export const keycloak: KeycloakConfig = {
     url: "http://localhost:8080",
-    realm: "entkit-demo-2",
+    realm: "entkit-demo-3",
     clientId: "frontend",
 };
 

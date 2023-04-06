@@ -69,6 +69,7 @@ func (Company) Annotations() []schema.Annotation {
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("ShopOutlined"),
 		entkit.IndexRoute(),
+		entkit.RoutePath("com"),
 		entkit.Actions(
 			entkit.ListAction,
 			entkit.ShowAction,
