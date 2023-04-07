@@ -5,7 +5,7 @@ services:
     build:
       context: "./"
       args:
-        GRAPHQL_URI: "https://demo.entkit.dev/query"
+        GRAPHQL_URI: "https://demo.entkit.com/query"
     ports:
       - "80:80"
   keycloak:

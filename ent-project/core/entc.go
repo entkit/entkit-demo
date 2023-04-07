@@ -38,7 +38,7 @@ func main() {
 		graphqlUri = "http://localhost/query"
 	}
 	entRefine, err := entkit.NewExtension(
-		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.TypescriptAdapter),
+		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.DefaultTypescriptAdapter),
 		entkit.WithGenerator(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
 
 		entkit.WithPrefix("Demo"),
