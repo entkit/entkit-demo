@@ -1,23 +1,23 @@
 version: "3.9"
 
 services:
-  example:
-    build:
-      context: "./"
-      args:
-        GRAPHQL_URI: "https://demo.entkit.com/query"
+  refine-project:
+    build: "./"
+    command: ["serve", "refine-project"]
     ports:
       - "80:80"
+  other-refine-project:
+    build: "./"
+    command: ["serve", "other-refine-project"]
+    ports:
+      - "81:80"
   keycloak:
     command: [ "start-dev" ]
     image: quay.io/keycloak/keycloak:21.0.0
     volumes:
-      - ./runtime/keycloak:/opt/keycloak/data/
+        - ./runtime/keycloak:/opt/keycloak/data/
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      #KC_HOSTNAME: localhost
-      #KC_DB: postgres
-      #KC_DB_URL: jdbc:postgresql://db/keycloak_db?currentSchema=public&user=keycloak_user&password=keycloak_pass
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
-      - "8080:8080"
+        - "8080:8080"

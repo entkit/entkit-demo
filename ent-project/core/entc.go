@@ -43,6 +43,11 @@ func main() {
 			entkit.RefineAdapter,
 			entkit.TargetPath(filepath.Join("..", "refine-project")),
 		),
+		entkit.WithGenerator(
+			"other-refine-project",
+			entkit.RefineAdapter,
+			entkit.TargetPath(filepath.Join("..", "other-refine-project-root/project")),
+		),
 		entkit.WithGenerator("my-server", entkit.DefaultServerAdapter),
 
 		entkit.WithPrefix("Demo"),

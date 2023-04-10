@@ -82,4 +82,4 @@ require (
 )
 
 // TODO: delete before commit
-replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit
+// replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit
