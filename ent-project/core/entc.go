@@ -15,7 +15,6 @@ import (
 	"github.com/entkit/entkit"
 	"log"
 	"os"
-
 	"path/filepath"
 )
 
@@ -39,7 +38,12 @@ func main() {
 	}
 	entRefine, err := entkit.NewExtension(
 		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.DefaultTypescriptAdapter),
-		entkit.WithGenerator(filepath.Join("..", "refine-project"), entkit.RefineAdapter),
+		entkit.WithGenerator(
+			"refine-project",
+			entkit.RefineAdapter,
+			entkit.TargetPath(filepath.Join("..", "refine-project")),
+		),
+		entkit.WithGenerator("my-server", entkit.DefaultServerAdapter),
 
 		entkit.WithPrefix("Demo"),
 		entkit.WithGraphqlURL(graphqlUri),
