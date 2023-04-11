@@ -6,7 +6,7 @@ require (
 	entgo.io/contrib v0.4.0
 	entgo.io/ent v0.12.0
 	github.com/99designs/gqlgen v0.17.28
-	github.com/entkit/entkit v0.0.0-20230410120902-14e6e0d786a3
+	github.com/entkit/entkit v0.0.0-20230411005945-dc9fb8c2f810
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/hashicorp/go-multierror v1.1.1
@@ -19,7 +19,7 @@ require (
 require (
 	ariga.io/atlas v0.10.1 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
-	github.com/Masterminds/semver/v3 v3.2.0 // indirect
+	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Nerzal/gocloak/v12 v12.0.0 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
@@ -83,4 +83,4 @@ require (
 )
 
 // TODO: remove before commit
-// replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit
+//replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit
