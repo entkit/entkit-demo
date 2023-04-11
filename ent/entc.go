@@ -38,7 +38,7 @@ func main() {
 	}
 
 	entRefine, err := entkit.NewExtension(
-		//entkit.WithGenerator(filepath.Join("..", "typescript-project"), entkit.DefaultTypescriptAdapter),
+		entkit.WithGenerator(filepath.Join("typescript-project"), entkit.DefaultTypescriptAdapter),
 		entkit.WithGenerator(
 			"refine-project",
 			entkit.RefineAdapter,
@@ -56,7 +56,7 @@ func main() {
 		entkit.WithAuth(
 			entkit.AuthWithKeycloak(
 				entkit.NewKeycloak(
-					"http://localhost",
+					"http://localhost:8080",
 					"entkit-demo-3",
 					"admin",
 					"admin",

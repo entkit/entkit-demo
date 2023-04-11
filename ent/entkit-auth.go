@@ -22,8 +22,8 @@ func EntkitAuthMiddleware(next http.Handler) http.Handler {
 		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 		var err error
 		kc := entkit.NewBackendKeycloak(
-			"https://lemur-4.cloud-iam.com/auth",
-			"entkit-demo",
+			"http://localhost:8080",
+			"entkit-demo-3",
 			"backend",
 			"test-secret",
 		)
@@ -41,8 +41,8 @@ func EntkitAuthGinMiddleware() gin.HandlerFunc {
 		c.Header("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 		var err error
 		kc := entkit.NewBackendKeycloak(
-			"https://lemur-4.cloud-iam.com/auth",
-			"entkit-demo",
+			"http://localhost:8080",
+			"entkit-demo-3",
 			"backend",
 			"test-secret",
 		)

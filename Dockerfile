@@ -24,9 +24,7 @@ RUN apk add --no-cache alpine-sdk
 RUN apk add --no-cache nodejs npm
 
 # Build
-RUN ls -la
 RUN go mod tidy
-RUN go generate
 RUN go build -o /usr/local/bin/entkit ./my-server/*.go
 
 # Run binary

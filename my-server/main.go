@@ -96,12 +96,12 @@ func main() {
 				&cli.StringFlag{
 					Name:    "KeycloakHost",
 					Aliases: []string{"keycloak-host", "kc-host"},
-					Value:   "https://lemur-4.cloud-iam.com/auth",
+					Value:   "http://localhost:8080",
 					EnvVars: []string{"KEYCLOAK_HOST"},
 				},
 				&cli.StringFlag{
 					Name:    "KeycloakRealm",
-					Value:   "entkit-demo",
+					Value:   "entkit-demo-3",
 					Aliases: []string{"keycloak-realm", "kc-realm"},
 					EnvVars: []string{"KEYCLOAK_REALM"},
 				},

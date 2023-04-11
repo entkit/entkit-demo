@@ -21,13 +21,13 @@ services:
     command: ["serve", "refine-project"]
     volumes: ["./runtime:/app/runtime"]
     ports:
-      - "80:80"
+      - "81:80"
   other-refine-project:
     build: "./"
     command: ["serve", "other-refine-project"]
     volumes: ["./runtime:/app/runtime"]
     ports:
-      - "81:80"
+      - "82:80"
   keycloak:
     command: [ "start-dev" ]
     image: quay.io/keycloak/keycloak:21.0.0
