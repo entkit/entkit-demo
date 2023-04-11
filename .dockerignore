@@ -13,6 +13,7 @@
 # how to modify the library, extend its functionality or contribute
 # to the project: https://entkit.com
 # ---------------------------------------------------------
+docker-compose.yaml
 node_modules
 **/node_modules
 build

@@ -18,27 +18,27 @@ version: "3.9"
 services:
   refine-project:
     build: "./"
-    command: [ "serve", "${REFINE_PROJECT_EXTRA_ARGS}", "refine-project"]
-    volumes: [ refine_project_runtime:/app/runtime ]
+    command: [ "serve ${REFINE_PROJECT_EXTRA_ARGS}refine-project"]
+    volumes: [ refine_project_shared:/app/shared ]
     ports:
       - "81:80"
   other-refine-project:
     build: "./"
-    command: [ "serve", "${OTHER_REFINE_PROJECT_EXTRA_ARGS}", "other-refine-project"]
-    volumes: [ other_refine_project_runtime:/app/runtime ]
+    command: [ "serve ${OTHER_REFINE_PROJECT_EXTRA_ARGS}other-refine-project"]
+    volumes: [ other_refine_project_shared:/app/shared ]
     ports:
       - "82:80"
   keycloak:
     command: [ "start-dev" ]
     image: quay.io/keycloak/keycloak:21.0.0
     volumes:
-        - keycloak_runtime:/opt/keycloak/data/
+        - keycloak_data:/opt/keycloak/data/
     environment:
         KEYCLOAK_ADMIN: admin
         KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
         - "8080:8080"
 volumes:
-  refine_project_runtime:
-  other_refine_project_runtime:
-  keycloak_runtime:
+  refine_project_shared:
+  other_refine_project_shared:
+  keycloak_data:

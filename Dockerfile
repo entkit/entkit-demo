@@ -28,4 +28,7 @@ RUN go mod tidy
 RUN go build -o /usr/local/bin/entkit ./my-server/*.go
 
 # Run binary
-ENTRYPOINT ["entkit"]
+ENTRYPOINT ["/bin/sh", "-c"]
+
+# Command
+CMD ["entkit"]
