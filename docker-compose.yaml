@@ -21,13 +21,13 @@ services:
     command: [ "entkit serve ${REFINE_PROJECT_EXTRA_ARGS} refine-project"]
     volumes: [ refine_project_runtime:/app/runtime ]
     ports:
-      - "81:80"
+      - "8081:80"
   other-refine-project:
     build: "./"
     command: [ "entkit serve ${OTHER_REFINE_PROJECT_EXTRA_ARGS} other-refine-project"]
     volumes: [ other_refine_project_runtime:/app/runtime ]
     ports:
-      - "82:80"
+      - "8082:80"
   keycloak:
     command: [ "start-dev" ]
     image: quay.io/keycloak/keycloak:21.0.0
