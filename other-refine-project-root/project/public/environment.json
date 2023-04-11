@@ -2,8 +2,8 @@
   "graphqlUrl": "http://localhost/query",
   "auth": {
     "keycloak": {
-      "url": "http://localhost:8080",
-      "realm": "entkit-demo-3",
+      "url": "https://lemur-4.cloud-iam.com/auth",
+      "realm": "entkit-demo",
       "clientId": "frontend",
       "backendClientId": "backend"
     }

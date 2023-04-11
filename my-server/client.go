@@ -3,18 +3,18 @@ package main
 import (
 	"context"
 	"github.com/99designs/gqlgen/graphql"
-	"github.com/entkit/entkit-demo/ent-project"
-	"github.com/entkit/entkit-demo/ent-project/core/ent"
+	"github.com/entkit/entkit-demo"
+	"github.com/entkit/entkit-demo/ent"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/urfave/cli/v2"
 )
 
 // This file will not be regenerated automatically.
 
-func InitClient(*cli.Context) (*ent.Client, error) {
+func InitClient(ctx *cli.Context) (*ent.Client, error) {
 	client, err := ent.Open(
-		"sqlite3",
-		"file:runtime/ent/demo.db?mode=rwc&cache=shared&_fk=1",
+		ctx.String("DatabaseDriver"),
+		ctx.String("DatabaseSourceName"),
 	)
 	if err != nil {
 		return nil, err

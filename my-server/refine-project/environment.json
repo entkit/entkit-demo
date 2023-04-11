@@ -1,0 +1,11 @@
+{
+  "graphqlUrl": "http://localhost/query",
+  "auth": {
+    "keycloak": {
+      "url": "http://localhost:8080",
+      "realm": "entkit-demo-3",
+      "clientId": "frontend",
+      "backendClientId": "backend"
+    }
+  }
+}
