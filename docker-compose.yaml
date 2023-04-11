@@ -18,13 +18,13 @@ version: "3.9"
 services:
   refine-project:
     build: "./"
-    command: [ "entkit serve ${REFINE_PROJECT_EXTRA_ARGS}refine-project"]
+    command: [ "entkit serve ${REFINE_PROJECT_EXTRA_ARGS} refine-project"]
     volumes: [ refine_project_runtime:/app/runtime ]
     ports:
       - "81:80"
   other-refine-project:
     build: "./"
-    command: [ "entkit serve ${OTHER_REFINE_PROJECT_EXTRA_ARGS}other-refine-project"]
+    command: [ "entkit serve ${OTHER_REFINE_PROJECT_EXTRA_ARGS} other-refine-project"]
     volumes: [ other_refine_project_runtime:/app/runtime ]
     ports:
       - "82:80"
