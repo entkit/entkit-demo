@@ -77,7 +77,7 @@ func main() {
 							"--file",
 							"./my-server/Dockerfile",
 							"--tag",
-							"demo_my_server",
+							"demo-my-server",
 							".",
 						)
 						cmd.Env = append(os.Environ(), "DOCKER_BUILDKIT=1")
@@ -108,7 +108,7 @@ func main() {
 					},
 					Action: func(context *cli.Context) error {
 						tags := context.StringSlice("tags")
-						repoName := context.String("registry") + "/demo_my_server"
+						repoName := context.String("registry") + "/demo-my-server"
 
 						for _, tag := range tags {
 							remoteImageName := repoName + ":" + tag
@@ -116,7 +116,7 @@ func main() {
 								"docker",
 								"image",
 								"tag",
-								"demo_my_server:latest",
+								"demo-my-server:latest",
 								remoteImageName,
 							)
 							cmd.Stderr = os.Stderr
