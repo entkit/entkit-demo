@@ -28,4 +28,4 @@ jobs:
     
       - uses: actions/setup-go@v4
       - name: Build and push Docker image
-        run: go run ./my-server/*.go docker build && go run ./my-server/*.go docker push --registry ${{ env.REGISTRY }}/${{ github.actor }}
+        run: go run ./my-server/*.go docker build && go run ./my-server/*.go docker push --registry ${{ env.REGISTRY }}/${{ github.event.repository.name }}
