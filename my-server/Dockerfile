@@ -13,7 +13,7 @@
 # to the project: https://entkit.com
 # ---------------------------------------------------------
 
-FROM golang:1.19-alpine
+FROM golang:1.19-alpine as build
 
 # Deps
 RUN apk add --no-cache alpine-sdk
@@ -25,7 +25,11 @@ ADD . /app
 
 # Build
 RUN go mod tidy
-RUN go build -o /usr/local/bin/entkit ./my-server/*.go
+RUN go build -o /entkit ./my-server/*.go
+
+FROM alpine:latest
+
+COPY --from=build /entkit /bin/entkit
 
 # Run binary
 ENTRYPOINT ["/bin/sh", "-c"]
