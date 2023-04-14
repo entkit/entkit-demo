@@ -6,7 +6,7 @@ require (
 	entgo.io/contrib v0.4.0
 	entgo.io/ent v0.12.0
 	github.com/99designs/gqlgen v0.17.29
-	github.com/entkit/entkit v0.0.0-20230412130113-3b297ac0a0fe
+	github.com/entkit/entkit v0.0.0-20230412210216-fd7fe18880f4
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/hashicorp/go-multierror v1.1.1

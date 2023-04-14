@@ -15,17 +15,30 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func EntkitAuthMiddleware(next http.Handler) http.Handler {
+func _entkitDefaultValue(value string, defaultValue string) string {
+	if value == "" {
+		return defaultValue
+	}
+	return value
+}
+
+func EntkitAuthMiddleware(
+	next http.Handler,
+	keycloakHost string,
+	keycloakRealm string,
+	keycloakBackendClientID string,
+	keycloakBackendClientSecret string,
+) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
 		w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 		var err error
 		kc := entkit.NewBackendKeycloak(
-			"http://localhost:8080",
-			"entkit-demo-3",
-			"backend",
-			"test-secret",
+			_entkitDefaultValue(keycloakHost, "http://localhost:8080"),
+			_entkitDefaultValue(keycloakRealm, "entkit-demo-3"),
+			_entkitDefaultValue(keycloakBackendClientID, "backend"),
+			_entkitDefaultValue(keycloakBackendClientSecret, "test-secret"),
 		)
 		r, err = kc.MiddlewareReqHandlerFunc(w, r)
 		if err == nil {
@@ -34,7 +47,12 @@ func EntkitAuthMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-func EntkitAuthGinMiddleware() gin.HandlerFunc {
+func EntkitAuthGinMiddleware(
+	keycloakHost string,
+	keycloakRealm string,
+	keycloakBackendClientID string,
+	keycloakBackendClientSecret string,
+) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Methods", "POST, GET")

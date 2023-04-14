@@ -41,10 +41,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgryski/trifles v0.0.0-20200323201526-dd97f9abfb48 h1:fRzb/w+pyskVMQ+UbP35JkH8yB7MYb4q/qhBarqZE6g=
 github.com/dgryski/trifles v0.0.0-20200323201526-dd97f9abfb48/go.mod h1:if7Fbed8SFyPtHLHbg49SI7NAdJiC5WIA09pe59rfAA=
-github.com/entkit/entkit v0.0.0-20230412123808-af85f515614c h1:7dw73eAm1kOoWomMSOme2dnWCudVkeyPWepg269ztK8=
-github.com/entkit/entkit v0.0.0-20230412123808-af85f515614c/go.mod h1:73HqpYT8ekBTOKCvVd0dWHl6Spp5J58zg9lprP6IVqY=
-github.com/entkit/entkit v0.0.0-20230412130113-3b297ac0a0fe h1:lw8dKsoS6GHrvPmd8wC0RrU2ktZGqNlY8+dC8saZNK8=
-github.com/entkit/entkit v0.0.0-20230412130113-3b297ac0a0fe/go.mod h1:73HqpYT8ekBTOKCvVd0dWHl6Spp5J58zg9lprP6IVqY=
+github.com/entkit/entkit v0.0.0-20230412210216-fd7fe18880f4 h1:vxzB8YN2lypwYgRf09X1zuOjOJzZortDKqidGyOje/Q=
+github.com/entkit/entkit v0.0.0-20230412210216-fd7fe18880f4/go.mod h1:73HqpYT8ekBTOKCvVd0dWHl6Spp5J58zg9lprP6IVqY=
 github.com/frankban/quicktest v1.14.3 h1:FJKSZTDHjyhriyC81FLQ0LY93eSai0ZyR/ZIkd3ZUKE=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=
 github.com/gin-contrib/sse v0.1.0/go.mod h1:RHrZQHXnP2xjPF+u1gW/2HnVO7nvIa9PG3Gm+fLHvGI=

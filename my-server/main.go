@@ -198,6 +198,12 @@ func main() {
 					Aliases: []string{"keycloak-backend-client-id", "kc-backend-client-id"},
 					EnvVars: []string{"KEYCLOAK_BACKEND_CLIENT_ID"},
 				},
+				&cli.StringFlag{
+					Name:    "KeycloakBackendClientSecret",
+					Value:   "test-secret",
+					Aliases: []string{"keycloak-backend-client-secret", "kc-backend-client-secret"},
+					EnvVars: []string{"KEYCLOAK_BACKEND_CLIENT_SECRET"},
+				},
 			},
 			Description: "Serve EntKit APP",
 			Subcommands: []*cli.Command{
@@ -205,6 +211,7 @@ func main() {
 					Name: "refine-project",
 					Action: func(context *cli.Context) error {
 						var log *zap.Logger
+
 						if context.Bool("DevMode") {
 							log, _ = zap.NewDevelopment()
 						} else {
@@ -237,7 +244,21 @@ func main() {
 						srv.Use(entgql.Transactioner{TxOpener: client})
 						//srv.Use(&debug.Tracer{})
 						mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
-						mux.Handle("/query", ent.EntkitAuthMiddleware(srv))
+						var (
+							keycloakHost                = context.String("KeycloakHost")
+							keycloakRealm               = context.String("KeycloakRealm")
+							keycloakFrontendClientID    = context.String("KeycloakFrontendClientID")
+							keycloakBackendClientID     = context.String("KeycloakBackendClientID")
+							keycloakBackendClientSecret = context.String("KeycloakBackendClientSecret")
+						)
+
+						mux.Handle("/query", ent.EntkitAuthMiddleware(
+							srv,
+							keycloakHost,
+							keycloakRealm,
+							keycloakBackendClientID,
+							keycloakBackendClientSecret,
+						))
 
 						mux.HandleFunc("/environment.json", func(writer http.ResponseWriter, request *http.Request) {
 							b, _ := json.Marshal(entkit.Environment{
@@ -245,10 +266,10 @@ func main() {
 								GraphqlURL: context.String("GraphqlURL"),
 								Auth: &entkit.AuthEnvironment{
 									Keycloak: &entkit.KeycloakEnvironment{
-										URL:             context.String("KeycloakHost"),
-										Realm:           context.String("KeycloakRealm"),
-										ClientID:        context.String("KeycloakFrontendClientID"),
-										BackendClientID: context.String("KeycloakBackendClientID"),
+										URL:             keycloakHost,
+										Realm:           keycloakRealm,
+										ClientID:        keycloakFrontendClientID,
+										BackendClientID: keycloakBackendClientID,
 									},
 								},
 							})
@@ -316,6 +337,7 @@ func main() {
 					Name: "other-refine-project",
 					Action: func(context *cli.Context) error {
 						var log *zap.Logger
+
 						if context.Bool("DevMode") {
 							log, _ = zap.NewDevelopment()
 						} else {
@@ -348,7 +370,21 @@ func main() {
 						srv.Use(entgql.Transactioner{TxOpener: client})
 						//srv.Use(&debug.Tracer{})
 						mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
-						mux.Handle("/query", ent.EntkitAuthMiddleware(srv))
+						var (
+							keycloakHost                = context.String("KeycloakHost")
+							keycloakRealm               = context.String("KeycloakRealm")
+							keycloakFrontendClientID    = context.String("KeycloakFrontendClientID")
+							keycloakBackendClientID     = context.String("KeycloakBackendClientID")
+							keycloakBackendClientSecret = context.String("KeycloakBackendClientSecret")
+						)
+
+						mux.Handle("/query", ent.EntkitAuthMiddleware(
+							srv,
+							keycloakHost,
+							keycloakRealm,
+							keycloakBackendClientID,
+							keycloakBackendClientSecret,
+						))
 
 						mux.HandleFunc("/environment.json", func(writer http.ResponseWriter, request *http.Request) {
 							b, _ := json.Marshal(entkit.Environment{
@@ -356,10 +392,10 @@ func main() {
 								GraphqlURL: context.String("GraphqlURL"),
 								Auth: &entkit.AuthEnvironment{
 									Keycloak: &entkit.KeycloakEnvironment{
-										URL:             context.String("KeycloakHost"),
-										Realm:           context.String("KeycloakRealm"),
-										ClientID:        context.String("KeycloakFrontendClientID"),
-										BackendClientID: context.String("KeycloakBackendClientID"),
+										URL:             keycloakHost,
+										Realm:           keycloakRealm,
+										ClientID:        keycloakFrontendClientID,
+										BackendClientID: keycloakBackendClientID,
 									},
 								},
 							})
