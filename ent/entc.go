@@ -39,13 +39,10 @@ func main() {
 
 	entRefine, err := entkit.NewExtension(
 		entkit.WithGenerator(filepath.Join("typescript-project"), entkit.DefaultTypescriptAdapter),
-		entkit.WithGenerator(
-			"refine-project",
-			entkit.RefineAdapter,
-		),
+		entkit.WithGenerator("refine-project", entkit.DefaultRefineAdapter),
 		entkit.WithGenerator(
 			"other-refine-project",
-			entkit.RefineAdapter,
+			entkit.DefaultRefineAdapter,
 			entkit.TargetPath(filepath.Join("other-refine-project-root/project")),
 		),
 		entkit.WithGenerator("my-server", entkit.DefaultServerAdapter),
