@@ -75,11 +75,6 @@ func (Warehouse) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("OrderedListOutlined"),
-		entkit.Actions(
-			entkit.ListAction,
-			entkit.ShowAction,
-			entkit.DeleteAction,
-			entkit.EditAction,
-		),
+		entkit.Actions(entkit.DefaultActions...),
 	}
 }

@@ -32,27 +32,6 @@ import * as Custom from "./custom";
 import * as Type from "./typedefs";
 import { usePermissions } from "@refinedev/core";
 
-export type CompanyListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const CompanyListAction: React.FC<CompanyListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Company?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/com".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
-        </Antd.Button>
-    </Link> : null
-}
-
 export type CompanyShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -74,7 +53,7 @@ export const CompanyShowAction: React.FC<CompanyShowActionProps> = ({recordItemI
     </Link> : null
 }
 
-export type CompanyDeleteActionProps = ButtonProps &
+export type CompanyListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -82,72 +61,38 @@ export type CompanyDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const CompanyListAction: React.FC<CompanyListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Company?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Company?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoCompanyInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "CompanyWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "company",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/com".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+export type CompanyCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const CompanyCreateAction: React.FC<CompanyCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/com/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 export type CompanyEditActionProps = ButtonProps &
@@ -167,28 +112,6 @@ export const CompanyEditAction: React.FC<CompanyEditActionProps> = ({recordItemI
     return can ? <Link to={ "/com/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type CountryListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const CountryListAction: React.FC<CountryListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Country?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/country".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -216,7 +139,7 @@ export const CountryShowAction: React.FC<CountryShowActionProps> = ({recordItemI
 }
 
 
-export type CountryDeleteActionProps = ButtonProps &
+export type CountryListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -224,72 +147,39 @@ export type CountryDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const CountryListAction: React.FC<CountryListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Country?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Country?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoCountryInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "CountryWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "country",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/country".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type CountryCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const CountryCreateAction: React.FC<CountryCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/country/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -310,28 +200,6 @@ export const CountryEditAction: React.FC<CountryEditActionProps> = ({recordItemI
     return can ? <Link to={ "/country/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type EmailListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const EmailListAction: React.FC<EmailListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Email?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/email".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -359,7 +227,7 @@ export const EmailShowAction: React.FC<EmailShowActionProps> = ({recordItemIDs, 
 }
 
 
-export type EmailDeleteActionProps = ButtonProps &
+export type EmailListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -367,72 +235,39 @@ export type EmailDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const EmailListAction: React.FC<EmailListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Email?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Email?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoEmailInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "EmailWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "email",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/email".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type EmailCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const EmailCreateAction: React.FC<EmailCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/email/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -453,28 +288,6 @@ export const EmailEditAction: React.FC<EmailEditActionProps> = ({recordItemIDs, 
     return can ? <Link to={ "/email/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type ImageListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const ImageListAction: React.FC<ImageListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Image?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/image".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -502,7 +315,7 @@ export const ImageShowAction: React.FC<ImageShowActionProps> = ({recordItemIDs, 
 }
 
 
-export type ImageDeleteActionProps = ButtonProps &
+export type ImageListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -510,72 +323,39 @@ export type ImageDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const ImageListAction: React.FC<ImageListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Image?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Image?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoImageInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "ImageWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "image",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/image".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type ImageCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const ImageCreateAction: React.FC<ImageCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/image/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -596,28 +376,6 @@ export const ImageEditAction: React.FC<ImageEditActionProps> = ({recordItemIDs, 
     return can ? <Link to={ "/image/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type LocationListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const LocationListAction: React.FC<LocationListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Location?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/location".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -645,7 +403,7 @@ export const LocationShowAction: React.FC<LocationShowActionProps> = ({recordIte
 }
 
 
-export type LocationDeleteActionProps = ButtonProps &
+export type LocationListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -653,72 +411,39 @@ export type LocationDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const LocationListAction: React.FC<LocationListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Location?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Location?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoLocationInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "LocationWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "location",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/location".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type LocationCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const LocationCreateAction: React.FC<LocationCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/location/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -739,28 +464,6 @@ export const LocationEditAction: React.FC<LocationEditActionProps> = ({recordIte
     return can ? <Link to={ "/location/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type PhoneListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const PhoneListAction: React.FC<PhoneListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Phone?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/phone".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -788,7 +491,7 @@ export const PhoneShowAction: React.FC<PhoneShowActionProps> = ({recordItemIDs, 
 }
 
 
-export type PhoneDeleteActionProps = ButtonProps &
+export type PhoneListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -796,72 +499,39 @@ export type PhoneDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const PhoneListAction: React.FC<PhoneListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Phone?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Phone?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoPhoneInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "PhoneWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "phone",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/phone".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type PhoneCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const PhoneCreateAction: React.FC<PhoneCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/phone/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -882,28 +552,6 @@ export const PhoneEditAction: React.FC<PhoneEditActionProps> = ({recordItemIDs, 
     return can ? <Link to={ "/phone/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type ProductListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const ProductListAction: React.FC<ProductListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Product?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/product".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -931,6 +579,50 @@ export const ProductShowAction: React.FC<ProductShowActionProps> = ({recordItemI
 }
 
 
+export type ProductListActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const ProductListAction: React.FC<ProductListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/product".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
+        </Antd.Button>
+    </Link> : null
+}
+
+
+export type ProductCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const ProductCreateAction: React.FC<ProductCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/product/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
+}
+
+
 export type ProductEditActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -950,83 +642,6 @@ export const ProductEditAction: React.FC<ProductEditActionProps> = ({recordItemI
             {hideText || "Edit"}
         </Antd.Button>
     </Link> : null
-}
-
-
-export type ProductDeleteActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Product?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
-
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoProductInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "ProductWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "product",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
-        </Antd.Button>
-    </Popconfirm> : null
 }
 
 
@@ -1107,28 +722,6 @@ export const ProductMyCustomActionButtonAction: React.FC<ProductMyCustomActionBu
 }
 
 
-export type VendorListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const VendorListAction: React.FC<VendorListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Vendor?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/vendor".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
 export type VendorShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -1151,7 +744,7 @@ export const VendorShowAction: React.FC<VendorShowActionProps> = ({recordItemIDs
 }
 
 
-export type VendorDeleteActionProps = ButtonProps &
+export type VendorListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -1159,72 +752,39 @@ export type VendorDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const VendorListAction: React.FC<VendorListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Vendor?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Vendor?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoVendorInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "VendorWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "vendor",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/vendor".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type VendorCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const VendorCreateAction: React.FC<VendorCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/vendor/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -1245,28 +805,6 @@ export const VendorEditAction: React.FC<VendorEditActionProps> = ({recordItemIDs
     return can ? <Link to={ "/vendor/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type WarehouseListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const WarehouseListAction: React.FC<WarehouseListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Warehouse?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/warehouse".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -1294,7 +832,7 @@ export const WarehouseShowAction: React.FC<WarehouseShowActionProps> = ({recordI
 }
 
 
-export type WarehouseDeleteActionProps = ButtonProps &
+export type WarehouseListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -1302,72 +840,39 @@ export type WarehouseDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const WarehouseListAction: React.FC<WarehouseListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Warehouse?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Warehouse?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoWarehouseInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "WarehouseWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "warehouse",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/warehouse".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type WarehouseCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const WarehouseCreateAction: React.FC<WarehouseCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/warehouse/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 
@@ -1388,28 +893,6 @@ export const WarehouseEditAction: React.FC<WarehouseEditActionProps> = ({recordI
     return can ? <Link to={ "/warehouse/edit/:id".replace(":id", String(recordItemIDs[0])) }>
         <Antd.Button icon={ <AntdIcons.EditOutlined/> } {...additionalProps} {...props} >
             {hideText || "Edit"}
-        </Antd.Button>
-    </Link> : null
-}
-
-
-export type WebsiteListActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-    recordItemIDs: Type.DemoID[],
-    onSuccess?: (data: any)=>void
-}
-
-export const WebsiteListAction: React.FC<WebsiteListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Website?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? <Link to={ "/website".replace(":id", String(recordItemIDs[0])) }>
-        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
-            {hideText || "List"}
         </Antd.Button>
     </Link> : null
 }
@@ -1437,7 +920,7 @@ export const WebsiteShowAction: React.FC<WebsiteShowActionProps> = ({recordItemI
 }
 
 
-export type WebsiteDeleteActionProps = ButtonProps &
+export type WebsiteListActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
     RefineButtonLinkingProps & {
@@ -1445,72 +928,39 @@ export type WebsiteDeleteActionProps = ButtonProps &
     onSuccess?: (data: any)=>void
 }
 
-export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+export const WebsiteListAction: React.FC<WebsiteListActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
     const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Website?.includes("Delete"));
-    const additionalProps = {"danger":true} || {};
+    const can = Boolean(permissions?.Website?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
 
-    const  notification = useNotification();
-    const { mutate, isLoading } = useCustomMutation();
-    //const { mutate, isLoading } = useCustomMutation<Type.DemoWebsiteInterface>();
-    const invalidate = useInvalidate();
-
-    return can ? <Popconfirm
-        key="delete"
-        okText="Delete"
-        cancelText="Cancel"
-        okType="primary"
-        title="Are you sure?"
-        okButtonProps={ { disabled: isLoading } }
-        onConfirm={(): void => {
-            mutate(
-                {
-                    method: "post",
-                    url: "",
-                    values: {},
-                    metaData: {
-                        operation: "delete",
-                        variables: {
-                            where: {
-                                value: {
-                                    idIn: recordItemIDs
-                                },
-                                type: "WebsiteWhereInput",
-                                required: true
-                            },
-                        },
-                        fields: null || undefined,
-                    },
-                },
-                {
-                    onSuccess: (resp) => {
-                        recordItemIDs.forEach((id: Type.DemoID)=>{
-                            invalidate({
-                                resource: "website",
-                                invalidates: ["resourceAll"],
-                                id,
-                            });
-                        })
-                        notification.open?.({
-                            type: "success",
-                            message: `Successfully`,
-                        })
-                        !onSuccess || onSuccess(resp);
-                    },
-                    onError: (error) => {
-                        notification.open?.({
-                            type: "error",
-                            message: error.message,
-                        })
-                    },
-                },
-            );
-        }}
-    >
-        <Antd.Button icon={ <AntdIcons.DeleteOutlined/> } {...additionalProps} {...props} >
-            {hideText || "Delete"}
+    return can ? <Link to={ "/website".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.UnorderedListOutlined/> } {...additionalProps} {...props} >
+            {hideText || "List"}
         </Antd.Button>
-    </Popconfirm> : null
+    </Link> : null
+}
+
+
+export type WebsiteCreateActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+    recordItemIDs: Type.DemoID[],
+    onSuccess?: (data: any)=>void
+}
+
+export const WebsiteCreateAction: React.FC<WebsiteCreateActionProps> = ({recordItemIDs, hideText, onSuccess, ...props}) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Create"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? <Link to={ "/website/create".replace(":id", String(recordItemIDs[0])) }>
+        <Antd.Button icon={ <AntdIcons.PlusCircleOutlined/> } {...additionalProps} {...props} >
+            {hideText || "Create"}
+        </Antd.Button>
+    </Link> : null
 }
 
 

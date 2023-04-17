@@ -389,10 +389,9 @@ export const CompanyShow : React.FC<CompanyShowProps> = ({id, withEdges, ...show
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.CompanyListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.CompanyDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.CompanyEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -846,10 +845,9 @@ export const CountryShow : React.FC<CountryShowProps> = ({id, withEdges, ...show
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.CountryListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.CountryDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.CountryEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -1067,10 +1065,9 @@ export const EmailShow : React.FC<EmailShowProps> = ({id, withEdges, ...showProp
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.EmailListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.EmailDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.EmailEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -1216,10 +1213,9 @@ export const ImageShow : React.FC<ImageShowProps> = ({id, withEdges, ...showProp
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.ImageListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.ImageDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.ImageEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -1359,10 +1355,9 @@ export const LocationShow : React.FC<LocationShowProps> = ({id, withEdges, ...sh
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.LocationListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.LocationDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.LocationEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -1510,10 +1505,9 @@ export const PhoneShow : React.FC<PhoneShowProps> = ({id, withEdges, ...showProp
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.PhoneListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.PhoneDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.PhoneEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -1654,12 +1648,11 @@ export const ProductShow : React.FC<ProductShowProps> = ({id, withEdges, ...show
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.ProductListAction recordItemIDs={ [record.id] }/>
                      
                      
                      <Action.ProductEditAction recordItemIDs={ [record.id] }/>
-                     
-                     <Action.ProductDeleteAction recordItemIDs={ [record.id] }/>
                      
                      </>
                  )}
@@ -1867,10 +1860,9 @@ export const VendorShow : React.FC<VendorShowProps> = ({id, withEdges, ...showPr
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.VendorListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.VendorDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.VendorEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -2069,10 +2061,9 @@ export const WarehouseShow : React.FC<WarehouseShowProps> = ({id, withEdges, ...
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.WarehouseListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.WarehouseDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.WarehouseEditAction recordItemIDs={ [record.id] }/>
                      </>
@@ -2223,10 +2214,9 @@ export const WebsiteShow : React.FC<WebsiteShowProps> = ({id, withEdges, ...show
                      
                      <Antd.Button icon={<AntdIcons.ClusterOutlined />} type="primary" onClick={ ()=>{ setEdgesDiagram(!edgesDiagram) } }>Edges Diagram</Antd.Button>
                      
+                     
                      <Action.WebsiteListAction recordItemIDs={ [record.id] }/>
                      
-                     
-                     <Action.WebsiteDeleteAction recordItemIDs={ [record.id] }/>
                      
                      <Action.WebsiteEditAction recordItemIDs={ [record.id] }/>
                      </>

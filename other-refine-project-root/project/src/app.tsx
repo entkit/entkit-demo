@@ -150,6 +150,7 @@ function App() {
                                 name: "company",
                                 list: "/com",
                                 show: "/com/show/:id",
+                                create: "/com/create",
                                 edit: "/com/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.ShopOutlined/>,
@@ -160,6 +161,7 @@ function App() {
                                 name: "country",
                                 list: "/country",
                                 show: "/country/show/:id",
+                                create: "/country/create",
                                 edit: "/country/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.GlobalOutlined/>,
@@ -170,6 +172,7 @@ function App() {
                                 name: "email",
                                 list: "/email",
                                 show: "/email/show/:id",
+                                create: "/email/create",
                                 edit: "/email/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.MailOutlined/>,
@@ -180,6 +183,7 @@ function App() {
                                 name: "image",
                                 list: "/image",
                                 show: "/image/show/:id",
+                                create: "/image/create",
                                 edit: "/image/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.CameraOutlined/>,
@@ -190,6 +194,7 @@ function App() {
                                 name: "location",
                                 list: "/location",
                                 show: "/location/show/:id",
+                                create: "/location/create",
                                 edit: "/location/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.PushpinOutlined/>,
@@ -200,6 +205,7 @@ function App() {
                                 name: "phone",
                                 list: "/phone",
                                 show: "/phone/show/:id",
+                                create: "/phone/create",
                                 edit: "/phone/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.PhoneOutlined/>,
@@ -210,6 +216,7 @@ function App() {
                                 name: "product",
                                 list: "/product",
                                 show: "/product/show/:id",
+                                create: "/product/create",
                                 edit: "/product/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.FileOutlined/>,
@@ -220,6 +227,7 @@ function App() {
                                 name: "vendor",
                                 list: "/vendor",
                                 show: "/vendor/show/:id",
+                                create: "/vendor/create",
                                 edit: "/vendor/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.StarOutlined/>,
@@ -230,6 +238,7 @@ function App() {
                                 name: "warehouse",
                                 list: "/warehouse",
                                 show: "/warehouse/show/:id",
+                                create: "/warehouse/create",
                                 edit: "/warehouse/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.OrderedListOutlined/>,
@@ -240,6 +249,7 @@ function App() {
                                 name: "website",
                                 list: "/website",
                                 show: "/website/show/:id",
+                                create: "/website/create",
                                 edit: "/website/edit/:id",
                                 meta: {
                                     icon: <AntdIcons.LinkOutlined/>,

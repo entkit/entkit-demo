@@ -31,13 +31,9 @@ export const CompanyList :React.FC<CompanyListProps> = ({tableProps, ...props} )
         <>
             
             <Action.CompanyListAction key="CompanyListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.CompanyCreateAction key="CompanyCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.CompanyDeleteAction
-                    key="CompanyDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -56,13 +52,9 @@ export const CountryList :React.FC<CountryListProps> = ({tableProps, ...props} )
         <>
             
             <Action.CountryListAction key="CountryListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.CountryCreateAction key="CountryCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.CountryDeleteAction
-                    key="CountryDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -81,13 +73,9 @@ export const EmailList :React.FC<EmailListProps> = ({tableProps, ...props} ) => 
         <>
             
             <Action.EmailListAction key="EmailListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.EmailCreateAction key="EmailCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.EmailDeleteAction
-                    key="EmailDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -106,13 +94,9 @@ export const ImageList :React.FC<ImageListProps> = ({tableProps, ...props} ) => 
         <>
             
             <Action.ImageListAction key="ImageListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.ImageCreateAction key="ImageCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.ImageDeleteAction
-                    key="ImageDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -131,13 +115,9 @@ export const LocationList :React.FC<LocationListProps> = ({tableProps, ...props}
         <>
             
             <Action.LocationListAction key="LocationListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.LocationCreateAction key="LocationCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.LocationDeleteAction
-                    key="LocationDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -156,13 +136,9 @@ export const PhoneList :React.FC<PhoneListProps> = ({tableProps, ...props} ) => 
         <>
             
             <Action.PhoneListAction key="PhoneListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.PhoneCreateAction key="PhoneCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.PhoneDeleteAction
-                    key="PhoneDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -181,13 +157,9 @@ export const ProductList :React.FC<ProductListProps> = ({tableProps, ...props} )
         <>
             
             <Action.ProductListAction key="ProductListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.ProductCreateAction key="ProductCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.ProductDeleteAction
-                    key="ProductDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -206,13 +178,9 @@ export const VendorList :React.FC<VendorListProps> = ({tableProps, ...props} ) =
         <>
             
             <Action.VendorListAction key="VendorListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.VendorCreateAction key="VendorCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.VendorDeleteAction
-                    key="VendorDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -231,13 +199,9 @@ export const WarehouseList :React.FC<WarehouseListProps> = ({tableProps, ...prop
         <>
             
             <Action.WarehouseListAction key="WarehouseListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.WarehouseCreateAction key="WarehouseCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.WarehouseDeleteAction
-                    key="WarehouseDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>
@@ -256,13 +220,9 @@ export const WebsiteList :React.FC<WebsiteListProps> = ({tableProps, ...props} )
         <>
             
             <Action.WebsiteListAction key="WebsiteListAction" recordItemIDs={ selectedRowKeys }/>
+            <Action.WebsiteCreateAction key="WebsiteCreateAction" recordItemIDs={ selectedRowKeys }/>
 
             {selectedRowKeys.length ? <>
-                <Action.WebsiteDeleteAction
-                    key="WebsiteDeleteAction"
-                    recordItemIDs={ selectedRowKeys }
-                    onSuccess={ ()=>setSelectedRowKeys([]) }
-                />
             </> : null }
         </>
     )}>

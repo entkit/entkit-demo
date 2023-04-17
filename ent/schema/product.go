@@ -99,15 +99,14 @@ func (Product) Annotations() []schema.Annotation {
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("FileOutlined"),
 		entkit.Actions(
-			entkit.ListAction,
-			entkit.ShowAction,
-			entkit.EditAction,
-			entkit.DeleteAction,
-			entkit.NewAction("MyCustomActionButton",
-				entkit.ActionWithOperation(
-					entkit.NewOperation("MyCustomActionButton"),
+			append(
+				entkit.DefaultActions,
+				entkit.NewAction("MyCustomActionButton",
+					entkit.ActionWithOperation(
+						entkit.NewOperation("MyCustomActionButton"),
+					),
 				),
-			),
+			)...,
 		),
 	}
 }

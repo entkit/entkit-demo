@@ -197,7 +197,8 @@ export const CompanyBadge: React.FC<Partial<Type.DemoCompanyInterface>> = (props
             />
         }
     >
-        <Link to={ "/company/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.name }
         </Link>
     </Antd.Popover>
@@ -217,7 +218,8 @@ export const CountryBadge: React.FC<Partial<Type.DemoCountryInterface>> = (props
             />
         }
     >
-        <Link to={ "/country/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.name }
         </Link>
     </Antd.Popover>
@@ -237,7 +239,8 @@ export const EmailBadge: React.FC<Partial<Type.DemoEmailInterface>> = (props) =>
             />
         }
     >
-        <Link to={ "/email/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.title }
         </Link>
     </Antd.Popover>
@@ -257,7 +260,8 @@ export const ImageBadge: React.FC<Partial<Type.DemoImageInterface>> = (props) =>
             />
         }
     >
-        <Link to={ "/image/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.originalURL ? <Antd.Image width={48} preview={false} src={props.originalURL }/> : null }
         </Link>
     </Antd.Popover>
@@ -277,7 +281,8 @@ export const LocationBadge: React.FC<Partial<Type.DemoLocationInterface>> = (pro
             />
         }
     >
-        <Link to={ "/location/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.title }
         </Link>
     </Antd.Popover>
@@ -297,7 +302,8 @@ export const PhoneBadge: React.FC<Partial<Type.DemoPhoneInterface>> = (props) =>
             />
         }
     >
-        <Link to={ "/phone/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.title }
         </Link>
     </Antd.Popover>
@@ -317,7 +323,8 @@ export const ProductBadge: React.FC<Partial<Type.DemoProductInterface>> = (props
             />
         }
     >
-        <Link to={ "/product/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.image ? <Antd.Image width={48} preview={false} src={props.image }/> : null }
         </Link>
     </Antd.Popover>
@@ -337,7 +344,8 @@ export const VendorBadge: React.FC<Partial<Type.DemoVendorInterface>> = (props) 
             />
         }
     >
-        <Link to={ "/vendor/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.name }
         </Link>
     </Antd.Popover>
@@ -357,7 +365,8 @@ export const WarehouseBadge: React.FC<Partial<Type.DemoWarehouseInterface>> = (p
             />
         }
     >
-        <Link to={ "/warehouse/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.name }
         </Link>
     </Antd.Popover>
@@ -377,7 +386,8 @@ export const WebsiteBadge: React.FC<Partial<Type.DemoWebsiteInterface>> = (props
             />
         }
     >
-        <Link to={ "/website/show/"+ props.id}>
+
+        <Link to={ "show/:id".replace(":id", String(props.id)) }>
             { props.title }
         </Link>
     </Antd.Popover>

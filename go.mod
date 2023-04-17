@@ -61,7 +61,6 @@ require (
 	github.com/segmentio/ksuid v1.0.4 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
-	github.com/stoewer/go-strcase v1.3.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
@@ -83,4 +82,4 @@ require (
 )
 
 // TODO: remove before commit
-// replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit
+replace github.com/entkit/entkit => /Users/aaronyordanyan/GolandProjects/entkit

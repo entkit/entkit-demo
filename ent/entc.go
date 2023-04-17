@@ -15,7 +15,6 @@ import (
 	"github.com/entkit/entkit"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 func main() {
@@ -52,33 +51,29 @@ func main() {
 		entkit.IgnoreUncommittedChanges(),
 		entkit.WithAuth(
 			entkit.AuthWithKeycloak(
-				entkit.NewKeycloak(
-					"http://localhost:8080",
-					"entkit-demo-3",
-					"admin",
-					"admin",
-					"entadmin",
-					"entadmin",
-					&gocloak.Client{
-						ClientID: gocloak.StringP("backend"),
-						Secret:   gocloak.StringP("test-secret"),
+				entkit.KeycloakHost("http://localhost:8080"),
+				entkit.KeycloakRealm("entkit-demo-3"),
+				entkit.KeycloakMasterAdminCredentials("admin", "admin"),
+				entkit.KeycloakGeneratedAdminCredentials("entadmin", "entadmin"),
+				entkit.KeycloakFrontendClientConfig(gocloak.Client{
+					ClientID: gocloak.StringP("frontend"),
+					RootURL:  gocloak.StringP("https://demo.entkit.com"),
+					RedirectURIs: &[]string{
+						"https://demo.entkit.com/*",
+						"http://localhost:3000/*",
+						"http://localhost/*",
 					},
-					&gocloak.Client{
-						ClientID: gocloak.StringP("frontend"),
-						RootURL:  gocloak.StringP("https://demo.entkit.com"),
-						RedirectURIs: &[]string{
-							"https://demo.entkit.com/*",
-							"http://localhost:3000/*",
-							"http://localhost/*",
-						},
-						Attributes: &map[string]string{
-							"post.logout.redirect.uris": "+",
-						},
-						WebOrigins: &[]string{
-							"+",
-						},
+					Attributes: &map[string]string{
+						"post.logout.redirect.uris": "+",
 					},
-				),
+					WebOrigins: &[]string{
+						"+",
+					},
+				}),
+				entkit.KeycloakBackendClientConfig(gocloak.Client{
+					ClientID: gocloak.StringP("backend"),
+					Secret:   gocloak.StringP("test-secret"),
+				}),
 			),
 		),
 	)
