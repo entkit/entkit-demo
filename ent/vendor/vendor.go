@@ -63,47 +63,47 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Vendor queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Vendor queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByName orders the results by the name field.
-func ByName(opts ...sql.OrderTermOption) Order {
+func ByName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldName, opts...).ToFunc()
 }
 
 // BySchema orders the results by the schema field.
-func BySchema(opts ...sql.OrderTermOption) Order {
+func BySchema(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldSchema, opts...).ToFunc()
 }
 
 // ByWarehousesCount orders the results by warehouses count.
-func ByWarehousesCount(opts ...sql.OrderTermOption) Order {
+func ByWarehousesCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newWarehousesStep(), opts...)
 	}
 }
 
 // ByWarehouses orders the results by warehouses terms.
-func ByWarehouses(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByWarehouses(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newWarehousesStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByProductsCount orders the results by products count.
-func ByProductsCount(opts ...sql.OrderTermOption) Order {
+func ByProductsCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newProductsStep(), opts...)
 	}
 }
 
 // ByProducts orders the results by products terms.
-func ByProducts(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByProducts(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newProductsStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}

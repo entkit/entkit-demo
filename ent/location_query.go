@@ -21,7 +21,7 @@ import (
 type LocationQuery struct {
 	config
 	ctx         *QueryContext
-	order       []location.Order
+	order       []location.OrderOption
 	inters      []Interceptor
 	predicates  []predicate.Location
 	withCompany *CompanyQuery
@@ -60,7 +60,7 @@ func (lq *LocationQuery) Unique(unique bool) *LocationQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (lq *LocationQuery) Order(o ...location.Order) *LocationQuery {
+func (lq *LocationQuery) Order(o ...location.OrderOption) *LocationQuery {
 	lq.order = append(lq.order, o...)
 	return lq
 }
@@ -298,7 +298,7 @@ func (lq *LocationQuery) Clone() *LocationQuery {
 	return &LocationQuery{
 		config:      lq.config,
 		ctx:         lq.ctx.Clone(),
-		order:       append([]location.Order{}, lq.order...),
+		order:       append([]location.OrderOption{}, lq.order...),
 		inters:      append([]Interceptor{}, lq.inters...),
 		predicates:  append([]predicate.Location{}, lq.predicates...),
 		withCompany: lq.withCompany.Clone(),

@@ -21,7 +21,7 @@ import (
 type EmailQuery struct {
 	config
 	ctx         *QueryContext
-	order       []email.Order
+	order       []email.OrderOption
 	inters      []Interceptor
 	predicates  []predicate.Email
 	withCompany *CompanyQuery
@@ -60,7 +60,7 @@ func (eq *EmailQuery) Unique(unique bool) *EmailQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (eq *EmailQuery) Order(o ...email.Order) *EmailQuery {
+func (eq *EmailQuery) Order(o ...email.OrderOption) *EmailQuery {
 	eq.order = append(eq.order, o...)
 	return eq
 }
@@ -298,7 +298,7 @@ func (eq *EmailQuery) Clone() *EmailQuery {
 	return &EmailQuery{
 		config:      eq.config,
 		ctx:         eq.ctx.Clone(),
-		order:       append([]email.Order{}, eq.order...),
+		order:       append([]email.OrderOption{}, eq.order...),
 		inters:      append([]Interceptor{}, eq.inters...),
 		predicates:  append([]predicate.Email{}, eq.predicates...),
 		withCompany: eq.withCompany.Clone(),

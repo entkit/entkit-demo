@@ -87,43 +87,43 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Phone queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Phone queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByTitle orders the results by the title field.
-func ByTitle(opts ...sql.OrderTermOption) Order {
+func ByTitle(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldTitle, opts...).ToFunc()
 }
 
 // ByDescription orders the results by the description field.
-func ByDescription(opts ...sql.OrderTermOption) Order {
+func ByDescription(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDescription, opts...).ToFunc()
 }
 
 // ByNumber orders the results by the number field.
-func ByNumber(opts ...sql.OrderTermOption) Order {
+func ByNumber(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldNumber, opts...).ToFunc()
 }
 
 // ByType orders the results by the type field.
-func ByType(opts ...sql.OrderTermOption) Order {
+func ByType(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldType, opts...).ToFunc()
 }
 
 // ByCompanyField orders the results by company field.
-func ByCompanyField(field string, opts ...sql.OrderTermOption) Order {
+func ByCompanyField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCompanyStep(), sql.OrderByField(field, opts...))
 	}
 }
 
 // ByCountryField orders the results by country field.
-func ByCountryField(field string, opts ...sql.OrderTermOption) Order {
+func ByCountryField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCountryStep(), sql.OrderByField(field, opts...))
 	}

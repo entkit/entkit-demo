@@ -118,78 +118,78 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Location queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Location queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByTitle orders the results by the title field.
-func ByTitle(opts ...sql.OrderTermOption) Order {
+func ByTitle(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldTitle, opts...).ToFunc()
 }
 
 // ByDescription orders the results by the description field.
-func ByDescription(opts ...sql.OrderTermOption) Order {
+func ByDescription(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDescription, opts...).ToFunc()
 }
 
 // ByLatitude orders the results by the latitude field.
-func ByLatitude(opts ...sql.OrderTermOption) Order {
+func ByLatitude(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldLatitude, opts...).ToFunc()
 }
 
 // ByLongitude orders the results by the longitude field.
-func ByLongitude(opts ...sql.OrderTermOption) Order {
+func ByLongitude(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldLongitude, opts...).ToFunc()
 }
 
 // ByAddress orders the results by the address field.
-func ByAddress(opts ...sql.OrderTermOption) Order {
+func ByAddress(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldAddress, opts...).ToFunc()
 }
 
 // ByPostcode orders the results by the postcode field.
-func ByPostcode(opts ...sql.OrderTermOption) Order {
+func ByPostcode(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldPostcode, opts...).ToFunc()
 }
 
 // ByType orders the results by the type field.
-func ByType(opts ...sql.OrderTermOption) Order {
+func ByType(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldType, opts...).ToFunc()
 }
 
 // ByState orders the results by the state field.
-func ByState(opts ...sql.OrderTermOption) Order {
+func ByState(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldState, opts...).ToFunc()
 }
 
 // BySuburb orders the results by the suburb field.
-func BySuburb(opts ...sql.OrderTermOption) Order {
+func BySuburb(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldSuburb, opts...).ToFunc()
 }
 
 // ByStreetType orders the results by the street_type field.
-func ByStreetType(opts ...sql.OrderTermOption) Order {
+func ByStreetType(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldStreetType, opts...).ToFunc()
 }
 
 // ByStreetName orders the results by the street_name field.
-func ByStreetName(opts ...sql.OrderTermOption) Order {
+func ByStreetName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldStreetName, opts...).ToFunc()
 }
 
 // ByCompanyField orders the results by company field.
-func ByCompanyField(field string, opts ...sql.OrderTermOption) Order {
+func ByCompanyField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCompanyStep(), sql.OrderByField(field, opts...))
 	}
 }
 
 // ByCountryField orders the results by country field.
-func ByCountryField(field string, opts ...sql.OrderTermOption) Order {
+func ByCountryField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCountryStep(), sql.OrderByField(field, opts...))
 	}

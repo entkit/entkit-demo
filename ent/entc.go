@@ -12,9 +12,10 @@ import (
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
 	"github.com/Nerzal/gocloak/v12"
-	"github.com/entkit/entkit"
+	"github.com/entkit/entkit/v2"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {

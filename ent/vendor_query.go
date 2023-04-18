@@ -22,7 +22,7 @@ import (
 type VendorQuery struct {
 	config
 	ctx                 *QueryContext
-	order               []vendor.Order
+	order               []vendor.OrderOption
 	inters              []Interceptor
 	predicates          []predicate.Vendor
 	withWarehouses      *WarehouseQuery
@@ -62,7 +62,7 @@ func (vq *VendorQuery) Unique(unique bool) *VendorQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (vq *VendorQuery) Order(o ...vendor.Order) *VendorQuery {
+func (vq *VendorQuery) Order(o ...vendor.OrderOption) *VendorQuery {
 	vq.order = append(vq.order, o...)
 	return vq
 }
@@ -300,7 +300,7 @@ func (vq *VendorQuery) Clone() *VendorQuery {
 	return &VendorQuery{
 		config:         vq.config,
 		ctx:            vq.ctx.Clone(),
-		order:          append([]vendor.Order{}, vq.order...),
+		order:          append([]vendor.OrderOption{}, vq.order...),
 		inters:         append([]Interceptor{}, vq.inters...),
 		predicates:     append([]predicate.Vendor{}, vq.predicates...),
 		withWarehouses: vq.withWarehouses.Clone(),
@@ -485,7 +485,7 @@ func (vq *VendorQuery) loadWarehouses(ctx context.Context, query *WarehouseQuery
 	}
 	query.withFKs = true
 	query.Where(predicate.Warehouse(func(s *sql.Selector) {
-		s.Where(sql.InValues(vendor.WarehousesColumn, fks...))
+		s.Where(sql.InValues(s.C(vendor.WarehousesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -516,7 +516,7 @@ func (vq *VendorQuery) loadProducts(ctx context.Context, query *ProductQuery, no
 	}
 	query.withFKs = true
 	query.Where(predicate.Product(func(s *sql.Selector) {
-		s.Where(sql.InValues(vendor.ProductsColumn, fks...))
+		s.Where(sql.InValues(s.C(vendor.ProductsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {

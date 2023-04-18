@@ -7,8 +7,8 @@ import (
 	"entgo.io/ent/schema"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
-	"github.com/entkit/entkit"
 	"github.com/entkit/entkit-demo/ent/schema/enums"
+	"github.com/entkit/entkit/v2"
 	"github.com/google/uuid"
 )
 

@@ -127,63 +127,63 @@ func BuildStatusValidator(bs enums.ProcessStatus) error {
 	}
 }
 
-// Order defines the ordering method for the Product queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Product queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByName orders the results by the name field.
-func ByName(opts ...sql.OrderTermOption) Order {
+func ByName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldName, opts...).ToFunc()
 }
 
 // ByDescription orders the results by the description field.
-func ByDescription(opts ...sql.OrderTermOption) Order {
+func ByDescription(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDescription, opts...).ToFunc()
 }
 
 // ByImage orders the results by the image field.
-func ByImage(opts ...sql.OrderTermOption) Order {
+func ByImage(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldImage, opts...).ToFunc()
 }
 
 // ByURL orders the results by the url field.
-func ByURL(opts ...sql.OrderTermOption) Order {
+func ByURL(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldURL, opts...).ToFunc()
 }
 
 // ByLastSell orders the results by the last_sell field.
-func ByLastSell(opts ...sql.OrderTermOption) Order {
+func ByLastSell(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldLastSell, opts...).ToFunc()
 }
 
 // ByCreatedAt orders the results by the created_at field.
-func ByCreatedAt(opts ...sql.OrderTermOption) Order {
+func ByCreatedAt(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCreatedAt, opts...).ToFunc()
 }
 
 // ByStatus orders the results by the status field.
-func ByStatus(opts ...sql.OrderTermOption) Order {
+func ByStatus(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldStatus, opts...).ToFunc()
 }
 
 // ByBuildStatus orders the results by the build_status field.
-func ByBuildStatus(opts ...sql.OrderTermOption) Order {
+func ByBuildStatus(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldBuildStatus, opts...).ToFunc()
 }
 
 // ByWarehouseField orders the results by warehouse field.
-func ByWarehouseField(field string, opts ...sql.OrderTermOption) Order {
+func ByWarehouseField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newWarehouseStep(), sql.OrderByField(field, opts...))
 	}
 }
 
 // ByVendorField orders the results by vendor field.
-func ByVendorField(field string, opts ...sql.OrderTermOption) Order {
+func ByVendorField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newVendorStep(), sql.OrderByField(field, opts...))
 	}

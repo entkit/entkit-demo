@@ -96,89 +96,89 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Country queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Country queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByName orders the results by the name field.
-func ByName(opts ...sql.OrderTermOption) Order {
+func ByName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldName, opts...).ToFunc()
 }
 
 // ByCode orders the results by the code field.
-func ByCode(opts ...sql.OrderTermOption) Order {
+func ByCode(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldCode, opts...).ToFunc()
 }
 
 // ByCompaniesCount orders the results by companies count.
-func ByCompaniesCount(opts ...sql.OrderTermOption) Order {
+func ByCompaniesCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newCompaniesStep(), opts...)
 	}
 }
 
 // ByCompanies orders the results by companies terms.
-func ByCompanies(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByCompanies(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCompaniesStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByPhonesCount orders the results by phones count.
-func ByPhonesCount(opts ...sql.OrderTermOption) Order {
+func ByPhonesCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newPhonesStep(), opts...)
 	}
 }
 
 // ByPhones orders the results by phones terms.
-func ByPhones(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByPhones(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newPhonesStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByEmailsCount orders the results by emails count.
-func ByEmailsCount(opts ...sql.OrderTermOption) Order {
+func ByEmailsCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newEmailsStep(), opts...)
 	}
 }
 
 // ByEmails orders the results by emails terms.
-func ByEmails(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByEmails(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newEmailsStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByWebsitesCount orders the results by websites count.
-func ByWebsitesCount(opts ...sql.OrderTermOption) Order {
+func ByWebsitesCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newWebsitesStep(), opts...)
 	}
 }
 
 // ByWebsites orders the results by websites terms.
-func ByWebsites(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByWebsites(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newWebsitesStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByLocationsCount orders the results by locations count.
-func ByLocationsCount(opts ...sql.OrderTermOption) Order {
+func ByLocationsCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newLocationsStep(), opts...)
 	}
 }
 
 // ByLocations orders the results by locations terms.
-func ByLocations(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByLocations(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newLocationsStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}

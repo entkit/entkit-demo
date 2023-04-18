@@ -10,6 +10,7 @@ import (
 	"strconv"
 
 	"entgo.io/contrib/entgql"
+	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/errcode"
@@ -225,7 +226,7 @@ func (p *companyPager) applyCursors(query *CompanyQuery, after, before *Cursor) 
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultCompanyOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultCompanyOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -236,22 +237,22 @@ func (p *companyPager) applyOrder(query *CompanyQuery) *CompanyQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultCompanyOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultCompanyOrder.Field.field))
+		query = query.Order(DefaultCompanyOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *companyPager) orderExpr() sql.Querier {
+func (p *companyPager) orderExpr(query *CompanyQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultCompanyOrder.Field {
-			b.Comma().Ident(DefaultCompanyOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultCompanyOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -311,7 +312,11 @@ func (c *CompanyQuery) Paginate(
 var (
 	// CompanyOrderFieldID orders Company by id.
 	CompanyOrderFieldID = &CompanyOrderField{
-		field: company.FieldID,
+		Value: func(c *Company) (ent.Value, error) {
+			return c.ID, nil
+		},
+		column: company.FieldID,
+		toTerm: company.ByID,
 		toCursor: func(c *Company) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -321,7 +326,11 @@ var (
 	}
 	// CompanyOrderFieldName orders Company by name.
 	CompanyOrderFieldName = &CompanyOrderField{
-		field: company.FieldName,
+		Value: func(c *Company) (ent.Value, error) {
+			return c.Name, nil
+		},
+		column: company.FieldName,
+		toTerm: company.ByName,
 		toCursor: func(c *Company) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -331,7 +340,11 @@ var (
 	}
 	// CompanyOrderFieldDescription orders Company by description.
 	CompanyOrderFieldDescription = &CompanyOrderField{
-		field: company.FieldDescription,
+		Value: func(c *Company) (ent.Value, error) {
+			return c.Description, nil
+		},
+		column: company.FieldDescription,
+		toTerm: company.ByDescription,
 		toCursor: func(c *Company) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -344,12 +357,12 @@ var (
 // String implement fmt.Stringer interface.
 func (f CompanyOrderField) String() string {
 	var str string
-	switch f.field {
-	case company.FieldID:
+	switch f.column {
+	case CompanyOrderFieldID.column:
 		str = "ID"
-	case company.FieldName:
+	case CompanyOrderFieldName.column:
 		str = "NAME"
-	case company.FieldDescription:
+	case CompanyOrderFieldDescription.column:
 		str = "DESCRIPTION"
 	}
 	return str
@@ -381,7 +394,10 @@ func (f *CompanyOrderField) UnmarshalGQL(v interface{}) error {
 
 // CompanyOrderField defines the ordering field of Company.
 type CompanyOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Company.
+	Value    func(*Company) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) company.OrderOption
 	toCursor func(*Company) Cursor
 }
 
@@ -395,7 +411,11 @@ type CompanyOrder struct {
 var DefaultCompanyOrder = &CompanyOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &CompanyOrderField{
-		field: company.FieldID,
+		Value: func(c *Company) (ent.Value, error) {
+			return c.ID, nil
+		},
+		column: company.FieldID,
+		toTerm: company.ByID,
 		toCursor: func(c *Company) Cursor {
 			return Cursor{ID: c.ID}
 		},
@@ -531,7 +551,7 @@ func (p *countryPager) applyCursors(query *CountryQuery, after, before *Cursor) 
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultCountryOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultCountryOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -542,22 +562,22 @@ func (p *countryPager) applyOrder(query *CountryQuery) *CountryQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultCountryOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultCountryOrder.Field.field))
+		query = query.Order(DefaultCountryOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *countryPager) orderExpr() sql.Querier {
+func (p *countryPager) orderExpr(query *CountryQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultCountryOrder.Field {
-			b.Comma().Ident(DefaultCountryOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultCountryOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -617,7 +637,11 @@ func (c *CountryQuery) Paginate(
 var (
 	// CountryOrderFieldID orders Country by id.
 	CountryOrderFieldID = &CountryOrderField{
-		field: country.FieldID,
+		Value: func(c *Country) (ent.Value, error) {
+			return c.ID, nil
+		},
+		column: country.FieldID,
+		toTerm: country.ByID,
 		toCursor: func(c *Country) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -627,7 +651,11 @@ var (
 	}
 	// CountryOrderFieldName orders Country by name.
 	CountryOrderFieldName = &CountryOrderField{
-		field: country.FieldName,
+		Value: func(c *Country) (ent.Value, error) {
+			return c.Name, nil
+		},
+		column: country.FieldName,
+		toTerm: country.ByName,
 		toCursor: func(c *Country) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -637,7 +665,11 @@ var (
 	}
 	// CountryOrderFieldCode orders Country by code.
 	CountryOrderFieldCode = &CountryOrderField{
-		field: country.FieldCode,
+		Value: func(c *Country) (ent.Value, error) {
+			return c.Code, nil
+		},
+		column: country.FieldCode,
+		toTerm: country.ByCode,
 		toCursor: func(c *Country) Cursor {
 			return Cursor{
 				ID:    c.ID,
@@ -650,12 +682,12 @@ var (
 // String implement fmt.Stringer interface.
 func (f CountryOrderField) String() string {
 	var str string
-	switch f.field {
-	case country.FieldID:
+	switch f.column {
+	case CountryOrderFieldID.column:
 		str = "ID"
-	case country.FieldName:
+	case CountryOrderFieldName.column:
 		str = "NAME"
-	case country.FieldCode:
+	case CountryOrderFieldCode.column:
 		str = "CODE"
 	}
 	return str
@@ -687,7 +719,10 @@ func (f *CountryOrderField) UnmarshalGQL(v interface{}) error {
 
 // CountryOrderField defines the ordering field of Country.
 type CountryOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Country.
+	Value    func(*Country) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) country.OrderOption
 	toCursor func(*Country) Cursor
 }
 
@@ -701,7 +736,11 @@ type CountryOrder struct {
 var DefaultCountryOrder = &CountryOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &CountryOrderField{
-		field: country.FieldID,
+		Value: func(c *Country) (ent.Value, error) {
+			return c.ID, nil
+		},
+		column: country.FieldID,
+		toTerm: country.ByID,
 		toCursor: func(c *Country) Cursor {
 			return Cursor{ID: c.ID}
 		},
@@ -837,7 +876,7 @@ func (p *emailPager) applyCursors(query *EmailQuery, after, before *Cursor) (*Em
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultEmailOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultEmailOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -848,22 +887,22 @@ func (p *emailPager) applyOrder(query *EmailQuery) *EmailQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultEmailOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultEmailOrder.Field.field))
+		query = query.Order(DefaultEmailOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *emailPager) orderExpr() sql.Querier {
+func (p *emailPager) orderExpr(query *EmailQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultEmailOrder.Field {
-			b.Comma().Ident(DefaultEmailOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultEmailOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -923,7 +962,11 @@ func (e *EmailQuery) Paginate(
 var (
 	// EmailOrderFieldID orders Email by id.
 	EmailOrderFieldID = &EmailOrderField{
-		field: email.FieldID,
+		Value: func(e *Email) (ent.Value, error) {
+			return e.ID, nil
+		},
+		column: email.FieldID,
+		toTerm: email.ByID,
 		toCursor: func(e *Email) Cursor {
 			return Cursor{
 				ID:    e.ID,
@@ -933,7 +976,11 @@ var (
 	}
 	// EmailOrderFieldTitle orders Email by title.
 	EmailOrderFieldTitle = &EmailOrderField{
-		field: email.FieldTitle,
+		Value: func(e *Email) (ent.Value, error) {
+			return e.Title, nil
+		},
+		column: email.FieldTitle,
+		toTerm: email.ByTitle,
 		toCursor: func(e *Email) Cursor {
 			return Cursor{
 				ID:    e.ID,
@@ -943,7 +990,11 @@ var (
 	}
 	// EmailOrderFieldDescription orders Email by description.
 	EmailOrderFieldDescription = &EmailOrderField{
-		field: email.FieldDescription,
+		Value: func(e *Email) (ent.Value, error) {
+			return e.Description, nil
+		},
+		column: email.FieldDescription,
+		toTerm: email.ByDescription,
 		toCursor: func(e *Email) Cursor {
 			return Cursor{
 				ID:    e.ID,
@@ -953,7 +1004,11 @@ var (
 	}
 	// EmailOrderFieldAddress orders Email by address.
 	EmailOrderFieldAddress = &EmailOrderField{
-		field: email.FieldAddress,
+		Value: func(e *Email) (ent.Value, error) {
+			return e.Address, nil
+		},
+		column: email.FieldAddress,
+		toTerm: email.ByAddress,
 		toCursor: func(e *Email) Cursor {
 			return Cursor{
 				ID:    e.ID,
@@ -966,14 +1021,14 @@ var (
 // String implement fmt.Stringer interface.
 func (f EmailOrderField) String() string {
 	var str string
-	switch f.field {
-	case email.FieldID:
+	switch f.column {
+	case EmailOrderFieldID.column:
 		str = "ID"
-	case email.FieldTitle:
+	case EmailOrderFieldTitle.column:
 		str = "TITLE"
-	case email.FieldDescription:
+	case EmailOrderFieldDescription.column:
 		str = "DESCRIPTION"
-	case email.FieldAddress:
+	case EmailOrderFieldAddress.column:
 		str = "ADDRESS"
 	}
 	return str
@@ -1007,7 +1062,10 @@ func (f *EmailOrderField) UnmarshalGQL(v interface{}) error {
 
 // EmailOrderField defines the ordering field of Email.
 type EmailOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Email.
+	Value    func(*Email) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) email.OrderOption
 	toCursor func(*Email) Cursor
 }
 
@@ -1021,7 +1079,11 @@ type EmailOrder struct {
 var DefaultEmailOrder = &EmailOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &EmailOrderField{
-		field: email.FieldID,
+		Value: func(e *Email) (ent.Value, error) {
+			return e.ID, nil
+		},
+		column: email.FieldID,
+		toTerm: email.ByID,
 		toCursor: func(e *Email) Cursor {
 			return Cursor{ID: e.ID}
 		},
@@ -1157,7 +1219,7 @@ func (p *imagePager) applyCursors(query *ImageQuery, after, before *Cursor) (*Im
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultImageOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultImageOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -1168,22 +1230,22 @@ func (p *imagePager) applyOrder(query *ImageQuery) *ImageQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultImageOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultImageOrder.Field.field))
+		query = query.Order(DefaultImageOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *imagePager) orderExpr() sql.Querier {
+func (p *imagePager) orderExpr(query *ImageQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultImageOrder.Field {
-			b.Comma().Ident(DefaultImageOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultImageOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -1243,7 +1305,11 @@ func (i *ImageQuery) Paginate(
 var (
 	// ImageOrderFieldID orders Image by id.
 	ImageOrderFieldID = &ImageOrderField{
-		field: image.FieldID,
+		Value: func(i *Image) (ent.Value, error) {
+			return i.ID, nil
+		},
+		column: image.FieldID,
+		toTerm: image.ByID,
 		toCursor: func(i *Image) Cursor {
 			return Cursor{
 				ID:    i.ID,
@@ -1253,7 +1319,11 @@ var (
 	}
 	// ImageOrderFieldTitle orders Image by title.
 	ImageOrderFieldTitle = &ImageOrderField{
-		field: image.FieldTitle,
+		Value: func(i *Image) (ent.Value, error) {
+			return i.Title, nil
+		},
+		column: image.FieldTitle,
+		toTerm: image.ByTitle,
 		toCursor: func(i *Image) Cursor {
 			return Cursor{
 				ID:    i.ID,
@@ -1263,7 +1333,11 @@ var (
 	}
 	// ImageOrderFieldOriginalURL orders Image by original_url.
 	ImageOrderFieldOriginalURL = &ImageOrderField{
-		field: image.FieldOriginalURL,
+		Value: func(i *Image) (ent.Value, error) {
+			return i.OriginalURL, nil
+		},
+		column: image.FieldOriginalURL,
+		toTerm: image.ByOriginalURL,
 		toCursor: func(i *Image) Cursor {
 			return Cursor{
 				ID:    i.ID,
@@ -1276,12 +1350,12 @@ var (
 // String implement fmt.Stringer interface.
 func (f ImageOrderField) String() string {
 	var str string
-	switch f.field {
-	case image.FieldID:
+	switch f.column {
+	case ImageOrderFieldID.column:
 		str = "ID"
-	case image.FieldTitle:
+	case ImageOrderFieldTitle.column:
 		str = "TITLE"
-	case image.FieldOriginalURL:
+	case ImageOrderFieldOriginalURL.column:
 		str = "ORIGINAL_URL"
 	}
 	return str
@@ -1313,7 +1387,10 @@ func (f *ImageOrderField) UnmarshalGQL(v interface{}) error {
 
 // ImageOrderField defines the ordering field of Image.
 type ImageOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Image.
+	Value    func(*Image) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) image.OrderOption
 	toCursor func(*Image) Cursor
 }
 
@@ -1327,7 +1404,11 @@ type ImageOrder struct {
 var DefaultImageOrder = &ImageOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &ImageOrderField{
-		field: image.FieldID,
+		Value: func(i *Image) (ent.Value, error) {
+			return i.ID, nil
+		},
+		column: image.FieldID,
+		toTerm: image.ByID,
 		toCursor: func(i *Image) Cursor {
 			return Cursor{ID: i.ID}
 		},
@@ -1463,7 +1544,7 @@ func (p *locationPager) applyCursors(query *LocationQuery, after, before *Cursor
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultLocationOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultLocationOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -1474,22 +1555,22 @@ func (p *locationPager) applyOrder(query *LocationQuery) *LocationQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultLocationOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultLocationOrder.Field.field))
+		query = query.Order(DefaultLocationOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *locationPager) orderExpr() sql.Querier {
+func (p *locationPager) orderExpr(query *LocationQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultLocationOrder.Field {
-			b.Comma().Ident(DefaultLocationOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultLocationOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -1549,7 +1630,11 @@ func (l *LocationQuery) Paginate(
 var (
 	// LocationOrderFieldID orders Location by id.
 	LocationOrderFieldID = &LocationOrderField{
-		field: location.FieldID,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.ID, nil
+		},
+		column: location.FieldID,
+		toTerm: location.ByID,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1559,7 +1644,11 @@ var (
 	}
 	// LocationOrderFieldTitle orders Location by title.
 	LocationOrderFieldTitle = &LocationOrderField{
-		field: location.FieldTitle,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Title, nil
+		},
+		column: location.FieldTitle,
+		toTerm: location.ByTitle,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1569,7 +1658,11 @@ var (
 	}
 	// LocationOrderFieldDescription orders Location by description.
 	LocationOrderFieldDescription = &LocationOrderField{
-		field: location.FieldDescription,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Description, nil
+		},
+		column: location.FieldDescription,
+		toTerm: location.ByDescription,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1579,7 +1672,11 @@ var (
 	}
 	// LocationOrderFieldLatitude orders Location by latitude.
 	LocationOrderFieldLatitude = &LocationOrderField{
-		field: location.FieldLatitude,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Latitude, nil
+		},
+		column: location.FieldLatitude,
+		toTerm: location.ByLatitude,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1589,7 +1686,11 @@ var (
 	}
 	// LocationOrderFieldLongitude orders Location by longitude.
 	LocationOrderFieldLongitude = &LocationOrderField{
-		field: location.FieldLongitude,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Longitude, nil
+		},
+		column: location.FieldLongitude,
+		toTerm: location.ByLongitude,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1599,7 +1700,11 @@ var (
 	}
 	// LocationOrderFieldAddress orders Location by address.
 	LocationOrderFieldAddress = &LocationOrderField{
-		field: location.FieldAddress,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Address, nil
+		},
+		column: location.FieldAddress,
+		toTerm: location.ByAddress,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1609,7 +1714,11 @@ var (
 	}
 	// LocationOrderFieldPostcode orders Location by postcode.
 	LocationOrderFieldPostcode = &LocationOrderField{
-		field: location.FieldPostcode,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Postcode, nil
+		},
+		column: location.FieldPostcode,
+		toTerm: location.ByPostcode,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1619,7 +1728,11 @@ var (
 	}
 	// LocationOrderFieldType orders Location by type.
 	LocationOrderFieldType = &LocationOrderField{
-		field: location.FieldType,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Type, nil
+		},
+		column: location.FieldType,
+		toTerm: location.ByType,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1629,7 +1742,11 @@ var (
 	}
 	// LocationOrderFieldState orders Location by state.
 	LocationOrderFieldState = &LocationOrderField{
-		field: location.FieldState,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.State, nil
+		},
+		column: location.FieldState,
+		toTerm: location.ByState,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1639,7 +1756,11 @@ var (
 	}
 	// LocationOrderFieldSuburb orders Location by suburb.
 	LocationOrderFieldSuburb = &LocationOrderField{
-		field: location.FieldSuburb,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.Suburb, nil
+		},
+		column: location.FieldSuburb,
+		toTerm: location.BySuburb,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1649,7 +1770,11 @@ var (
 	}
 	// LocationOrderFieldStreetType orders Location by street_type.
 	LocationOrderFieldStreetType = &LocationOrderField{
-		field: location.FieldStreetType,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.StreetType, nil
+		},
+		column: location.FieldStreetType,
+		toTerm: location.ByStreetType,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1659,7 +1784,11 @@ var (
 	}
 	// LocationOrderFieldStreetName orders Location by street_name.
 	LocationOrderFieldStreetName = &LocationOrderField{
-		field: location.FieldStreetName,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.StreetName, nil
+		},
+		column: location.FieldStreetName,
+		toTerm: location.ByStreetName,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{
 				ID:    l.ID,
@@ -1672,30 +1801,30 @@ var (
 // String implement fmt.Stringer interface.
 func (f LocationOrderField) String() string {
 	var str string
-	switch f.field {
-	case location.FieldID:
+	switch f.column {
+	case LocationOrderFieldID.column:
 		str = "ID"
-	case location.FieldTitle:
+	case LocationOrderFieldTitle.column:
 		str = "TITLE"
-	case location.FieldDescription:
+	case LocationOrderFieldDescription.column:
 		str = "DESCRIPTION"
-	case location.FieldLatitude:
+	case LocationOrderFieldLatitude.column:
 		str = "LATITUDE"
-	case location.FieldLongitude:
+	case LocationOrderFieldLongitude.column:
 		str = "LONGITUDE"
-	case location.FieldAddress:
+	case LocationOrderFieldAddress.column:
 		str = "ADDRESS"
-	case location.FieldPostcode:
+	case LocationOrderFieldPostcode.column:
 		str = "POSTCODE"
-	case location.FieldType:
+	case LocationOrderFieldType.column:
 		str = "TYPE"
-	case location.FieldState:
+	case LocationOrderFieldState.column:
 		str = "STATE"
-	case location.FieldSuburb:
+	case LocationOrderFieldSuburb.column:
 		str = "SUBURB"
-	case location.FieldStreetType:
+	case LocationOrderFieldStreetType.column:
 		str = "STREET_TYPE"
-	case location.FieldStreetName:
+	case LocationOrderFieldStreetName.column:
 		str = "STREET_NAME"
 	}
 	return str
@@ -1745,7 +1874,10 @@ func (f *LocationOrderField) UnmarshalGQL(v interface{}) error {
 
 // LocationOrderField defines the ordering field of Location.
 type LocationOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Location.
+	Value    func(*Location) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) location.OrderOption
 	toCursor func(*Location) Cursor
 }
 
@@ -1759,7 +1891,11 @@ type LocationOrder struct {
 var DefaultLocationOrder = &LocationOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &LocationOrderField{
-		field: location.FieldID,
+		Value: func(l *Location) (ent.Value, error) {
+			return l.ID, nil
+		},
+		column: location.FieldID,
+		toTerm: location.ByID,
 		toCursor: func(l *Location) Cursor {
 			return Cursor{ID: l.ID}
 		},
@@ -1895,7 +2031,7 @@ func (p *phonePager) applyCursors(query *PhoneQuery, after, before *Cursor) (*Ph
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultPhoneOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultPhoneOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -1906,22 +2042,22 @@ func (p *phonePager) applyOrder(query *PhoneQuery) *PhoneQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultPhoneOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultPhoneOrder.Field.field))
+		query = query.Order(DefaultPhoneOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *phonePager) orderExpr() sql.Querier {
+func (p *phonePager) orderExpr(query *PhoneQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultPhoneOrder.Field {
-			b.Comma().Ident(DefaultPhoneOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultPhoneOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -1981,7 +2117,11 @@ func (ph *PhoneQuery) Paginate(
 var (
 	// PhoneOrderFieldID orders Phone by id.
 	PhoneOrderFieldID = &PhoneOrderField{
-		field: phone.FieldID,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.ID, nil
+		},
+		column: phone.FieldID,
+		toTerm: phone.ByID,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{
 				ID:    ph.ID,
@@ -1991,7 +2131,11 @@ var (
 	}
 	// PhoneOrderFieldTitle orders Phone by title.
 	PhoneOrderFieldTitle = &PhoneOrderField{
-		field: phone.FieldTitle,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.Title, nil
+		},
+		column: phone.FieldTitle,
+		toTerm: phone.ByTitle,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{
 				ID:    ph.ID,
@@ -2001,7 +2145,11 @@ var (
 	}
 	// PhoneOrderFieldDescription orders Phone by description.
 	PhoneOrderFieldDescription = &PhoneOrderField{
-		field: phone.FieldDescription,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.Description, nil
+		},
+		column: phone.FieldDescription,
+		toTerm: phone.ByDescription,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{
 				ID:    ph.ID,
@@ -2011,7 +2159,11 @@ var (
 	}
 	// PhoneOrderFieldNumber orders Phone by number.
 	PhoneOrderFieldNumber = &PhoneOrderField{
-		field: phone.FieldNumber,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.Number, nil
+		},
+		column: phone.FieldNumber,
+		toTerm: phone.ByNumber,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{
 				ID:    ph.ID,
@@ -2021,7 +2173,11 @@ var (
 	}
 	// PhoneOrderFieldType orders Phone by type.
 	PhoneOrderFieldType = &PhoneOrderField{
-		field: phone.FieldType,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.Type, nil
+		},
+		column: phone.FieldType,
+		toTerm: phone.ByType,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{
 				ID:    ph.ID,
@@ -2034,16 +2190,16 @@ var (
 // String implement fmt.Stringer interface.
 func (f PhoneOrderField) String() string {
 	var str string
-	switch f.field {
-	case phone.FieldID:
+	switch f.column {
+	case PhoneOrderFieldID.column:
 		str = "ID"
-	case phone.FieldTitle:
+	case PhoneOrderFieldTitle.column:
 		str = "TITLE"
-	case phone.FieldDescription:
+	case PhoneOrderFieldDescription.column:
 		str = "DESCRIPTION"
-	case phone.FieldNumber:
+	case PhoneOrderFieldNumber.column:
 		str = "NUMBER"
-	case phone.FieldType:
+	case PhoneOrderFieldType.column:
 		str = "TYPE"
 	}
 	return str
@@ -2079,7 +2235,10 @@ func (f *PhoneOrderField) UnmarshalGQL(v interface{}) error {
 
 // PhoneOrderField defines the ordering field of Phone.
 type PhoneOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Phone.
+	Value    func(*Phone) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) phone.OrderOption
 	toCursor func(*Phone) Cursor
 }
 
@@ -2093,7 +2252,11 @@ type PhoneOrder struct {
 var DefaultPhoneOrder = &PhoneOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &PhoneOrderField{
-		field: phone.FieldID,
+		Value: func(ph *Phone) (ent.Value, error) {
+			return ph.ID, nil
+		},
+		column: phone.FieldID,
+		toTerm: phone.ByID,
 		toCursor: func(ph *Phone) Cursor {
 			return Cursor{ID: ph.ID}
 		},
@@ -2229,7 +2392,7 @@ func (p *productPager) applyCursors(query *ProductQuery, after, before *Cursor) 
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultProductOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultProductOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -2240,22 +2403,22 @@ func (p *productPager) applyOrder(query *ProductQuery) *ProductQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultProductOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultProductOrder.Field.field))
+		query = query.Order(DefaultProductOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *productPager) orderExpr() sql.Querier {
+func (p *productPager) orderExpr(query *ProductQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultProductOrder.Field {
-			b.Comma().Ident(DefaultProductOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultProductOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -2315,7 +2478,11 @@ func (pr *ProductQuery) Paginate(
 var (
 	// ProductOrderFieldID orders Product by id.
 	ProductOrderFieldID = &ProductOrderField{
-		field: product.FieldID,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.ID, nil
+		},
+		column: product.FieldID,
+		toTerm: product.ByID,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2325,7 +2492,11 @@ var (
 	}
 	// ProductOrderFieldName orders Product by name.
 	ProductOrderFieldName = &ProductOrderField{
-		field: product.FieldName,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.Name, nil
+		},
+		column: product.FieldName,
+		toTerm: product.ByName,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2335,7 +2506,11 @@ var (
 	}
 	// ProductOrderFieldDescription orders Product by description.
 	ProductOrderFieldDescription = &ProductOrderField{
-		field: product.FieldDescription,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.Description, nil
+		},
+		column: product.FieldDescription,
+		toTerm: product.ByDescription,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2345,7 +2520,11 @@ var (
 	}
 	// ProductOrderFieldImage orders Product by image.
 	ProductOrderFieldImage = &ProductOrderField{
-		field: product.FieldImage,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.Image, nil
+		},
+		column: product.FieldImage,
+		toTerm: product.ByImage,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2355,7 +2534,11 @@ var (
 	}
 	// ProductOrderFieldURL orders Product by url.
 	ProductOrderFieldURL = &ProductOrderField{
-		field: product.FieldURL,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.URL, nil
+		},
+		column: product.FieldURL,
+		toTerm: product.ByURL,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2365,7 +2548,11 @@ var (
 	}
 	// ProductOrderFieldLastSell orders Product by last_sell.
 	ProductOrderFieldLastSell = &ProductOrderField{
-		field: product.FieldLastSell,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.LastSell, nil
+		},
+		column: product.FieldLastSell,
+		toTerm: product.ByLastSell,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2375,7 +2562,11 @@ var (
 	}
 	// ProductOrderFieldCreatedAt orders Product by created_at.
 	ProductOrderFieldCreatedAt = &ProductOrderField{
-		field: product.FieldCreatedAt,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.CreatedAt, nil
+		},
+		column: product.FieldCreatedAt,
+		toTerm: product.ByCreatedAt,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2385,7 +2576,11 @@ var (
 	}
 	// ProductOrderFieldStatus orders Product by status.
 	ProductOrderFieldStatus = &ProductOrderField{
-		field: product.FieldStatus,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.Status, nil
+		},
+		column: product.FieldStatus,
+		toTerm: product.ByStatus,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2395,7 +2590,11 @@ var (
 	}
 	// ProductOrderFieldBuildStatus orders Product by build_status.
 	ProductOrderFieldBuildStatus = &ProductOrderField{
-		field: product.FieldBuildStatus,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.BuildStatus, nil
+		},
+		column: product.FieldBuildStatus,
+		toTerm: product.ByBuildStatus,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{
 				ID:    pr.ID,
@@ -2408,24 +2607,24 @@ var (
 // String implement fmt.Stringer interface.
 func (f ProductOrderField) String() string {
 	var str string
-	switch f.field {
-	case product.FieldID:
+	switch f.column {
+	case ProductOrderFieldID.column:
 		str = "ID"
-	case product.FieldName:
+	case ProductOrderFieldName.column:
 		str = "TITLE"
-	case product.FieldDescription:
+	case ProductOrderFieldDescription.column:
 		str = "DESCRIPTION"
-	case product.FieldImage:
+	case ProductOrderFieldImage.column:
 		str = "IMAGE"
-	case product.FieldURL:
+	case ProductOrderFieldURL.column:
 		str = "URL"
-	case product.FieldLastSell:
+	case ProductOrderFieldLastSell.column:
 		str = "LAST_SELL"
-	case product.FieldCreatedAt:
+	case ProductOrderFieldCreatedAt.column:
 		str = "CREATED_AT"
-	case product.FieldStatus:
+	case ProductOrderFieldStatus.column:
 		str = "STATUS"
-	case product.FieldBuildStatus:
+	case ProductOrderFieldBuildStatus.column:
 		str = "BUILD_STATUS"
 	}
 	return str
@@ -2469,7 +2668,10 @@ func (f *ProductOrderField) UnmarshalGQL(v interface{}) error {
 
 // ProductOrderField defines the ordering field of Product.
 type ProductOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Product.
+	Value    func(*Product) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) product.OrderOption
 	toCursor func(*Product) Cursor
 }
 
@@ -2483,7 +2685,11 @@ type ProductOrder struct {
 var DefaultProductOrder = &ProductOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &ProductOrderField{
-		field: product.FieldID,
+		Value: func(pr *Product) (ent.Value, error) {
+			return pr.ID, nil
+		},
+		column: product.FieldID,
+		toTerm: product.ByID,
 		toCursor: func(pr *Product) Cursor {
 			return Cursor{ID: pr.ID}
 		},
@@ -2619,7 +2825,7 @@ func (p *vendorPager) applyCursors(query *VendorQuery, after, before *Cursor) (*
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultVendorOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultVendorOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -2630,22 +2836,22 @@ func (p *vendorPager) applyOrder(query *VendorQuery) *VendorQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultVendorOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultVendorOrder.Field.field))
+		query = query.Order(DefaultVendorOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *vendorPager) orderExpr() sql.Querier {
+func (p *vendorPager) orderExpr(query *VendorQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultVendorOrder.Field {
-			b.Comma().Ident(DefaultVendorOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultVendorOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -2705,7 +2911,11 @@ func (v *VendorQuery) Paginate(
 var (
 	// VendorOrderFieldID orders Vendor by id.
 	VendorOrderFieldID = &VendorOrderField{
-		field: vendor.FieldID,
+		Value: func(v *Vendor) (ent.Value, error) {
+			return v.ID, nil
+		},
+		column: vendor.FieldID,
+		toTerm: vendor.ByID,
 		toCursor: func(v *Vendor) Cursor {
 			return Cursor{
 				ID:    v.ID,
@@ -2715,7 +2925,11 @@ var (
 	}
 	// VendorOrderFieldName orders Vendor by name.
 	VendorOrderFieldName = &VendorOrderField{
-		field: vendor.FieldName,
+		Value: func(v *Vendor) (ent.Value, error) {
+			return v.Name, nil
+		},
+		column: vendor.FieldName,
+		toTerm: vendor.ByName,
 		toCursor: func(v *Vendor) Cursor {
 			return Cursor{
 				ID:    v.ID,
@@ -2725,7 +2939,11 @@ var (
 	}
 	// VendorOrderFieldSchema orders Vendor by schema.
 	VendorOrderFieldSchema = &VendorOrderField{
-		field: vendor.FieldSchema,
+		Value: func(v *Vendor) (ent.Value, error) {
+			return v.Schema, nil
+		},
+		column: vendor.FieldSchema,
+		toTerm: vendor.BySchema,
 		toCursor: func(v *Vendor) Cursor {
 			return Cursor{
 				ID:    v.ID,
@@ -2738,12 +2956,12 @@ var (
 // String implement fmt.Stringer interface.
 func (f VendorOrderField) String() string {
 	var str string
-	switch f.field {
-	case vendor.FieldID:
+	switch f.column {
+	case VendorOrderFieldID.column:
 		str = "ID"
-	case vendor.FieldName:
+	case VendorOrderFieldName.column:
 		str = "NAME"
-	case vendor.FieldSchema:
+	case VendorOrderFieldSchema.column:
 		str = "SCHEMA"
 	}
 	return str
@@ -2775,7 +2993,10 @@ func (f *VendorOrderField) UnmarshalGQL(v interface{}) error {
 
 // VendorOrderField defines the ordering field of Vendor.
 type VendorOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Vendor.
+	Value    func(*Vendor) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) vendor.OrderOption
 	toCursor func(*Vendor) Cursor
 }
 
@@ -2789,7 +3010,11 @@ type VendorOrder struct {
 var DefaultVendorOrder = &VendorOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &VendorOrderField{
-		field: vendor.FieldID,
+		Value: func(v *Vendor) (ent.Value, error) {
+			return v.ID, nil
+		},
+		column: vendor.FieldID,
+		toTerm: vendor.ByID,
 		toCursor: func(v *Vendor) Cursor {
 			return Cursor{ID: v.ID}
 		},
@@ -2925,7 +3150,7 @@ func (p *warehousePager) applyCursors(query *WarehouseQuery, after, before *Curs
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultWarehouseOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultWarehouseOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -2936,22 +3161,22 @@ func (p *warehousePager) applyOrder(query *WarehouseQuery) *WarehouseQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultWarehouseOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultWarehouseOrder.Field.field))
+		query = query.Order(DefaultWarehouseOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *warehousePager) orderExpr() sql.Querier {
+func (p *warehousePager) orderExpr(query *WarehouseQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultWarehouseOrder.Field {
-			b.Comma().Ident(DefaultWarehouseOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultWarehouseOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -3011,7 +3236,11 @@ func (w *WarehouseQuery) Paginate(
 var (
 	// WarehouseOrderFieldID orders Warehouse by id.
 	WarehouseOrderFieldID = &WarehouseOrderField{
-		field: warehouse.FieldID,
+		Value: func(w *Warehouse) (ent.Value, error) {
+			return w.ID, nil
+		},
+		column: warehouse.FieldID,
+		toTerm: warehouse.ByID,
 		toCursor: func(w *Warehouse) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3021,7 +3250,11 @@ var (
 	}
 	// WarehouseOrderFieldName orders Warehouse by name.
 	WarehouseOrderFieldName = &WarehouseOrderField{
-		field: warehouse.FieldName,
+		Value: func(w *Warehouse) (ent.Value, error) {
+			return w.Name, nil
+		},
+		column: warehouse.FieldName,
+		toTerm: warehouse.ByName,
 		toCursor: func(w *Warehouse) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3031,7 +3264,11 @@ var (
 	}
 	// WarehouseOrderFieldLastUpdate orders Warehouse by last_update.
 	WarehouseOrderFieldLastUpdate = &WarehouseOrderField{
-		field: warehouse.FieldLastUpdate,
+		Value: func(w *Warehouse) (ent.Value, error) {
+			return w.LastUpdate, nil
+		},
+		column: warehouse.FieldLastUpdate,
+		toTerm: warehouse.ByLastUpdate,
 		toCursor: func(w *Warehouse) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3041,7 +3278,11 @@ var (
 	}
 	// WarehouseOrderFieldEnabled orders Warehouse by enabled.
 	WarehouseOrderFieldEnabled = &WarehouseOrderField{
-		field: warehouse.FieldEnabled,
+		Value: func(w *Warehouse) (ent.Value, error) {
+			return w.Enabled, nil
+		},
+		column: warehouse.FieldEnabled,
+		toTerm: warehouse.ByEnabled,
 		toCursor: func(w *Warehouse) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3054,14 +3295,14 @@ var (
 // String implement fmt.Stringer interface.
 func (f WarehouseOrderField) String() string {
 	var str string
-	switch f.field {
-	case warehouse.FieldID:
+	switch f.column {
+	case WarehouseOrderFieldID.column:
 		str = "ID"
-	case warehouse.FieldName:
+	case WarehouseOrderFieldName.column:
 		str = "NAME"
-	case warehouse.FieldLastUpdate:
+	case WarehouseOrderFieldLastUpdate.column:
 		str = "LAST_UPDATE"
-	case warehouse.FieldEnabled:
+	case WarehouseOrderFieldEnabled.column:
 		str = "ENABLED"
 	}
 	return str
@@ -3095,7 +3336,10 @@ func (f *WarehouseOrderField) UnmarshalGQL(v interface{}) error {
 
 // WarehouseOrderField defines the ordering field of Warehouse.
 type WarehouseOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Warehouse.
+	Value    func(*Warehouse) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) warehouse.OrderOption
 	toCursor func(*Warehouse) Cursor
 }
 
@@ -3109,7 +3353,11 @@ type WarehouseOrder struct {
 var DefaultWarehouseOrder = &WarehouseOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &WarehouseOrderField{
-		field: warehouse.FieldID,
+		Value: func(w *Warehouse) (ent.Value, error) {
+			return w.ID, nil
+		},
+		column: warehouse.FieldID,
+		toTerm: warehouse.ByID,
 		toCursor: func(w *Warehouse) Cursor {
 			return Cursor{ID: w.ID}
 		},
@@ -3245,7 +3493,7 @@ func (p *websitePager) applyCursors(query *WebsiteQuery, after, before *Cursor) 
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultWebsiteOrder.Field.field, p.order.Field.field, direction) {
+	for _, predicate := range entgql.CursorsPredicate(after, before, DefaultWebsiteOrder.Field.column, p.order.Field.column, direction) {
 		query = query.Where(predicate)
 	}
 	return query, nil
@@ -3256,22 +3504,22 @@ func (p *websitePager) applyOrder(query *WebsiteQuery) *WebsiteQuery {
 	if p.reverse {
 		direction = direction.Reverse()
 	}
-	query = query.Order(orderFunc(direction, p.order.Field.field))
+	query = query.Order(p.order.Field.toTerm(direction.OrderTermOption()))
 	if p.order.Field != DefaultWebsiteOrder.Field {
-		query = query.Order(orderFunc(direction, DefaultWebsiteOrder.Field.field))
+		query = query.Order(DefaultWebsiteOrder.Field.toTerm(direction.OrderTermOption()))
 	}
 	return query
 }
 
-func (p *websitePager) orderExpr() sql.Querier {
+func (p *websitePager) orderExpr(query *WebsiteQuery) sql.Querier {
 	direction := p.order.Direction
 	if p.reverse {
 		direction = direction.Reverse()
 	}
 	return sql.ExprFunc(func(b *sql.Builder) {
-		b.Ident(p.order.Field.field).Pad().WriteString(string(direction))
+		b.Ident(p.order.Field.column).Pad().WriteString(string(direction))
 		if p.order.Field != DefaultWebsiteOrder.Field {
-			b.Comma().Ident(DefaultWebsiteOrder.Field.field).Pad().WriteString(string(direction))
+			b.Comma().Ident(DefaultWebsiteOrder.Field.column).Pad().WriteString(string(direction))
 		}
 	})
 }
@@ -3331,7 +3579,11 @@ func (w *WebsiteQuery) Paginate(
 var (
 	// WebsiteOrderFieldID orders Website by id.
 	WebsiteOrderFieldID = &WebsiteOrderField{
-		field: website.FieldID,
+		Value: func(w *Website) (ent.Value, error) {
+			return w.ID, nil
+		},
+		column: website.FieldID,
+		toTerm: website.ByID,
 		toCursor: func(w *Website) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3341,7 +3593,11 @@ var (
 	}
 	// WebsiteOrderFieldTitle orders Website by title.
 	WebsiteOrderFieldTitle = &WebsiteOrderField{
-		field: website.FieldTitle,
+		Value: func(w *Website) (ent.Value, error) {
+			return w.Title, nil
+		},
+		column: website.FieldTitle,
+		toTerm: website.ByTitle,
 		toCursor: func(w *Website) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3351,7 +3607,11 @@ var (
 	}
 	// WebsiteOrderFieldDescription orders Website by description.
 	WebsiteOrderFieldDescription = &WebsiteOrderField{
-		field: website.FieldDescription,
+		Value: func(w *Website) (ent.Value, error) {
+			return w.Description, nil
+		},
+		column: website.FieldDescription,
+		toTerm: website.ByDescription,
 		toCursor: func(w *Website) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3361,7 +3621,11 @@ var (
 	}
 	// WebsiteOrderFieldURL orders Website by url.
 	WebsiteOrderFieldURL = &WebsiteOrderField{
-		field: website.FieldURL,
+		Value: func(w *Website) (ent.Value, error) {
+			return w.URL, nil
+		},
+		column: website.FieldURL,
+		toTerm: website.ByURL,
 		toCursor: func(w *Website) Cursor {
 			return Cursor{
 				ID:    w.ID,
@@ -3374,14 +3638,14 @@ var (
 // String implement fmt.Stringer interface.
 func (f WebsiteOrderField) String() string {
 	var str string
-	switch f.field {
-	case website.FieldID:
+	switch f.column {
+	case WebsiteOrderFieldID.column:
 		str = "ID"
-	case website.FieldTitle:
+	case WebsiteOrderFieldTitle.column:
 		str = "TITLE"
-	case website.FieldDescription:
+	case WebsiteOrderFieldDescription.column:
 		str = "DESCRIPTION"
-	case website.FieldURL:
+	case WebsiteOrderFieldURL.column:
 		str = "URL"
 	}
 	return str
@@ -3415,7 +3679,10 @@ func (f *WebsiteOrderField) UnmarshalGQL(v interface{}) error {
 
 // WebsiteOrderField defines the ordering field of Website.
 type WebsiteOrderField struct {
-	field    string
+	// Value extracts the ordering value from the given Website.
+	Value    func(*Website) (ent.Value, error)
+	column   string // field or computed.
+	toTerm   func(...sql.OrderTermOption) website.OrderOption
 	toCursor func(*Website) Cursor
 }
 
@@ -3429,7 +3696,11 @@ type WebsiteOrder struct {
 var DefaultWebsiteOrder = &WebsiteOrder{
 	Direction: entgql.OrderDirectionAsc,
 	Field: &WebsiteOrderField{
-		field: website.FieldID,
+		Value: func(w *Website) (ent.Value, error) {
+			return w.ID, nil
+		},
+		column: website.FieldID,
+		toTerm: website.ByID,
 		toCursor: func(w *Website) Cursor {
 			return Cursor{ID: w.ID}
 		},

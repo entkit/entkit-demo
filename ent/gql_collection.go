@@ -119,7 +119,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.CountriesPrimaryKey[0], limit, pager.orderExpr())
+				modify := limitRows(company.CountriesPrimaryKey[0], limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -165,7 +165,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(company.PhonesColumn, ids...))
+							s.Where(sql.InValues(s.C(company.PhonesColumn), ids...))
 						})
 						if err := query.GroupBy(company.PhonesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -204,7 +204,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.PhonesColumn, limit, pager.orderExpr())
+				modify := limitRows(company.PhonesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -250,7 +250,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(company.EmailsColumn, ids...))
+							s.Where(sql.InValues(s.C(company.EmailsColumn), ids...))
 						})
 						if err := query.GroupBy(company.EmailsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -289,7 +289,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.EmailsColumn, limit, pager.orderExpr())
+				modify := limitRows(company.EmailsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -335,7 +335,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(company.WebsitesColumn, ids...))
+							s.Where(sql.InValues(s.C(company.WebsitesColumn), ids...))
 						})
 						if err := query.GroupBy(company.WebsitesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -374,7 +374,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.WebsitesColumn, limit, pager.orderExpr())
+				modify := limitRows(company.WebsitesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -420,7 +420,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(company.LocationsColumn, ids...))
+							s.Where(sql.InValues(s.C(company.LocationsColumn), ids...))
 						})
 						if err := query.GroupBy(company.LocationsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -459,7 +459,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.LocationsColumn, limit, pager.orderExpr())
+				modify := limitRows(company.LocationsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -525,7 +525,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(company.GalleryImagesColumn, ids...))
+							s.Where(sql.InValues(s.C(company.GalleryImagesColumn), ids...))
 						})
 						if err := query.GroupBy(company.GalleryImagesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -564,7 +564,7 @@ func (c *CompanyQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(company.GalleryImagesColumn, limit, pager.orderExpr())
+				modify := limitRows(company.GalleryImagesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -745,7 +745,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(country.CompaniesPrimaryKey[1], limit, pager.orderExpr())
+				modify := limitRows(country.CompaniesPrimaryKey[1], limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -791,7 +791,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(country.PhonesColumn, ids...))
+							s.Where(sql.InValues(s.C(country.PhonesColumn), ids...))
 						})
 						if err := query.GroupBy(country.PhonesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -830,7 +830,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(country.PhonesColumn, limit, pager.orderExpr())
+				modify := limitRows(country.PhonesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -876,7 +876,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(country.EmailsColumn, ids...))
+							s.Where(sql.InValues(s.C(country.EmailsColumn), ids...))
 						})
 						if err := query.GroupBy(country.EmailsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -915,7 +915,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(country.EmailsColumn, limit, pager.orderExpr())
+				modify := limitRows(country.EmailsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -961,7 +961,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(country.WebsitesColumn, ids...))
+							s.Where(sql.InValues(s.C(country.WebsitesColumn), ids...))
 						})
 						if err := query.GroupBy(country.WebsitesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -1000,7 +1000,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(country.WebsitesColumn, limit, pager.orderExpr())
+				modify := limitRows(country.WebsitesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -1046,7 +1046,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(country.LocationsColumn, ids...))
+							s.Where(sql.InValues(s.C(country.LocationsColumn), ids...))
 						})
 						if err := query.GroupBy(country.LocationsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -1085,7 +1085,7 @@ func (c *CountryQuery) collectField(ctx context.Context, opCtx *graphql.Operatio
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(country.LocationsColumn, limit, pager.orderExpr())
+				modify := limitRows(country.LocationsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -1883,7 +1883,7 @@ func (v *VendorQuery) collectField(ctx context.Context, opCtx *graphql.Operation
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(vendor.WarehousesColumn, ids...))
+							s.Where(sql.InValues(s.C(vendor.WarehousesColumn), ids...))
 						})
 						if err := query.GroupBy(vendor.WarehousesColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -1922,7 +1922,7 @@ func (v *VendorQuery) collectField(ctx context.Context, opCtx *graphql.Operation
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(vendor.WarehousesColumn, limit, pager.orderExpr())
+				modify := limitRows(vendor.WarehousesColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -1968,7 +1968,7 @@ func (v *VendorQuery) collectField(ctx context.Context, opCtx *graphql.Operation
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(vendor.ProductsColumn, ids...))
+							s.Where(sql.InValues(s.C(vendor.ProductsColumn), ids...))
 						})
 						if err := query.GroupBy(vendor.ProductsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -2007,7 +2007,7 @@ func (v *VendorQuery) collectField(ctx context.Context, opCtx *graphql.Operation
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(vendor.ProductsColumn, limit, pager.orderExpr())
+				modify := limitRows(vendor.ProductsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)
@@ -2145,7 +2145,7 @@ func (w *WarehouseQuery) collectField(ctx context.Context, opCtx *graphql.Operat
 							Count  int       `sql:"count"`
 						}
 						query.Where(func(s *sql.Selector) {
-							s.Where(sql.InValues(warehouse.ProductsColumn, ids...))
+							s.Where(sql.InValues(s.C(warehouse.ProductsColumn), ids...))
 						})
 						if err := query.GroupBy(warehouse.ProductsColumn).Aggregate(Count()).Scan(ctx, &v); err != nil {
 							return err
@@ -2184,7 +2184,7 @@ func (w *WarehouseQuery) collectField(ctx context.Context, opCtx *graphql.Operat
 				return err
 			}
 			if limit := paginateLimit(args.first, args.last); limit > 0 {
-				modify := limitRows(warehouse.ProductsColumn, limit, pager.orderExpr())
+				modify := limitRows(warehouse.ProductsColumn, limit, pager.orderExpr(query))
 				query.modifiers = append(query.modifiers, modify)
 			} else {
 				query = pager.applyOrder(query)

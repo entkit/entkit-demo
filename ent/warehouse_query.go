@@ -22,7 +22,7 @@ import (
 type WarehouseQuery struct {
 	config
 	ctx               *QueryContext
-	order             []warehouse.Order
+	order             []warehouse.OrderOption
 	inters            []Interceptor
 	predicates        []predicate.Warehouse
 	withProducts      *ProductQuery
@@ -62,7 +62,7 @@ func (wq *WarehouseQuery) Unique(unique bool) *WarehouseQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (wq *WarehouseQuery) Order(o ...warehouse.Order) *WarehouseQuery {
+func (wq *WarehouseQuery) Order(o ...warehouse.OrderOption) *WarehouseQuery {
 	wq.order = append(wq.order, o...)
 	return wq
 }
@@ -300,7 +300,7 @@ func (wq *WarehouseQuery) Clone() *WarehouseQuery {
 	return &WarehouseQuery{
 		config:       wq.config,
 		ctx:          wq.ctx.Clone(),
-		order:        append([]warehouse.Order{}, wq.order...),
+		order:        append([]warehouse.OrderOption{}, wq.order...),
 		inters:       append([]Interceptor{}, wq.inters...),
 		predicates:   append([]predicate.Warehouse{}, wq.predicates...),
 		withProducts: wq.withProducts.Clone(),
@@ -484,7 +484,7 @@ func (wq *WarehouseQuery) loadProducts(ctx context.Context, query *ProductQuery,
 	}
 	query.withFKs = true
 	query.Where(predicate.Product(func(s *sql.Selector) {
-		s.Where(sql.InValues(warehouse.ProductsColumn, fks...))
+		s.Where(sql.InValues(s.C(warehouse.ProductsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {

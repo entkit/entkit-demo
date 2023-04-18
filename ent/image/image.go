@@ -87,40 +87,40 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Image queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Image queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByTitle orders the results by the title field.
-func ByTitle(opts ...sql.OrderTermOption) Order {
+func ByTitle(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldTitle, opts...).ToFunc()
 }
 
 // ByOriginalURL orders the results by the original_url field.
-func ByOriginalURL(opts ...sql.OrderTermOption) Order {
+func ByOriginalURL(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldOriginalURL, opts...).ToFunc()
 }
 
 // ByGalleryCompanyField orders the results by gallery_company field.
-func ByGalleryCompanyField(field string, opts ...sql.OrderTermOption) Order {
+func ByGalleryCompanyField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newGalleryCompanyStep(), sql.OrderByField(field, opts...))
 	}
 }
 
 // ByLogoCompanyField orders the results by logo_company field.
-func ByLogoCompanyField(field string, opts ...sql.OrderTermOption) Order {
+func ByLogoCompanyField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newLogoCompanyStep(), sql.OrderByField(field, opts...))
 	}
 }
 
 // ByCoverCompanyField orders the results by cover_company field.
-func ByCoverCompanyField(field string, opts ...sql.OrderTermOption) Order {
+func ByCoverCompanyField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newCoverCompanyStep(), sql.OrderByField(field, opts...))
 	}

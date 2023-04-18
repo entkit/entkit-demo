@@ -25,7 +25,7 @@ import (
 type CountryQuery struct {
 	config
 	ctx                *QueryContext
-	order              []country.Order
+	order              []country.OrderOption
 	inters             []Interceptor
 	predicates         []predicate.Country
 	withCompanies      *CompanyQuery
@@ -71,7 +71,7 @@ func (cq *CountryQuery) Unique(unique bool) *CountryQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (cq *CountryQuery) Order(o ...country.Order) *CountryQuery {
+func (cq *CountryQuery) Order(o ...country.OrderOption) *CountryQuery {
 	cq.order = append(cq.order, o...)
 	return cq
 }
@@ -375,7 +375,7 @@ func (cq *CountryQuery) Clone() *CountryQuery {
 	return &CountryQuery{
 		config:        cq.config,
 		ctx:           cq.ctx.Clone(),
-		order:         append([]country.Order{}, cq.order...),
+		order:         append([]country.OrderOption{}, cq.order...),
 		inters:        append([]Interceptor{}, cq.inters...),
 		predicates:    append([]predicate.Country{}, cq.predicates...),
 		withCompanies: cq.withCompanies.Clone(),
@@ -702,7 +702,7 @@ func (cq *CountryQuery) loadPhones(ctx context.Context, query *PhoneQuery, nodes
 	}
 	query.withFKs = true
 	query.Where(predicate.Phone(func(s *sql.Selector) {
-		s.Where(sql.InValues(country.PhonesColumn, fks...))
+		s.Where(sql.InValues(s.C(country.PhonesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -733,7 +733,7 @@ func (cq *CountryQuery) loadEmails(ctx context.Context, query *EmailQuery, nodes
 	}
 	query.withFKs = true
 	query.Where(predicate.Email(func(s *sql.Selector) {
-		s.Where(sql.InValues(country.EmailsColumn, fks...))
+		s.Where(sql.InValues(s.C(country.EmailsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -764,7 +764,7 @@ func (cq *CountryQuery) loadWebsites(ctx context.Context, query *WebsiteQuery, n
 	}
 	query.withFKs = true
 	query.Where(predicate.Website(func(s *sql.Selector) {
-		s.Where(sql.InValues(country.WebsitesColumn, fks...))
+		s.Where(sql.InValues(s.C(country.WebsitesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -795,7 +795,7 @@ func (cq *CountryQuery) loadLocations(ctx context.Context, query *LocationQuery,
 	}
 	query.withFKs = true
 	query.Where(predicate.Location(func(s *sql.Selector) {
-		s.Where(sql.InValues(country.LocationsColumn, fks...))
+		s.Where(sql.InValues(s.C(country.LocationsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {

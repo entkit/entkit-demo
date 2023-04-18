@@ -85,50 +85,50 @@ var (
 	DefaultID func() uuid.UUID
 )
 
-// Order defines the ordering method for the Warehouse queries.
-type Order func(*sql.Selector)
+// OrderOption defines the ordering options for the Warehouse queries.
+type OrderOption func(*sql.Selector)
 
 // ByID orders the results by the id field.
-func ByID(opts ...sql.OrderTermOption) Order {
+func ByID(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldID, opts...).ToFunc()
 }
 
 // ByName orders the results by the name field.
-func ByName(opts ...sql.OrderTermOption) Order {
+func ByName(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldName, opts...).ToFunc()
 }
 
 // ByLastUpdate orders the results by the last_update field.
-func ByLastUpdate(opts ...sql.OrderTermOption) Order {
+func ByLastUpdate(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldLastUpdate, opts...).ToFunc()
 }
 
 // ByOriginalData orders the results by the original_data field.
-func ByOriginalData(opts ...sql.OrderTermOption) Order {
+func ByOriginalData(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldOriginalData, opts...).ToFunc()
 }
 
 // ByEnabled orders the results by the enabled field.
-func ByEnabled(opts ...sql.OrderTermOption) Order {
+func ByEnabled(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldEnabled, opts...).ToFunc()
 }
 
 // ByProductsCount orders the results by products count.
-func ByProductsCount(opts ...sql.OrderTermOption) Order {
+func ByProductsCount(opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborsCount(s, newProductsStep(), opts...)
 	}
 }
 
 // ByProducts orders the results by products terms.
-func ByProducts(term sql.OrderTerm, terms ...sql.OrderTerm) Order {
+func ByProducts(term sql.OrderTerm, terms ...sql.OrderTerm) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newProductsStep(), append([]sql.OrderTerm{term}, terms...)...)
 	}
 }
 
 // ByVendorField orders the results by vendor field.
-func ByVendorField(field string, opts ...sql.OrderTermOption) Order {
+func ByVendorField(field string, opts ...sql.OrderTermOption) OrderOption {
 	return func(s *sql.Selector) {
 		sqlgraph.OrderByNeighborTerms(s, newVendorStep(), sql.OrderByField(field, opts...))
 	}

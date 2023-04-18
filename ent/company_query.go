@@ -26,7 +26,7 @@ import (
 type CompanyQuery struct {
 	config
 	ctx                    *QueryContext
-	order                  []company.Order
+	order                  []company.OrderOption
 	inters                 []Interceptor
 	predicates             []predicate.Company
 	withCountries          *CountryQuery
@@ -76,7 +76,7 @@ func (cq *CompanyQuery) Unique(unique bool) *CompanyQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (cq *CompanyQuery) Order(o ...company.Order) *CompanyQuery {
+func (cq *CompanyQuery) Order(o ...company.OrderOption) *CompanyQuery {
 	cq.order = append(cq.order, o...)
 	return cq
 }
@@ -446,7 +446,7 @@ func (cq *CompanyQuery) Clone() *CompanyQuery {
 	return &CompanyQuery{
 		config:            cq.config,
 		ctx:               cq.ctx.Clone(),
-		order:             append([]company.Order{}, cq.order...),
+		order:             append([]company.OrderOption{}, cq.order...),
 		inters:            append([]Interceptor{}, cq.inters...),
 		predicates:        append([]predicate.Company{}, cq.predicates...),
 		withCountries:     cq.withCountries.Clone(),
@@ -838,7 +838,7 @@ func (cq *CompanyQuery) loadPhones(ctx context.Context, query *PhoneQuery, nodes
 	}
 	query.withFKs = true
 	query.Where(predicate.Phone(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.PhonesColumn, fks...))
+		s.Where(sql.InValues(s.C(company.PhonesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -869,7 +869,7 @@ func (cq *CompanyQuery) loadEmails(ctx context.Context, query *EmailQuery, nodes
 	}
 	query.withFKs = true
 	query.Where(predicate.Email(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.EmailsColumn, fks...))
+		s.Where(sql.InValues(s.C(company.EmailsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -900,7 +900,7 @@ func (cq *CompanyQuery) loadWebsites(ctx context.Context, query *WebsiteQuery, n
 	}
 	query.withFKs = true
 	query.Where(predicate.Website(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.WebsitesColumn, fks...))
+		s.Where(sql.InValues(s.C(company.WebsitesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -931,7 +931,7 @@ func (cq *CompanyQuery) loadLocations(ctx context.Context, query *LocationQuery,
 	}
 	query.withFKs = true
 	query.Where(predicate.Location(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.LocationsColumn, fks...))
+		s.Where(sql.InValues(s.C(company.LocationsColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -959,7 +959,7 @@ func (cq *CompanyQuery) loadLogoImage(ctx context.Context, query *ImageQuery, no
 	}
 	query.withFKs = true
 	query.Where(predicate.Image(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.LogoImageColumn, fks...))
+		s.Where(sql.InValues(s.C(company.LogoImageColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -987,7 +987,7 @@ func (cq *CompanyQuery) loadCoverImage(ctx context.Context, query *ImageQuery, n
 	}
 	query.withFKs = true
 	query.Where(predicate.Image(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.CoverImageColumn, fks...))
+		s.Where(sql.InValues(s.C(company.CoverImageColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {
@@ -1018,7 +1018,7 @@ func (cq *CompanyQuery) loadGalleryImages(ctx context.Context, query *ImageQuery
 	}
 	query.withFKs = true
 	query.Where(predicate.Image(func(s *sql.Selector) {
-		s.Where(sql.InValues(company.GalleryImagesColumn, fks...))
+		s.Where(sql.InValues(s.C(company.GalleryImagesColumn), fks...))
 	}))
 	neighbors, err := query.All(ctx)
 	if err != nil {

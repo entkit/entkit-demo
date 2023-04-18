@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/entkit/entkit"
+	"github.com/entkit/entkit/v2"
 	"github.com/gin-gonic/gin"
 )
 

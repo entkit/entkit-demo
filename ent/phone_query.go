@@ -21,7 +21,7 @@ import (
 type PhoneQuery struct {
 	config
 	ctx         *QueryContext
-	order       []phone.Order
+	order       []phone.OrderOption
 	inters      []Interceptor
 	predicates  []predicate.Phone
 	withCompany *CompanyQuery
@@ -60,7 +60,7 @@ func (pq *PhoneQuery) Unique(unique bool) *PhoneQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (pq *PhoneQuery) Order(o ...phone.Order) *PhoneQuery {
+func (pq *PhoneQuery) Order(o ...phone.OrderOption) *PhoneQuery {
 	pq.order = append(pq.order, o...)
 	return pq
 }
@@ -298,7 +298,7 @@ func (pq *PhoneQuery) Clone() *PhoneQuery {
 	return &PhoneQuery{
 		config:      pq.config,
 		ctx:         pq.ctx.Clone(),
-		order:       append([]phone.Order{}, pq.order...),
+		order:       append([]phone.OrderOption{}, pq.order...),
 		inters:      append([]Interceptor{}, pq.inters...),
 		predicates:  append([]predicate.Phone{}, pq.predicates...),
 		withCompany: pq.withCompany.Clone(),

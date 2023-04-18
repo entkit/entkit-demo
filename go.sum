@@ -1,11 +1,7 @@
 ariga.io/atlas v0.10.1 h1:zub8+r1P4OqUYoDl6AgUxqPRwl8A9oeI5q3LucfsnUE=
 ariga.io/atlas v0.10.1/go.mod h1:+TR129FJZ5Lvzms6dvCeGWh1yR6hMvmXBhug4hrNIGk=
-entgo.io/contrib v0.4.0 h1:5K5B9LQvLdSZUPYwm5uoWBuO2bYoBws4jTwpM8Sx1ak=
-entgo.io/contrib v0.4.0/go.mod h1:pwWMBLYK07JONGJDFwCKAVSdbBF83MFXb/azFsJOX4o=
 entgo.io/contrib v0.4.1 h1:bmXUubfczeXB7y8incqTza/raDiV66LS4yMt6p3FL9A=
 entgo.io/contrib v0.4.1/go.mod h1:APu/jIDPxY/PwwQn7FJVkog5zEbMgjSFCV3U0bVzRD4=
-entgo.io/ent v0.12.0 h1:DTub/yd0pMK9s0ONfZps2cYkyD2VPIuknVBv10BESc0=
-entgo.io/ent v0.12.0/go.mod h1:OA1Y5bNE8EtlxKv4IyzWwt4jgvGbkoKMcwp668iEKQE=
 entgo.io/ent v0.12.1 h1:bqK+WMwfjpTsFiXx9tQSEZMNLyAADSx5Y1xySjT4Tm8=
 entgo.io/ent v0.12.1/go.mod h1:OA1Y5bNE8EtlxKv4IyzWwt4jgvGbkoKMcwp668iEKQE=
 github.com/99designs/gqlgen v0.17.29 h1:z2MrNOFATCVgQLRCF6Uufz4uz2IQLB5BBMwPUMafJOA=
@@ -45,10 +41,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgryski/trifles v0.0.0-20200323201526-dd97f9abfb48 h1:fRzb/w+pyskVMQ+UbP35JkH8yB7MYb4q/qhBarqZE6g=
 github.com/dgryski/trifles v0.0.0-20200323201526-dd97f9abfb48/go.mod h1:if7Fbed8SFyPtHLHbg49SI7NAdJiC5WIA09pe59rfAA=
-github.com/entkit/entkit v0.0.0-20230417205241-42876c25a203 h1:mi8EtETVPUh7DBFr4WdlqbyFxmQpdz/PMebZ4eHwgfE=
-github.com/entkit/entkit v0.0.0-20230417205241-42876c25a203/go.mod h1:73HqpYT8ekBTOKCvVd0dWHl6Spp5J58zg9lprP6IVqY=
-github.com/entkit/entkit v0.0.0-20230417221349-de8437192104 h1:q9sJcla/M8NDN23iy2ZOvsjwDwixxeEZWG6y7MZX7yw=
-github.com/entkit/entkit v0.0.0-20230417221349-de8437192104/go.mod h1:73HqpYT8ekBTOKCvVd0dWHl6Spp5J58zg9lprP6IVqY=
+github.com/entkit/entkit/v2 v2.0.0 h1:44l+0WC145IP1Fi31Y4Fo5O88n8EMNbgkyDVphYVl6A=
+github.com/entkit/entkit/v2 v2.0.0/go.mod h1:c/Z9pvIO5rx2MngneKccHy7CBOqzvnGPP1h+MafyLJM=
 github.com/frankban/quicktest v1.14.3 h1:FJKSZTDHjyhriyC81FLQ0LY93eSai0ZyR/ZIkd3ZUKE=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=
 github.com/gin-contrib/sse v0.1.0/go.mod h1:RHrZQHXnP2xjPF+u1gW/2HnVO7nvIa9PG3Gm+fLHvGI=
@@ -151,8 +145,6 @@ github.com/shopspring/decimal v1.3.1/go.mod h1:DKyhrW/HYNuLGql+MJL6WCR6knT2jwCFR
 github.com/spf13/cast v1.3.1/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
 github.com/spf13/cast v1.5.0 h1:rj3WzYc11XZaIZMPKmwP96zkFEnnAmV8s6XbB2aY32w=
 github.com/spf13/cast v1.5.0/go.mod h1:SpXXQ5YoyJw6s3/6cMTQuxvgRl3PCJiyaX9p6b155UU=
-github.com/stoewer/go-strcase v1.3.0 h1:g0eASXYtp+yvN9fK8sH94oCIk0fau9uV1/ZdJ0AVEzs=
-github.com/stoewer/go-strcase v1.3.0/go.mod h1:fAH5hQ5pehh+j3nZfvwdk2RgEgQjAoM8wodgtPmh1xo=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0 h1:1zr/of2m5FGMsad5YfcqgdqdWrIhu+EBEJRhR1U7z/c=
@@ -178,7 +170,6 @@ github.com/vektah/gqlparser/v2 v2.5.1 h1:ZGu+bquAY23jsxDRcYpWjttRZrUz07LbiY77gUO
 github.com/vektah/gqlparser/v2 v2.5.1/go.mod h1:mPgqFBu/woKTVYWyNk8cO3kh4S/f4aRFZrvOnp3hmCs=
 github.com/vmihailenco/msgpack/v5 v5.3.5 h1:5gO0H1iULLWGhs2H5tbAHIZTV8/cYafcFOr9znI5mJU=
 github.com/vmihailenco/msgpack/v5 v5.3.5/go.mod h1:7xyJ9e+0+9SaZT0Wt1RGleJXzli6Q/V5KbhBonMG9jc=
-github.com/vmihailenco/tagparser v0.1.2 h1:gnjoVuB/kljJ5wICEEOpx98oXMWPLj22G67Vbd1qPqc=
 github.com/vmihailenco/tagparser/v2 v2.0.0 h1:y09buUbR+b5aycVFQs/g70pqKVZNBmxwAhO7/IwNM9g=
 github.com/vmihailenco/tagparser/v2 v2.0.0/go.mod h1:Wri+At7QHww0WTrCBeu4J6bNtoV6mEfg5OIWRZA9qds=
 github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 h1:bAn7/zixMGCfxrRTfdpNzjtPYqr8smhKouy9mxVdGPU=

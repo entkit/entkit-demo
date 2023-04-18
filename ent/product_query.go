@@ -21,7 +21,7 @@ import (
 type ProductQuery struct {
 	config
 	ctx           *QueryContext
-	order         []product.Order
+	order         []product.OrderOption
 	inters        []Interceptor
 	predicates    []predicate.Product
 	withWarehouse *WarehouseQuery
@@ -60,7 +60,7 @@ func (pq *ProductQuery) Unique(unique bool) *ProductQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (pq *ProductQuery) Order(o ...product.Order) *ProductQuery {
+func (pq *ProductQuery) Order(o ...product.OrderOption) *ProductQuery {
 	pq.order = append(pq.order, o...)
 	return pq
 }
@@ -298,7 +298,7 @@ func (pq *ProductQuery) Clone() *ProductQuery {
 	return &ProductQuery{
 		config:        pq.config,
 		ctx:           pq.ctx.Clone(),
-		order:         append([]product.Order{}, pq.order...),
+		order:         append([]product.OrderOption{}, pq.order...),
 		inters:        append([]Interceptor{}, pq.inters...),
 		predicates:    append([]predicate.Product{}, pq.predicates...),
 		withWarehouse: pq.withWarehouse.Clone(),

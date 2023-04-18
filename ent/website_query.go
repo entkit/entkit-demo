@@ -21,7 +21,7 @@ import (
 type WebsiteQuery struct {
 	config
 	ctx         *QueryContext
-	order       []website.Order
+	order       []website.OrderOption
 	inters      []Interceptor
 	predicates  []predicate.Website
 	withCompany *CompanyQuery
@@ -60,7 +60,7 @@ func (wq *WebsiteQuery) Unique(unique bool) *WebsiteQuery {
 }
 
 // Order specifies how the records should be ordered.
-func (wq *WebsiteQuery) Order(o ...website.Order) *WebsiteQuery {
+func (wq *WebsiteQuery) Order(o ...website.OrderOption) *WebsiteQuery {
 	wq.order = append(wq.order, o...)
 	return wq
 }
@@ -298,7 +298,7 @@ func (wq *WebsiteQuery) Clone() *WebsiteQuery {
 	return &WebsiteQuery{
 		config:      wq.config,
 		ctx:         wq.ctx.Clone(),
-		order:       append([]website.Order{}, wq.order...),
+		order:       append([]website.OrderOption{}, wq.order...),
 		inters:      append([]Interceptor{}, wq.inters...),
 		predicates:  append([]predicate.Website{}, wq.predicates...),
 		withCompany: wq.withCompany.Clone(),
