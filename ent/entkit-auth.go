@@ -20,7 +20,7 @@ func _entkitDefaultValue(value string, defaultValue string) string {
 	return value
 }
 
-func EntkitAuthMiddleware(
+func DemoAuthMiddleware(
 	next http.Handler,
 	keycloakHost string,
 	keycloakRealm string,
@@ -45,7 +45,7 @@ func EntkitAuthMiddleware(
 	})
 }
 
-func EntkitAuthGinMiddleware(
+func DemoAuthGinMiddleware(
 	keycloakHost string,
 	keycloakRealm string,
 	keycloakBackendClientID string,
@@ -140,8 +140,8 @@ func (e DemoScope) String() string {
 	}
 }
 
-func EntkitAuthorizeByResource(ctx context.Context, resource DemoResource, scope DemoScope) error {
-	authContext, err := EntkitAuthContextFromRequestContext(ctx)
+func DemoAuthorizeByResource(ctx context.Context, resource DemoResource, scope DemoScope) error {
+	authContext, err := DemoAuthContextFromRequestContext(ctx)
 	if err != nil {
 		return err
 	}
@@ -162,7 +162,171 @@ func EntkitAuthorizeByResource(ctx context.Context, resource DemoResource, scope
 	return nil
 }
 
-func EntkitAuthContextFromRequestContext(ctx context.Context) (*entkit.AuthContext, error) {
+func DemoEnforceCompanyRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCompanyResource, DemoReadScope)
+}
+
+func DemoEnforceCompanyCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCompanyResource, DemoCreateScope)
+}
+
+func DemoEnforceCompanyUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCompanyResource, DemoUpdateScope)
+}
+
+func DemoEnforceCompanyDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCompanyResource, DemoDeleteScope)
+}
+
+func DemoEnforceCountryRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCountryResource, DemoReadScope)
+}
+
+func DemoEnforceCountryCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCountryResource, DemoCreateScope)
+}
+
+func DemoEnforceCountryUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCountryResource, DemoUpdateScope)
+}
+
+func DemoEnforceCountryDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoCountryResource, DemoDeleteScope)
+}
+
+func DemoEnforceEmailRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoEmailResource, DemoReadScope)
+}
+
+func DemoEnforceEmailCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoEmailResource, DemoCreateScope)
+}
+
+func DemoEnforceEmailUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoEmailResource, DemoUpdateScope)
+}
+
+func DemoEnforceEmailDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoEmailResource, DemoDeleteScope)
+}
+
+func DemoEnforceImageRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoImageResource, DemoReadScope)
+}
+
+func DemoEnforceImageCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoImageResource, DemoCreateScope)
+}
+
+func DemoEnforceImageUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoImageResource, DemoUpdateScope)
+}
+
+func DemoEnforceImageDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoImageResource, DemoDeleteScope)
+}
+
+func DemoEnforceLocationRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoLocationResource, DemoReadScope)
+}
+
+func DemoEnforceLocationCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoLocationResource, DemoCreateScope)
+}
+
+func DemoEnforceLocationUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoLocationResource, DemoUpdateScope)
+}
+
+func DemoEnforceLocationDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoLocationResource, DemoDeleteScope)
+}
+
+func DemoEnforcePhoneRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoPhoneResource, DemoReadScope)
+}
+
+func DemoEnforcePhoneCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoPhoneResource, DemoCreateScope)
+}
+
+func DemoEnforcePhoneUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoPhoneResource, DemoUpdateScope)
+}
+
+func DemoEnforcePhoneDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoPhoneResource, DemoDeleteScope)
+}
+
+func DemoEnforceProductRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoProductResource, DemoReadScope)
+}
+
+func DemoEnforceProductCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoProductResource, DemoCreateScope)
+}
+
+func DemoEnforceProductUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoProductResource, DemoUpdateScope)
+}
+
+func DemoEnforceProductDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoProductResource, DemoDeleteScope)
+}
+
+func DemoEnforceProductMyCustomActionButton(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoProductResource, DemoMyCustomActionButtonScope)
+}
+
+func DemoEnforceVendorRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoVendorResource, DemoReadScope)
+}
+
+func DemoEnforceVendorCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoVendorResource, DemoCreateScope)
+}
+
+func DemoEnforceVendorUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoVendorResource, DemoUpdateScope)
+}
+
+func DemoEnforceVendorDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoVendorResource, DemoDeleteScope)
+}
+
+func DemoEnforceWarehouseRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWarehouseResource, DemoReadScope)
+}
+
+func DemoEnforceWarehouseCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWarehouseResource, DemoCreateScope)
+}
+
+func DemoEnforceWarehouseUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWarehouseResource, DemoUpdateScope)
+}
+
+func DemoEnforceWarehouseDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWarehouseResource, DemoDeleteScope)
+}
+
+func DemoEnforceWebsiteRead(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWebsiteResource, DemoReadScope)
+}
+
+func DemoEnforceWebsiteCreate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWebsiteResource, DemoCreateScope)
+}
+
+func DemoEnforceWebsiteUpdate(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWebsiteResource, DemoUpdateScope)
+}
+
+func DemoEnforceWebsiteDelete(ctx context.Context) error {
+	return DemoAuthorizeByResource(ctx, DemoWebsiteResource, DemoDeleteScope)
+}
+
+func DemoAuthContextFromRequestContext(ctx context.Context) (*entkit.AuthContext, error) {
 	val := ctx.Value(entkit.AuthContextKey)
 	if val == nil {
 		err := fmt.Errorf("could not retrieve AuthContext")

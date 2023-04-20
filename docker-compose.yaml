@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  refine-project:
+    profiles: [ "app" ]
+    image: ghcr.io/entkit/demo-my-server:latest
+    command: [ "entkit serve refine-project" ]
+    depends_on:
+      - download-db-curl
+    environment:
+      DB_DSN: file:data/demo.db?mode=rwc&cache=shared&_fk=1
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+      KEYCLOAK_BACKEND_CLIENT_ID: ${KEYCLOAK_BACKEND_CLIENT_ID}
+      KEYCLOAK_BACKEND_CLIENT_SECRET: ${KEYCLOAK_BACKEND_CLIENT_SECRET}
+      GRAPHQL_URL: ${GRAPHQL_URL}
+      UNION_SERVER: true
+    ports:
+      - "8081:80"
+    volumes:
+      - data:/data
+
+  download-db-curl:
+    profiles: [ "app" ]
+    user: root
+    image: curlimages/curl:8.00.1
+    volumes:
+      - data:/data
+    command: ["curl", "-o", "/data/demo.db", "https://raw.githubusercontent.com/entkit/entkit-demo/main/runtime/ent/demo.db"]
+
+  keycloak:
+    command: [ "start-dev" ]
+    image: quay.io/keycloak/keycloak:21.0.0
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    profiles: [ "service" ]
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data/
+volumes:
+  data:
+  keycloak_data:

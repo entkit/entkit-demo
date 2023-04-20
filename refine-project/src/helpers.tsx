@@ -13,4 +13,4 @@
 // to the project: https://entkit.com
 // ---------------------------------------------------------
 
-export {};
+export {}

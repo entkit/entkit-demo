@@ -14,10 +14,10 @@
 // ---------------------------------------------------------
 
 import React from "react";
-import { createRoot } from "react-dom/client";
+import {createRoot} from "react-dom/client";
 import App from "./app";
 import Keycloak from "keycloak-js";
-import { ReactKeycloakProvider } from "@react-keycloak/web";
+import {ReactKeycloakProvider} from "@react-keycloak/web";
 
 declare global {
     interface Window {
@@ -25,24 +25,26 @@ declare global {
     }
 }
 
-fetch("/environment.json")
+fetch("environment.json")
     .then((res) => res.json())
     .then((data) => {
         window.environment = data;
     })
-    .then(() => {
+    .then(()=>{
         const keycloak = new Keycloak(window.environment.auth.keycloak);
         const container = document.getElementById("root") as HTMLElement;
         const root = createRoot(container);
 
         root.render(
-            <ReactKeycloakProvider authClient={keycloak}>
+            <ReactKeycloakProvider
+                authClient={keycloak}
+                >
                 <React.StrictMode>
-                    <App />
+                    <App/>
                 </React.StrictMode>
-            </ReactKeycloakProvider>,
+            </ReactKeycloakProvider>
         );
-    });
+    })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
@@ -51,15 +53,13 @@ import { ReportHandler } from "web-vitals";
 
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
     if (onPerfEntry && onPerfEntry instanceof Function) {
-        import("web-vitals").then(
-            ({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-                getCLS(onPerfEntry);
-                getFID(onPerfEntry);
-                getFCP(onPerfEntry);
-                getLCP(onPerfEntry);
-                getTTFB(onPerfEntry);
-            },
-        );
+        import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+            getCLS(onPerfEntry);
+            getFID(onPerfEntry);
+            getFCP(onPerfEntry);
+            getLCP(onPerfEntry);
+            getTTFB(onPerfEntry);
+        });
     }
 };
 reportWebVitals();

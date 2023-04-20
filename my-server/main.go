@@ -12,7 +12,6 @@
 // how to modify the library, extend its functionality or contribute
 // to the project: https://entkit.com
 // ---------------------------------------------------------
-
 package main
 
 import (
@@ -32,7 +31,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"regexp"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -150,6 +149,19 @@ func main() {
 			Name:    "serve",
 			Aliases: []string{"s"},
 			Flags: []cli.Flag{
+				&cli.BoolFlag{
+					Name:    "UnionServer",
+					Usage:   "Run API server with frontend server together",
+					Aliases: []string{"union-server", "u"},
+					Value:   false,
+					EnvVars: []string{"UNION_SERVER"},
+				},
+				&cli.BoolFlag{
+					Name:    "HTTPS",
+					Aliases: []string{"https", "ssl"},
+					Value:   false,
+					EnvVars: []string{"HTTPS"},
+				},
 				&cli.StringFlag{
 					Name:    "DatabaseDriver",
 					Aliases: []string{"db-driver"},
@@ -165,14 +177,37 @@ func main() {
 				&cli.StringFlag{
 					Name:    "Host",
 					Aliases: []string{"host"},
-					Value:   ":80",
+					Value:   "localhost",
 					EnvVars: []string{"HOST"},
+				},
+				&cli.IntFlag{
+					Name:    "Port",
+					Aliases: []string{"port", "p"},
+					Value:   80,
+					EnvVars: []string{"PORT"},
+				},
+				&cli.StringFlag{
+					Name:    "AppPath",
+					Aliases: []string{"app-path"},
+					Value:   "/",
+					EnvVars: []string{"APP_PATH"},
 				},
 				&cli.StringFlag{
 					Name:    "GraphqlURL",
 					Aliases: []string{"graphql-url", "gql-url"},
-					Value:   "http://localhost/query",
 					EnvVars: []string{"GRAPHQL_URL"},
+				},
+				&cli.StringFlag{
+					Name:    "GraphqlURIPath",
+					Aliases: []string{"graphql-uri-path", "gql-uri-path"},
+					Value:   "/query",
+					EnvVars: []string{"GRAPHQL_URI_PATH"},
+				},
+				&cli.StringFlag{
+					Name:    "GraphqlPlaygroundURIPath",
+					Aliases: []string{"graphql-playground-uri-path", "gql-playground-uri-path"},
+					Value:   "/playground",
+					EnvVars: []string{"GRAPHQL_PLAYGROUND_URI_PATH"},
 				},
 				&cli.StringFlag{
 					Name:    "KeycloakHost",
@@ -218,7 +253,6 @@ func main() {
 						}
 
 						providedLevel := context.String("LogLevel")
-
 						level, err := zapcore.ParseLevel(providedLevel)
 						if err != nil {
 							log.Fatal("unsupported log level", zap.String("provided", providedLevel))
@@ -228,6 +262,24 @@ func main() {
 						defer log.Sync()
 
 						log.Info("starting server...")
+						isHttps := context.Bool("HTTPS")
+						host := context.String("Host")
+						port := ":" + strconv.Itoa(context.Int("Port"))
+						appPath := strings.Trim(context.String("AppPath"), "/")
+						isUnionServer := context.Bool("UnionServer")
+						gqlURL := context.String("GraphqlURL")
+						gqlURIPath := context.String("GraphqlURIPath")
+						gqlPlaygroundURIPath := context.String("GraphqlPlaygroundURIPath")
+						proto := "http://"
+						appUrl := proto + "localhost" + port + "/" + appPath + "/"
+
+						if isHttps {
+							proto = "https://"
+						}
+
+						if gqlURL == "" {
+							gqlURL += proto + host + port + gqlURIPath
+						}
 
 						start := time.Now()
 						client, err := InitClient(context)
@@ -238,11 +290,6 @@ func main() {
 
 						// Up MUX server
 						mux := http.NewServeMux()
-
-						srv := handler.NewDefaultServer(NewSchema(client))
-						srv.Use(entgql.Transactioner{TxOpener: client})
-						//srv.Use(&debug.Tracer{})
-						mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
 						var (
 							keycloakHost                = context.String("KeycloakHost")
 							keycloakRealm               = context.String("KeycloakRealm")
@@ -251,18 +298,28 @@ func main() {
 							keycloakBackendClientSecret = context.String("KeycloakBackendClientSecret")
 						)
 
-						mux.Handle("/query", ent.EntkitAuthMiddleware(
-							srv,
-							keycloakHost,
-							keycloakRealm,
-							keycloakBackendClientID,
-							keycloakBackendClientSecret,
-						))
+						log.Info("Union server", zap.Bool("enabled", isUnionServer), zap.String("graphql-url", gqlURL))
 
-						mux.HandleFunc("/environment.json", func(writer http.ResponseWriter, request *http.Request) {
+						if isUnionServer {
+							srv := handler.NewDefaultServer(NewSchema(client))
+							srv.Use(entgql.Transactioner{TxOpener: client})
+							//srv.Use(&debug.Tracer{})
+							mux.HandleFunc(gqlPlaygroundURIPath, playground.Handler("Example", gqlURIPath))
+
+							mux.Handle(gqlURIPath, ent.DemoAuthMiddleware(
+								srv,
+								keycloakHost,
+								keycloakRealm,
+								keycloakBackendClientID,
+								keycloakBackendClientSecret,
+							))
+						}
+
+						mux.HandleFunc("/"+appPath+"/environment.json", func(writer http.ResponseWriter, request *http.Request) {
 							b, _ := json.Marshal(entkit.Environment{
 								Meta:       map[string]any{},
-								GraphqlURL: context.String("GraphqlURL"),
+								GraphqlURL: gqlURL,
+								AppPath:    "/" + appPath + "/",
 								Auth: &entkit.AuthEnvironment{
 									Keycloak: &entkit.KeycloakEnvironment{
 										URL:             keycloakHost,
@@ -275,183 +332,79 @@ func main() {
 							writer.Write(b)
 						})
 
-						if os.Getenv("SKIP_EMBED_SERVER") != "true" {
-							mux.HandleFunc(
-								"/",
-								func(w http.ResponseWriter, r *http.Request) {
-									if r.Method != "GET" {
-										http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+						mux.HandleFunc(
+							"/"+appPath+"/",
+							func(w http.ResponseWriter, r *http.Request) {
+								if r.Method != "GET" {
+									http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+									return
+								}
+								start := time.Now()
+								log.Debug("request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
+
+								path := filepath.Clean(r.URL.Path)
+								path = strings.TrimPrefix(path, "/"+appPath+"/")
+
+								staticPaths := []string{"static", "images", "favicon.ico", "asset-manifest.json", "environment.json"}
+								isStaticPath := false
+								for _, v := range staticPaths {
+									if path == v || strings.HasPrefix(path, v+"/") {
+										isStaticPath = true
+										continue
+									}
+								}
+
+								if isStaticPath {
+									w.Header().Set("Cache-Control", "public, max-age=31536000")
+								} else {
+									path = "index.html"
+								}
+
+								file, err := RefineProjectFS.Open(filepath.Join("refine-project", path))
+								if err != nil {
+									if os.IsNotExist(err) {
+										log.Warn("file not found", zap.String("path", path), zap.String("reason", err.Error()))
+										http.NotFound(w, r)
 										return
 									}
-									start := time.Now()
-									log.Debug("request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
+									log.Warn("file cannot be read", zap.String("path", path), zap.String("reason", err.Error()))
+									http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+									return
+								}
 
-									path := filepath.Clean(r.URL.Path)
-									path = strings.TrimPrefix(path, "/")
+								contentType := mime.TypeByExtension(filepath.Ext(path))
+								w.Header().Set("Content-Type", contentType)
 
-									rePattern := `^asset-manifest\.json|^environment\.json|^favicon\.ico|^images/.*|^static/.*`
-									isStaticPath, _ := regexp.MatchString(rePattern, path)
-
-									if isStaticPath {
-										w.Header().Set("Cache-Control", "public, max-age=31536000")
-									} else {
-										path = "index.html"
-									}
-
-									file, err := RefineProjectFS.Open(filepath.Join("refine-project", path))
+								var n int64
+								if path == "index.html" {
+									buf := new(strings.Builder)
+									_, err := io.Copy(buf, file)
 									if err != nil {
-										if os.IsNotExist(err) {
-											log.Warn("file not found", zap.String("path", path), zap.String("reason", err.Error()))
-											http.NotFound(w, r)
-											return
-										}
-										log.Warn("file cannot be read", zap.String("path", path), zap.String("reason", err.Error()))
-										http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-										return
+										panic(err)
 									}
-
-									contentType := mime.TypeByExtension(filepath.Ext(path))
-									w.Header().Set("Content-Type", contentType)
-
+									// check errors
+									newStr := strings.Replace(buf.String(), "%PUBLIC_URL%", "/"+appPath+"/", -1)
+									for _, sp := range staticPaths {
+										newStr = strings.Replace(newStr, "/"+sp, "/"+appPath+"/"+sp, -1)
+									}
+									r := strings.NewReader(newStr)
+									w.Header().Set("Content-Length", fmt.Sprintf("%d", r.Size()))
+									n, _ = io.Copy(w, r)
+								} else {
 									stat, err := file.Stat()
 									if err == nil && stat.Size() > 0 {
 										w.Header().Set("Content-Length", fmt.Sprintf("%d", stat.Size()))
 									}
+									n, _ = io.Copy(w, file)
+								}
 
-									n, _ := io.Copy(w, file)
-									log.Debug("serving file", zap.String("path", path), zap.Int64("bytes", n))
-									log.Info("request handled", zap.String("path", r.URL.Path), zap.Duration("duration", time.Since(start)))
-								},
-							)
-						}
-						host := context.String("Host")
-						log.Info("server started", zap.String("address", host))
-						if err := http.ListenAndServe(host, mux); err != nil {
-							log.Fatal("server failed", zap.String("reason", err.Error()))
-						}
-						return nil
-					},
-				},
-				{
-					Name: "other-refine-project",
-					Action: func(context *cli.Context) error {
-						var log *zap.Logger
-						if context.Bool("DevMode") {
-							log, _ = zap.NewDevelopment()
-						} else {
-							log, _ = zap.NewProduction()
-						}
-
-						providedLevel := context.String("LogLevel")
-
-						level, err := zapcore.ParseLevel(providedLevel)
-						if err != nil {
-							log.Fatal("unsupported log level", zap.String("provided", providedLevel))
-						}
-						log = log.WithOptions(zap.IncreaseLevel(level))
-
-						defer log.Sync()
-
-						log.Info("starting server...")
-
-						start := time.Now()
-						client, err := InitClient(context)
-						if err != nil {
-							log.Fatal("failed to start ent client", zap.String("reason", err.Error()))
-						}
-						log.Info("ent client initialized", zap.Duration("duration", time.Since(start)))
-
-						// Up MUX server
-						mux := http.NewServeMux()
-
-						srv := handler.NewDefaultServer(NewSchema(client))
-						srv.Use(entgql.Transactioner{TxOpener: client})
-						//srv.Use(&debug.Tracer{})
-						mux.HandleFunc("/playground", playground.Handler("Example", "/query"))
-						var (
-							keycloakHost                = context.String("KeycloakHost")
-							keycloakRealm               = context.String("KeycloakRealm")
-							keycloakFrontendClientID    = context.String("KeycloakFrontendClientID")
-							keycloakBackendClientID     = context.String("KeycloakBackendClientID")
-							keycloakBackendClientSecret = context.String("KeycloakBackendClientSecret")
+								log.Debug("serving file", zap.String("path", path), zap.Int64("bytes", n))
+								log.Info("request handled", zap.String("path", r.URL.Path), zap.Duration("duration", time.Since(start)))
+							},
 						)
 
-						mux.Handle("/query", ent.EntkitAuthMiddleware(
-							srv,
-							keycloakHost,
-							keycloakRealm,
-							keycloakBackendClientID,
-							keycloakBackendClientSecret,
-						))
-
-						mux.HandleFunc("/environment.json", func(writer http.ResponseWriter, request *http.Request) {
-							b, _ := json.Marshal(entkit.Environment{
-								Meta:       map[string]any{},
-								GraphqlURL: context.String("GraphqlURL"),
-								Auth: &entkit.AuthEnvironment{
-									Keycloak: &entkit.KeycloakEnvironment{
-										URL:             keycloakHost,
-										Realm:           keycloakRealm,
-										ClientID:        keycloakFrontendClientID,
-										BackendClientID: keycloakBackendClientID,
-									},
-								},
-							})
-							writer.Write(b)
-						})
-
-						if os.Getenv("SKIP_EMBED_SERVER") != "true" {
-							mux.HandleFunc(
-								"/",
-								func(w http.ResponseWriter, r *http.Request) {
-									if r.Method != "GET" {
-										http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
-										return
-									}
-									start := time.Now()
-									log.Debug("request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
-
-									path := filepath.Clean(r.URL.Path)
-									path = strings.TrimPrefix(path, "/")
-
-									rePattern := `^asset-manifest\.json|^environment\.json|^favicon\.ico|^images/.*|^static/.*`
-									isStaticPath, _ := regexp.MatchString(rePattern, path)
-
-									if isStaticPath {
-										w.Header().Set("Cache-Control", "public, max-age=31536000")
-									} else {
-										path = "index.html"
-									}
-
-									file, err := OtherRefineProjectFS.Open(filepath.Join("other-refine-project", path))
-									if err != nil {
-										if os.IsNotExist(err) {
-											log.Warn("file not found", zap.String("path", path), zap.String("reason", err.Error()))
-											http.NotFound(w, r)
-											return
-										}
-										log.Warn("file cannot be read", zap.String("path", path), zap.String("reason", err.Error()))
-										http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-										return
-									}
-
-									contentType := mime.TypeByExtension(filepath.Ext(path))
-									w.Header().Set("Content-Type", contentType)
-
-									stat, err := file.Stat()
-									if err == nil && stat.Size() > 0 {
-										w.Header().Set("Content-Length", fmt.Sprintf("%d", stat.Size()))
-									}
-
-									n, _ := io.Copy(w, file)
-									log.Debug("serving file", zap.String("path", path), zap.Int64("bytes", n))
-									log.Info("request handled", zap.String("path", r.URL.Path), zap.Duration("duration", time.Since(start)))
-								},
-							)
-						}
-						host := context.String("Host")
-						log.Info("server started", zap.String("address", host))
-						if err := http.ListenAndServe(host, mux); err != nil {
+						log.Info("server started", zap.String("address", appUrl))
+						if err := http.ListenAndServe(port, mux); err != nil {
 							log.Fatal("server failed", zap.String("reason", err.Error()))
 						}
 						return nil

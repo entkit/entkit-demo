@@ -1,5 +1,5 @@
 {
-  "graphqlUrl": "http://localhost/query",
+  "appPath": "/",
   "auth": {
     "keycloak": {
       "url": "http://localhost:8080",

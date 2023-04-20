@@ -13,12 +13,13 @@
 // to the project: https://entkit.com
 // ---------------------------------------------------------
 
-import { Col, Grid, Layout as AntdLayout, Row } from "antd";
-import { SearchComponent } from "search-component";
+import {Col, Grid, Layout as AntdLayout, Row} from "antd";
+import {SearchComponent} from "search-component";
 
-const { Header: AntdHeader } = AntdLayout;
+const {Header: AntdHeader} = AntdLayout;
 
-const { useBreakpoint } = Grid;
+const {useBreakpoint} = Grid;
+
 
 interface IOptionGroup {
     value: string;
@@ -35,21 +36,27 @@ export const Header: React.FC = () => {
 
     return (
         <AntdHeader
-            style={{
-                padding: "0 24px",
-                background: "white",
-            }}
+            style={
+                {
+                    padding: "0 24px",
+                    background: "white",
+                }
+            }
         >
             <Row
                 align="middle"
-                style={{
-                    justifyContent: screens.sm ? "space-between" : "end",
-                }}
+                style={
+                    {
+                        justifyContent: screens.sm ? "space-between" : "end",
+                    }
+                }
             >
                 <Col xs={0} sm={12}>
-                    <SearchComponent />
+                    <SearchComponent/>
                 </Col>
-                <Col></Col>
+                <Col>
+
+                </Col>
             </Row>
         </AntdHeader>
     );

@@ -119,7 +119,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: countriesCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -137,7 +137,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: phonesCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -155,7 +155,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: emailsCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -173,7 +173,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: websitesCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -191,7 +191,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: locationsCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -209,7 +209,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: logo_imageCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -227,7 +227,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: cover_imageCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -247,7 +247,7 @@ export const CompanyEdit: React.FC = () => {
                 cursors: gallery_imagesCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -416,7 +416,7 @@ export const CountryEdit: React.FC = () => {
                 cursors: companiesCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -434,7 +434,7 @@ export const CountryEdit: React.FC = () => {
                 cursors: phonesCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -452,7 +452,7 @@ export const CountryEdit: React.FC = () => {
                 cursors: emailsCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -470,7 +470,7 @@ export const CountryEdit: React.FC = () => {
                 cursors: websitesCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -488,7 +488,7 @@ export const CountryEdit: React.FC = () => {
                 cursors: locationsCursors,
                 fields: ["id", "title"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "title",
                     operator: "contains",
@@ -585,7 +585,7 @@ export const EmailEdit: React.FC = () => {
                 cursors: companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -603,7 +603,7 @@ export const EmailEdit: React.FC = () => {
                 cursors: countryCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -690,7 +690,7 @@ export const ImageEdit: React.FC = () => {
                 cursors: gallery_companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -708,7 +708,7 @@ export const ImageEdit: React.FC = () => {
                 cursors: logo_companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -728,7 +728,7 @@ export const ImageEdit: React.FC = () => {
                 cursors: cover_companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -828,7 +828,7 @@ export const LocationEdit: React.FC = () => {
                 cursors: companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -846,7 +846,7 @@ export const LocationEdit: React.FC = () => {
                 cursors: countryCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -995,7 +995,7 @@ export const PhoneEdit: React.FC = () => {
                 cursors: companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1013,7 +1013,7 @@ export const PhoneEdit: React.FC = () => {
                 cursors: countryCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1110,7 +1110,7 @@ export const ProductEdit: React.FC = () => {
                 cursors: warehouseCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1128,7 +1128,7 @@ export const ProductEdit: React.FC = () => {
                 cursors: vendorCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1273,7 +1273,7 @@ export const VendorEdit: React.FC = () => {
                 cursors: warehousesCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1291,7 +1291,7 @@ export const VendorEdit: React.FC = () => {
                 cursors: productsCursors,
                 fields: ["id", "url"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "url",
                     operator: "contains",
@@ -1377,7 +1377,7 @@ export const WarehouseEdit: React.FC = () => {
                 cursors: productsCursors,
                 fields: ["id", "url"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "url",
                     operator: "contains",
@@ -1395,7 +1395,7 @@ export const WarehouseEdit: React.FC = () => {
                 cursors: vendorCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1498,7 +1498,7 @@ export const WebsiteEdit: React.FC = () => {
                 cursors: companyCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",
@@ -1516,7 +1516,7 @@ export const WebsiteEdit: React.FC = () => {
                 cursors: countryCursors,
                 fields: ["id", "name"],
             },
-            onSearch: (value) => [
+            onSearch: (value: string) => [
                 {
                     field: "name",
                     operator: "contains",

@@ -20,18 +20,11 @@ services:
     build:
         context: ..
         dockerfile: ./my-server/Dockerfile
-    command: [ "entkit serve ${REFINE_PROJECT_EXTRA_ARGS} refine-project"]
+    command: [ "entkit serve ${REFINE_PROJECT_EXTRA_ARGS:-} refine-project"]
     volumes: [ refine_project_runtime:/app/runtime ]
+    profiles: [ "app" ]
     ports:
       - "8081:80"
-  other-refine-project:
-    build:
-        context: ..
-        dockerfile: ./my-server/Dockerfile
-    command: [ "entkit serve ${OTHER_REFINE_PROJECT_EXTRA_ARGS} other-refine-project"]
-    volumes: [ other_refine_project_runtime:/app/runtime ]
-    ports:
-      - "8082:80"
   keycloak:
     command: [ "start-dev" ]
     image: quay.io/keycloak/keycloak:21.0.0
@@ -43,7 +36,7 @@ services:
         KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
         - "8080:8080"
+    profiles: [ "service" ]
 volumes:
   refine_project_runtime:
-  other_refine_project_runtime:
   keycloak_data:
