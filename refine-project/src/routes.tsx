@@ -26,12 +26,13 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import { NavigateToResource, CatchAllNavigate } from "@refinedev/react-router-v6";
 
 export const RoutesBundle: React.FC = ()=>{
+    const loginUrl = window.environment.appPath + "login";
     return <Routes>
         <Route
             path={window.environment.appPath}
             element={
                 <Authenticated
-                    fallback={<CatchAllNavigate to={window.environment.appPath+"/login"} />}
+                    fallback={<CatchAllNavigate to={loginUrl} />}
                 >
                     <ThemedLayoutV2
                         Header={Header}

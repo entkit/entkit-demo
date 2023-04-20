@@ -31,7 +31,6 @@ services:
     volumes:
         - keycloak_data:/opt/keycloak/data/
     environment:
-        PROXY_ADDRESS_FORWARDING: true
         KEYCLOAK_ADMIN: admin
         KEYCLOAK_ADMIN_PASSWORD: admin
     ports:

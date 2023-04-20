@@ -266,12 +266,17 @@ func main() {
 						host := context.String("Host")
 						port := ":" + strconv.Itoa(context.Int("Port"))
 						appPath := strings.Trim(context.String("AppPath"), "/")
+						if appPath == "" {
+							appPath = "/"
+						} else {
+							appPath = "/" + appPath + "/"
+						}
 						isUnionServer := context.Bool("UnionServer")
 						gqlURL := context.String("GraphqlURL")
 						gqlURIPath := context.String("GraphqlURIPath")
 						gqlPlaygroundURIPath := context.String("GraphqlPlaygroundURIPath")
 						proto := "http://"
-						appUrl := proto + "localhost" + port + "/" + appPath + "/"
+						appUrl := proto + "localhost" + port + appPath
 
 						if isHttps {
 							proto = "https://"
@@ -315,11 +320,11 @@ func main() {
 							))
 						}
 
-						mux.HandleFunc("/"+appPath+"/environment.json", func(writer http.ResponseWriter, request *http.Request) {
+						mux.HandleFunc(appPath+"environment.json", func(writer http.ResponseWriter, request *http.Request) {
 							b, _ := json.Marshal(entkit.Environment{
 								Meta:       map[string]any{},
 								GraphqlURL: gqlURL,
-								AppPath:    "/" + appPath + "/",
+								AppPath:    appPath,
 								Auth: &entkit.AuthEnvironment{
 									Keycloak: &entkit.KeycloakEnvironment{
 										URL:             keycloakHost,
@@ -333,7 +338,7 @@ func main() {
 						})
 
 						mux.HandleFunc(
-							"/"+appPath+"/",
+							appPath,
 							func(w http.ResponseWriter, r *http.Request) {
 								if r.Method != "GET" {
 									http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
@@ -343,7 +348,7 @@ func main() {
 								log.Debug("request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
 
 								path := filepath.Clean(r.URL.Path)
-								path = strings.TrimPrefix(path, "/"+appPath+"/")
+								path = strings.TrimPrefix(path, appPath)
 
 								staticPaths := []string{"static", "images", "favicon.ico", "asset-manifest.json", "environment.json"}
 								isStaticPath := false
@@ -382,10 +387,9 @@ func main() {
 									if err != nil {
 										panic(err)
 									}
-									// check errors
-									newStr := strings.Replace(buf.String(), "%PUBLIC_URL%", "/"+appPath+"/", -1)
+									newStr := strings.Replace(buf.String(), "%PUBLIC_URL%", appPath, -1)
 									for _, sp := range staticPaths {
-										newStr = strings.Replace(newStr, "/"+sp, "/"+appPath+"/"+sp, -1)
+										newStr = strings.Replace(newStr, "/"+sp, appPath+sp, -1)
 									}
 									r := strings.NewReader(newStr)
 									w.Header().Set("Content-Length", fmt.Sprintf("%d", r.Size()))
