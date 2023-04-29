@@ -67,6 +67,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.CompanyList />} />
                     <Route path="create" element={<Create.CompanyCreate />} />
                     <Route path="edit/:id" element={<Edit.CompanyEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.CompanyEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="country">
@@ -74,6 +78,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.CountryList />} />
                     <Route path="create" element={<Create.CountryCreate />} />
                     <Route path="edit/:id" element={<Edit.CountryEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.CountryEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="email">
@@ -81,6 +89,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.EmailList />} />
                     <Route path="create" element={<Create.EmailCreate />} />
                     <Route path="edit/:id" element={<Edit.EmailEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.EmailEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="image">
@@ -88,6 +100,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.ImageList />} />
                     <Route path="create" element={<Create.ImageCreate />} />
                     <Route path="edit/:id" element={<Edit.ImageEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.ImageEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="location">
@@ -98,6 +114,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.LocationList />} />
                     <Route path="create" element={<Create.LocationCreate />} />
                     <Route path="edit/:id" element={<Edit.LocationEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.LocationEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="phone">
@@ -105,6 +125,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.PhoneList />} />
                     <Route path="create" element={<Create.PhoneCreate />} />
                     <Route path="edit/:id" element={<Edit.PhoneEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.PhoneEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="product">
@@ -112,6 +136,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.ProductList />} />
                     <Route path="create" element={<Create.ProductCreate />} />
                     <Route path="edit/:id" element={<Edit.ProductEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.ProductEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="vendor">
@@ -119,6 +147,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.VendorList />} />
                     <Route path="create" element={<Create.VendorCreate />} />
                     <Route path="edit/:id" element={<Edit.VendorEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.VendorEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="warehouse">
@@ -129,6 +161,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.WarehouseList />} />
                     <Route path="create" element={<Create.WarehouseCreate />} />
                     <Route path="edit/:id" element={<Edit.WarehouseEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.WarehouseEdgesDiagram />}
+                    />
                 </Route>
 
                 <Route path="website">
@@ -136,6 +172,10 @@ export const RoutesBundle: React.FC = () => {
                     <Route index element={<List.WebsiteList />} />
                     <Route path="create" element={<Create.WebsiteCreate />} />
                     <Route path="edit/:id" element={<Edit.WebsiteEdit />} />
+                    <Route
+                        path="edges/:id"
+                        element={<EdgesDiagram.WebsiteEdgesDiagram />}
+                    />
                 </Route>
             </Route>
 

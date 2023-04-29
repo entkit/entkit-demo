@@ -102,6 +102,8 @@ func (Location) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("PushpinOutlined"),
-		entkit.Actions(entkit.DefaultActions...),
+		entkit.Actions(
+			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		),
 	}
 }

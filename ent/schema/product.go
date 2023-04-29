@@ -101,6 +101,7 @@ func (Product) Annotations() []schema.Annotation {
 		entkit.Actions(
 			append(
 				entkit.DefaultActions,
+				entkit.EdgesDiagramAction,
 				entkit.NewAction("MyCustomActionButton",
 					entkit.ActionWithOperation(
 						entkit.NewOperation("MyCustomActionButton"),

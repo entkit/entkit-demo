@@ -267,6 +267,40 @@ export const CompanyDeleteAction: React.FC<CompanyDeleteActionProps> = ({
     ) : null;
 };
 
+export type CompanyEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const CompanyEdgesDiagramAction: React.FC<
+    CompanyEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Company?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "com/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type CountryShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -499,6 +533,40 @@ export const CountryDeleteAction: React.FC<CountryDeleteActionProps> = ({
                 {hideText || "Delete"}
             </Antd.Button>
         </Popconfirm>
+    ) : null;
+};
+
+export type CountryEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const CountryEdgesDiagramAction: React.FC<
+    CountryEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Country?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "country/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
     ) : null;
 };
 
@@ -737,6 +805,40 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
     ) : null;
 };
 
+export type EmailEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const EmailEdgesDiagramAction: React.FC<
+    EmailEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Email?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "email/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type ImageShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -969,6 +1071,40 @@ export const ImageDeleteAction: React.FC<ImageDeleteActionProps> = ({
                 {hideText || "Delete"}
             </Antd.Button>
         </Popconfirm>
+    ) : null;
+};
+
+export type ImageEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const ImageEdgesDiagramAction: React.FC<
+    ImageEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Image?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "image/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
     ) : null;
 };
 
@@ -1207,6 +1343,40 @@ export const LocationDeleteAction: React.FC<LocationDeleteActionProps> = ({
     ) : null;
 };
 
+export type LocationEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const LocationEdgesDiagramAction: React.FC<
+    LocationEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Location?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "location/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type PhoneShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -1442,6 +1612,40 @@ export const PhoneDeleteAction: React.FC<PhoneDeleteActionProps> = ({
     ) : null;
 };
 
+export type PhoneEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const PhoneEdgesDiagramAction: React.FC<
+    PhoneEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Phone?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "phone/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type ProductShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -1674,6 +1878,40 @@ export const ProductDeleteAction: React.FC<ProductDeleteActionProps> = ({
                 {hideText || "Delete"}
             </Antd.Button>
         </Popconfirm>
+    ) : null;
+};
+
+export type ProductEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const ProductEdgesDiagramAction: React.FC<
+    ProductEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Product?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "product/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
     ) : null;
 };
 
@@ -1996,6 +2234,40 @@ export const VendorDeleteAction: React.FC<VendorDeleteActionProps> = ({
     ) : null;
 };
 
+export type VendorEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const VendorEdgesDiagramAction: React.FC<
+    VendorEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Vendor?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "vendor/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type WarehouseShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -2231,6 +2503,40 @@ export const WarehouseDeleteAction: React.FC<WarehouseDeleteActionProps> = ({
     ) : null;
 };
 
+export type WarehouseEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const WarehouseEdgesDiagramAction: React.FC<
+    WarehouseEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Warehouse?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "warehouse/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
+    ) : null;
+};
+
 export type WebsiteShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -2463,5 +2769,39 @@ export const WebsiteDeleteAction: React.FC<WebsiteDeleteActionProps> = ({
                 {hideText || "Delete"}
             </Antd.Button>
         </Popconfirm>
+    ) : null;
+};
+
+export type WebsiteEdgesDiagramActionProps = ButtonProps &
+    RefineButtonCommonProps &
+    RefineButtonSingleProps &
+    RefineButtonLinkingProps & {
+        recordItemIDs: Type.DemoID[];
+        onSuccess?: (data: any) => void;
+    };
+
+export const WebsiteEdgesDiagramAction: React.FC<
+    WebsiteEdgesDiagramActionProps
+> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
+    const { data: permissions } = usePermissions<Record<string, string[]>>();
+    const can = Boolean(permissions?.Website?.includes("Read"));
+    const additionalProps = null || {};
+    const Link = useLink();
+
+    return can ? (
+        <Link
+            to={
+                window.environment.appPath +
+                "website/edges/:id".replace(":id", String(recordItemIDs[0]))
+            }
+        >
+            <Antd.Button
+                icon={<AntdIcons.ClusterOutlined />}
+                {...additionalProps}
+                {...props}
+            >
+                {hideText || "Edges Diagram"}
+            </Antd.Button>
+        </Link>
     ) : null;
 };

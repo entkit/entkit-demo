@@ -265,6 +265,10 @@ export const CompanyEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.CompanyShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.CompanyEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -515,6 +519,10 @@ export const CountryEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.CountryShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.CountryEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -639,6 +647,10 @@ export const EmailEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.EmailShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.EmailEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -773,6 +785,10 @@ export const ImageEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.ImageShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.ImageEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -900,6 +916,10 @@ export const LocationEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.LocationShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.LocationEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -1076,6 +1096,10 @@ export const PhoneEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.PhoneShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.PhoneEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -1200,6 +1224,10 @@ export const ProductEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.ProductShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.ProductEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -1372,6 +1400,10 @@ export const VendorEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.VendorShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.VendorEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >
@@ -1485,6 +1517,10 @@ export const WarehouseEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.WarehouseShowAction
+                        recordItemIDs={id ? [id] : []}
+                    />
+
+                    <Action.WarehouseEdgesDiagramAction
                         recordItemIDs={id ? [id] : []}
                     />
                 </>
@@ -1617,6 +1653,10 @@ export const WebsiteEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.WebsiteShowAction recordItemIDs={id ? [id] : []} />
+
+                    <Action.WebsiteEdgesDiagramAction
+                        recordItemIDs={id ? [id] : []}
+                    />
                 </>
             )}
         >

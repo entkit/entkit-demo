@@ -62,6 +62,8 @@ func (Website) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("LinkOutlined"),
-		entkit.Actions(entkit.DefaultActions...),
+		entkit.Actions(
+			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		),
 	}
 }

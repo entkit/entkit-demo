@@ -70,6 +70,8 @@ func (Company) Annotations() []schema.Annotation {
 		entkit.Icon("ShopOutlined"),
 		entkit.IndexRoute(),
 		entkit.RoutePath("com"),
-		entkit.Actions(entkit.DefaultActions...),
+		entkit.Actions(
+			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		),
 	}
 }

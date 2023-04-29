@@ -189,6 +189,10 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
                     <Action.CompanyEditAction recordItemIDs={[record.id]} />
 
                     <Action.CompanyDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.CompanyEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -549,6 +553,10 @@ export const CountryShow: React.FC<CountryShowProps> = ({
                     <Action.CountryEditAction recordItemIDs={[record.id]} />
 
                     <Action.CountryDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.CountryEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -775,6 +783,10 @@ export const EmailShow: React.FC<EmailShowProps> = ({
                     <Action.EmailEditAction recordItemIDs={[record.id]} />
 
                     <Action.EmailDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.EmailEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -863,6 +875,10 @@ export const ImageShow: React.FC<ImageShowProps> = ({
                     <Action.ImageEditAction recordItemIDs={[record.id]} />
 
                     <Action.ImageDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.ImageEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -960,6 +976,10 @@ export const LocationShow: React.FC<LocationShowProps> = ({
                     <Action.LocationEditAction recordItemIDs={[record.id]} />
 
                     <Action.LocationDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.LocationEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -1063,6 +1083,10 @@ export const PhoneShow: React.FC<PhoneShowProps> = ({
                     <Action.PhoneEditAction recordItemIDs={[record.id]} />
 
                     <Action.PhoneDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.PhoneEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -1163,6 +1187,10 @@ export const ProductShow: React.FC<ProductShowProps> = ({
                     <Action.ProductEditAction recordItemIDs={[record.id]} />
 
                     <Action.ProductDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.ProductEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -1305,6 +1333,10 @@ export const VendorShow: React.FC<VendorShowProps> = ({
                     <Action.VendorEditAction recordItemIDs={[record.id]} />
 
                     <Action.VendorDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.VendorEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -1469,6 +1501,10 @@ export const WarehouseShow: React.FC<WarehouseShowProps> = ({
                     <Action.WarehouseEditAction recordItemIDs={[record.id]} />
 
                     <Action.WarehouseDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.WarehouseEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}
@@ -1591,6 +1627,10 @@ export const WebsiteShow: React.FC<WebsiteShowProps> = ({
                     <Action.WebsiteEditAction recordItemIDs={[record.id]} />
 
                     <Action.WebsiteDeleteAction recordItemIDs={[record.id]} />
+
+                    <Action.WebsiteEdgesDiagramAction
+                        recordItemIDs={[record.id]}
+                    />
                 </>
             )}
             {...showProps}

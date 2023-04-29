@@ -65,6 +65,8 @@ func (Phone) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("PhoneOutlined"),
-		entkit.Actions(entkit.DefaultActions...),
+		entkit.Actions(
+			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		),
 	}
 }

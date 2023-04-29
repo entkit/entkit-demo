@@ -59,6 +59,8 @@ func (Country) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("GlobalOutlined"),
-		entkit.Actions(entkit.DefaultActions...),
+		entkit.Actions(
+			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		),
 	}
 }
