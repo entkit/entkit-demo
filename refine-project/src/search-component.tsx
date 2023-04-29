@@ -13,10 +13,10 @@
 // to the project: https://entkit.com
 // ---------------------------------------------------------
 
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Typography, Avatar, AutoComplete, Input } from "antd";
 import { useList, useLink } from "@refinedev/core";
-import * as Interfaces from "./typedefs"
+import * as Interfaces from "./typedefs";
 import debounce from "lodash/debounce";
 import { FileImageOutlined, SearchOutlined } from "@ant-design/icons";
 
@@ -39,95 +39,105 @@ export const SearchComponent: React.FC = () => {
 
     const renderTitle = (title: string) => (
         <Typography.Title>
-            <Typography.Text style={
-                { fontSize: "16px" }
-            }>{title}</Typography.Text>
-            
+            <Typography.Text style={{ fontSize: "16px" }}>
+                {title}
+            </Typography.Text>
         </Typography.Title>
     );
 
-    const renderItem = (title: string, imageUrl: string|null, link: string) => ({
+    const renderItem = (
+        title: string,
+        imageUrl: string | null,
+        link: string,
+    ) => ({
         value: title,
         key: link,
         label: (
-            <Link key={title+link} to={link} style={
-                { display: "flex", alignItems: "center" }
-            }>
-                { imageUrl ? <Avatar size={48} src={imageUrl} style={
-                    { minWidth: "48px" }
-                } /> : <FileImageOutlined style={ {fontSize: '48px'} } />}
-                <Text style={
-                    { marginLeft: "16px" }
-                }>{title}</Text>
+            <Link
+                key={title + link}
+                to={link}
+                style={{ display: "flex", alignItems: "center" }}
+            >
+                {imageUrl ? (
+                    <Avatar
+                        size={48}
+                        src={imageUrl}
+                        style={{ minWidth: "48px" }}
+                    />
+                ) : (
+                    <FileImageOutlined style={{ fontSize: "48px" }} />
+                )}
+                <Text style={{ marginLeft: "16px" }}>{title}</Text>
             </Link>
         ),
-    });const { refetch: refetchCompany } = useList<Interfaces.DemoCompanyInterface>({
-        resource: "company",
-        metaData: {
-            fields: [
-                "id",
-                "name",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        window.environment.appPath + "com/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Company"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    });
+    const { refetch: refetchCompany } =
+        useList<Interfaces.DemoCompanyInterface>({
+            resource: "company",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
             },
-        },
-    });const { refetch: refetchCountry } = useList<Interfaces.DemoCountryInterface>({
-        resource: "country",
-        metaData: {
-            fields: [
-                "id",
-                "name",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        window.environment.appPath + "country/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Country"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            window.environment.appPath +
+                                "com/show/:id".replace(":id", String(item.id)),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Company"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
             },
-        },
-    });const { refetch: refetchEmail } = useList<Interfaces.DemoEmailInterface>({
+        });
+    const { refetch: refetchCountry } =
+        useList<Interfaces.DemoCountryInterface>({
+            resource: "country",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            window.environment.appPath +
+                                "country/show/:id".replace(
+                                    ":id",
+                                    String(item.id),
+                                ),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Country"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchEmail } = useList<Interfaces.DemoEmailInterface>({
         resource: "email",
         metaData: {
-            fields: [
-                "id",
-                "title",
-            ],
+            fields: ["id", "title"],
             searchQuery: value,
         },
         queryOptions: {
@@ -137,7 +147,8 @@ export const SearchComponent: React.FC = () => {
                     renderItem(
                         String(item.title),
                         null,
-                        window.environment.appPath + "email/show/:id".replace(":id", String(item.id)),
+                        window.environment.appPath +
+                            "email/show/:id".replace(":id", String(item.id)),
                     ),
                 );
                 if (storeOptionGroup.length > 0) {
@@ -151,14 +162,11 @@ export const SearchComponent: React.FC = () => {
                 }
             },
         },
-    });const { refetch: refetchImage } = useList<Interfaces.DemoImageInterface>({
+    });
+    const { refetch: refetchImage } = useList<Interfaces.DemoImageInterface>({
         resource: "image",
         metaData: {
-            fields: [
-                "id",
-                "title",
-                "originalURL",
-            ],
+            fields: ["id", "title", "originalURL"],
             searchQuery: value,
         },
         queryOptions: {
@@ -168,7 +176,8 @@ export const SearchComponent: React.FC = () => {
                     renderItem(
                         String(item.title),
                         `${item.originalURL}`,
-                        window.environment.appPath + "image/show/:id".replace(":id", String(item.id)),
+                        window.environment.appPath +
+                            "image/show/:id".replace(":id", String(item.id)),
                     ),
                 );
                 if (storeOptionGroup.length > 0) {
@@ -182,43 +191,44 @@ export const SearchComponent: React.FC = () => {
                 }
             },
         },
-    });const { refetch: refetchLocation } = useList<Interfaces.DemoLocationInterface>({
-        resource: "location",
-        metaData: {
-            fields: [
-                "id",
-                "title",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.title),
-                        null,
-                        window.environment.appPath + "location/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Location"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    });
+    const { refetch: refetchLocation } =
+        useList<Interfaces.DemoLocationInterface>({
+            resource: "location",
+            metaData: {
+                fields: ["id", "title"],
+                searchQuery: value,
             },
-        },
-    });const { refetch: refetchPhone } = useList<Interfaces.DemoPhoneInterface>({
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.title),
+                            null,
+                            window.environment.appPath +
+                                "location/show/:id".replace(
+                                    ":id",
+                                    String(item.id),
+                                ),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Location"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchPhone } = useList<Interfaces.DemoPhoneInterface>({
         resource: "phone",
         metaData: {
-            fields: [
-                "id",
-                "title",
-            ],
+            fields: ["id", "title"],
             searchQuery: value,
         },
         queryOptions: {
@@ -228,7 +238,8 @@ export const SearchComponent: React.FC = () => {
                     renderItem(
                         String(item.title),
                         null,
-                        window.environment.appPath + "phone/show/:id".replace(":id", String(item.id)),
+                        window.environment.appPath +
+                            "phone/show/:id".replace(":id", String(item.id)),
                     ),
                 );
                 if (storeOptionGroup.length > 0) {
@@ -242,44 +253,44 @@ export const SearchComponent: React.FC = () => {
                 }
             },
         },
-    });const { refetch: refetchProduct } = useList<Interfaces.DemoProductInterface>({
-        resource: "product",
-        metaData: {
-            fields: [
-                "id",
-                "name",
-                "image",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        `${item.image}`,
-                        window.environment.appPath + "product/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Product"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
+    });
+    const { refetch: refetchProduct } =
+        useList<Interfaces.DemoProductInterface>({
+            resource: "product",
+            metaData: {
+                fields: ["id", "name", "image"],
+                searchQuery: value,
             },
-        },
-    });const { refetch: refetchVendor } = useList<Interfaces.DemoVendorInterface>({
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            `${item.image}`,
+                            window.environment.appPath +
+                                "product/show/:id".replace(
+                                    ":id",
+                                    String(item.id),
+                                ),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Product"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchVendor } = useList<Interfaces.DemoVendorInterface>({
         resource: "vendor",
         metaData: {
-            fields: [
-                "id",
-                "name",
-            ],
+            fields: ["id", "name"],
             searchQuery: value,
         },
         queryOptions: {
@@ -289,7 +300,8 @@ export const SearchComponent: React.FC = () => {
                     renderItem(
                         String(item.name),
                         null,
-                        window.environment.appPath + "vendor/show/:id".replace(":id", String(item.id)),
+                        window.environment.appPath +
+                            "vendor/show/:id".replace(":id", String(item.id)),
                     ),
                 );
                 if (storeOptionGroup.length > 0) {
@@ -303,72 +315,78 @@ export const SearchComponent: React.FC = () => {
                 }
             },
         },
-    });const { refetch: refetchWarehouse } = useList<Interfaces.DemoWarehouseInterface>({
-        resource: "warehouse",
-        metaData: {
-            fields: [
-                "id",
-                "name",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.name),
-                        null,
-                        window.environment.appPath + "warehouse/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Warehouse"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
-            },
-        },
-    });const { refetch: refetchWebsite } = useList<Interfaces.DemoWebsiteInterface>({
-        resource: "website",
-        metaData: {
-            fields: [
-                "id",
-                "title",
-            ],
-            searchQuery: value,
-        },
-        queryOptions: {
-            enabled: false,
-            onSuccess: (data) => {
-                const storeOptionGroup = data.data.map((item) =>
-                    renderItem(
-                        String(item.title),
-                        null,
-                        window.environment.appPath + "website/show/:id".replace(":id", String(item.id)),
-                    ),
-                );
-                if (storeOptionGroup.length > 0) {
-                    setOptions((prevOptions) => [
-                        ...prevOptions,
-                        {
-                            label: renderTitle("Website"),
-                            options: storeOptionGroup,
-                        },
-                    ]);
-                }
-            },
-        },
     });
+    const { refetch: refetchWarehouse } =
+        useList<Interfaces.DemoWarehouseInterface>({
+            resource: "warehouse",
+            metaData: {
+                fields: ["id", "name"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.name),
+                            null,
+                            window.environment.appPath +
+                                "warehouse/show/:id".replace(
+                                    ":id",
+                                    String(item.id),
+                                ),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Warehouse"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
+    const { refetch: refetchWebsite } =
+        useList<Interfaces.DemoWebsiteInterface>({
+            resource: "website",
+            metaData: {
+                fields: ["id", "title"],
+                searchQuery: value,
+            },
+            queryOptions: {
+                enabled: false,
+                onSuccess: (data) => {
+                    const storeOptionGroup = data.data.map((item) =>
+                        renderItem(
+                            String(item.title),
+                            null,
+                            window.environment.appPath +
+                                "website/show/:id".replace(
+                                    ":id",
+                                    String(item.id),
+                                ),
+                        ),
+                    );
+                    if (storeOptionGroup.length > 0) {
+                        setOptions((prevOptions) => [
+                            ...prevOptions,
+                            {
+                                label: renderTitle("Website"),
+                                options: storeOptionGroup,
+                            },
+                        ]);
+                    }
+                },
+            },
+        });
 
     useEffect(() => {
         setOptions([]);
-        if(value.length < 3){
-            return
+        if (value.length < 3) {
+            return;
         }
         refetchCompany();
         refetchCountry();
@@ -384,24 +402,19 @@ export const SearchComponent: React.FC = () => {
 
     return (
         <AutoComplete
-            style={
-                {
-                    width: "100%",
-                    maxWidth: "550px",
-                }
-            }
+            style={{
+                width: "100%",
+                maxWidth: "550px",
+            }}
             options={options}
             filterOption={false}
-            onSearch={debounce(
-                (value: string) => setValue(value),
-                300,
-            )}
+            onSearch={debounce((value: string) => setValue(value), 300)}
         >
             <Input
                 size="large"
                 placeholder="Search"
-                suffix={<SearchOutlined/>}
+                suffix={<SearchOutlined />}
             />
         </AutoComplete>
-    )
-}
+    );
+};

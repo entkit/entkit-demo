@@ -15,6 +15,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"entgo.io/contrib/entgql"
 	"fmt"
@@ -31,6 +32,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -151,7 +153,7 @@ func main() {
 			Flags: []cli.Flag{
 				&cli.BoolFlag{
 					Name:    "UnionServer",
-					Usage:   "Run API server with frontend server together",
+					Usage:   "Run API server, App server and other servers together",
 					Aliases: []string{"union-server", "u"},
 					Value:   false,
 					EnvVars: []string{"UNION_SERVER"},
@@ -192,6 +194,18 @@ func main() {
 					Value:   "/",
 					EnvVars: []string{"APP_PATH"},
 				},
+				&cli.BoolFlag{
+					Name:    "AppServerEnabled",
+					Aliases: []string{"app-server-enabled"},
+					Value:   true,
+					EnvVars: []string{"APP_SERVER_ENABLED"},
+				},
+				&cli.BoolFlag{
+					Name:    "GraphqlServerEnabled",
+					Aliases: []string{"graphql-server-enabled", "gql-server-enabled"},
+					Value:   false,
+					EnvVars: []string{"GRAPHQL_SERVER_ENABLED"},
+				},
 				&cli.StringFlag{
 					Name:    "GraphqlURL",
 					Aliases: []string{"graphql-url", "gql-url"},
@@ -208,6 +222,12 @@ func main() {
 					Aliases: []string{"graphql-playground-uri-path", "gql-playground-uri-path"},
 					Value:   "/playground",
 					EnvVars: []string{"GRAPHQL_PLAYGROUND_URI_PATH"},
+				},
+				&cli.BoolFlag{
+					Name:    "GraphqlPlaygroundServerEnabled",
+					Aliases: []string{"graphql-playground-server-enabled", "gql-playground-server-enabled", "gql-pg-server-enabled"},
+					Value:   false,
+					EnvVars: []string{"GRAPHQL_PLAYGROUND_SERVER_ENABLED"},
 				},
 				&cli.StringFlag{
 					Name:    "KeycloakHost",
@@ -255,13 +275,12 @@ func main() {
 						providedLevel := context.String("LogLevel")
 						level, err := zapcore.ParseLevel(providedLevel)
 						if err != nil {
-							log.Fatal("unsupported log level", zap.String("provided", providedLevel))
+							log.Fatal("Unsupported log level", zap.String("provided", providedLevel))
 						}
 						log = log.WithOptions(zap.IncreaseLevel(level))
 
 						defer log.Sync()
 
-						log.Info("starting server...")
 						isHttps := context.Bool("HTTPS")
 						host := context.String("Host")
 						port := ":" + strconv.Itoa(context.Int("Port"))
@@ -271,12 +290,21 @@ func main() {
 						} else {
 							appPath = "/" + appPath + "/"
 						}
-						isUnionServer := context.Bool("UnionServer")
 						gqlURL := context.String("GraphqlURL")
 						gqlURIPath := context.String("GraphqlURIPath")
 						gqlPlaygroundURIPath := context.String("GraphqlPlaygroundURIPath")
 						proto := "http://"
 						appUrl := proto + "localhost" + port + appPath
+						gqlPlaygroundServerEnabled := context.Bool("GraphqlPlaygroundServerEnabled")
+						appServerEnabled := context.Bool("AppServerEnabled")
+						gqlServerEnabled := context.Bool("GraphqlServerEnabled")
+						isUnionServer := context.Bool("UnionServer")
+						if isUnionServer {
+							log.Info("Union server enabled")
+							appServerEnabled = true
+							gqlServerEnabled = true
+							gqlPlaygroundServerEnabled = true
+						}
 
 						if isHttps {
 							proto = "https://"
@@ -285,13 +313,6 @@ func main() {
 						if gqlURL == "" {
 							gqlURL += proto + host + port + gqlURIPath
 						}
-
-						start := time.Now()
-						client, err := InitClient(context)
-						if err != nil {
-							log.Fatal("failed to start ent client", zap.String("reason", err.Error()))
-						}
-						log.Info("ent client initialized", zap.Duration("duration", time.Since(start)))
 
 						// Up MUX server
 						mux := http.NewServeMux()
@@ -303,14 +324,17 @@ func main() {
 							keycloakBackendClientSecret = context.String("KeycloakBackendClientSecret")
 						)
 
-						log.Info("Union server", zap.Bool("enabled", isUnionServer), zap.String("graphql-url", gqlURL))
+						if gqlServerEnabled {
+							start := time.Now()
+							client, err := InitClient(context)
+							if err != nil {
+								log.Fatal("Failed to start Ent client", zap.Error(err))
+							}
+							log.Info("Ent client initialized", zap.Duration("duration", time.Since(start)))
 
-						if isUnionServer {
 							srv := handler.NewDefaultServer(NewSchema(client))
 							srv.Use(entgql.Transactioner{TxOpener: client})
 							//srv.Use(&debug.Tracer{})
-							mux.HandleFunc(gqlPlaygroundURIPath, playground.Handler("Example", gqlURIPath))
-
 							mux.Handle(gqlURIPath, ent.DemoAuthMiddleware(
 								srv,
 								keycloakHost,
@@ -318,98 +342,106 @@ func main() {
 								keycloakBackendClientID,
 								keycloakBackendClientSecret,
 							))
+							log.Info("Graphql server enabled", zap.String("url", gqlURL))
 						}
 
-						mux.HandleFunc(appPath+"environment.json", func(writer http.ResponseWriter, request *http.Request) {
-							b, _ := json.Marshal(entkit.Environment{
-								Meta:       map[string]any{},
-								GraphqlURL: gqlURL,
-								AppPath:    appPath,
-								Auth: &entkit.AuthEnvironment{
-									Keycloak: &entkit.KeycloakEnvironment{
-										URL:             keycloakHost,
-										Realm:           keycloakRealm,
-										ClientID:        keycloakFrontendClientID,
-										BackendClientID: keycloakBackendClientID,
-									},
-								},
-							})
-							writer.Write(b)
-						})
+						if gqlPlaygroundServerEnabled {
+							gqlPlaygroundURL := proto + host + port + gqlPlaygroundURIPath
+							mux.HandleFunc(gqlPlaygroundURIPath, playground.Handler("refine-project", gqlURIPath))
+							log.Info("Graphql playground server enabled", zap.String("url", gqlPlaygroundURL))
+						}
 
-						mux.HandleFunc(
-							appPath,
-							func(w http.ResponseWriter, r *http.Request) {
-								if r.Method != "GET" {
-									http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
-									return
-								}
-								start := time.Now()
-								log.Debug("request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
-
-								path := filepath.Clean(r.URL.Path)
-								path = strings.TrimPrefix(path, appPath)
-
-								staticPaths := []string{"static", "images", "favicon.ico", "asset-manifest.json", "environment.json"}
-								isStaticPath := false
-								for _, v := range staticPaths {
-									if path == v || strings.HasPrefix(path, v+"/") {
-										isStaticPath = true
-										continue
-									}
-								}
-
-								if isStaticPath {
-									w.Header().Set("Cache-Control", "public, max-age=31536000")
-								} else {
-									path = "index.html"
-								}
-
-								file, err := RefineProjectFS.Open(filepath.Join("refine-project", path))
-								if err != nil {
-									if os.IsNotExist(err) {
-										log.Warn("file not found", zap.String("path", path), zap.String("reason", err.Error()))
-										http.NotFound(w, r)
+						if appServerEnabled {
+							mux.HandleFunc(
+								appPath,
+								func(w http.ResponseWriter, r *http.Request) {
+									if r.Method != "GET" {
+										http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 										return
 									}
-									log.Warn("file cannot be read", zap.String("path", path), zap.String("reason", err.Error()))
-									http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-									return
-								}
+									start := time.Now()
+									log.Debug("Request starts", zap.String("path", r.URL.Path), zap.Time("time", start))
 
-								contentType := mime.TypeByExtension(filepath.Ext(path))
-								w.Header().Set("Content-Type", contentType)
+									path := filepath.Clean(r.URL.Path)
+									path = strings.TrimPrefix(path, appPath)
 
-								var n int64
-								if path == "index.html" {
-									buf := new(strings.Builder)
-									_, err := io.Copy(buf, file)
+									staticPaths := []string{"static", "images", "favicon.ico", "asset-manifest.json", "environment.json"}
+									isStaticPath := false
+									for _, v := range staticPaths {
+										if path == v || strings.HasPrefix(path, v+"/") {
+											isStaticPath = true
+											continue
+										}
+									}
+
+									if isStaticPath {
+										w.Header().Set("Cache-Control", "public, max-age=31536000")
+									} else {
+										path = "index.html"
+									}
+
+									file, err := RefineProjectFS.Open(filepath.Join("refine-project", path))
 									if err != nil {
-										panic(err)
+										if os.IsNotExist(err) {
+											log.Info("File not found", zap.String("path", path), zap.Error(err))
+											http.NotFound(w, r)
+											return
+										}
+										log.Info("File cannot be read", zap.String("path", path), zap.Error(err))
+										http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+										return
 									}
-									newStr := strings.Replace(buf.String(), "%PUBLIC_URL%", appPath, -1)
-									for _, sp := range staticPaths {
-										newStr = strings.Replace(newStr, "/"+sp, appPath+sp, -1)
-									}
-									r := strings.NewReader(newStr)
-									w.Header().Set("Content-Length", fmt.Sprintf("%d", r.Size()))
-									n, _ = io.Copy(w, r)
-								} else {
-									stat, err := file.Stat()
-									if err == nil && stat.Size() > 0 {
-										w.Header().Set("Content-Length", fmt.Sprintf("%d", stat.Size()))
-									}
-									n, _ = io.Copy(w, file)
-								}
 
-								log.Debug("serving file", zap.String("path", path), zap.Int64("bytes", n))
-								log.Info("request handled", zap.String("path", r.URL.Path), zap.Duration("duration", time.Since(start)))
-							},
-						)
+									contentType := mime.TypeByExtension(filepath.Ext(path))
+									w.Header().Set("Content-Type", contentType)
 
-						log.Info("server started", zap.String("address", appUrl))
+									var n int64
+									if path == "index.html" {
+										b, _ := json.Marshal(entkit.Environment{
+											Meta:       map[string]any{},
+											GraphqlURL: gqlURL,
+											AppPath:    appPath,
+											Auth: &entkit.AuthEnvironment{
+												Keycloak: &entkit.KeycloakEnvironment{
+													URL:             keycloakHost,
+													Realm:           keycloakRealm,
+													ClientID:        keycloakFrontendClientID,
+													BackendClientID: keycloakBackendClientID,
+												},
+											},
+										})
+										buf := new(bytes.Buffer)
+										_, err := io.Copy(buf, file)
+										if err != nil {
+											panic(err)
+										}
+										newStr := buf.String()
+										for _, sp := range staticPaths {
+											newStr = strings.Replace(newStr, "/"+sp, appPath+sp, -1)
+										}
+										re := regexp.MustCompile("(<script data-name=\"environment\">window.environment=).*?(</script>)")
+										newStr = re.ReplaceAllString(newStr, "$1"+string(b)+"$2")
+
+										r := strings.NewReader(newStr)
+										w.Header().Set("Content-Length", fmt.Sprintf("%d", r.Size()))
+										n, _ = io.Copy(w, r)
+									} else {
+										stat, err := file.Stat()
+										if err == nil && stat.Size() > 0 {
+											w.Header().Set("Content-Length", fmt.Sprintf("%d", stat.Size()))
+										}
+										n, _ = io.Copy(w, file)
+									}
+
+									log.Debug("Serving file", zap.String("path", path), zap.Int64("bytes", n))
+									log.Info("Request handled", zap.String("path", r.URL.Path), zap.Duration("duration", time.Since(start)))
+								},
+							)
+							log.Info("App server enabled", zap.String("url", appUrl))
+						}
+
 						if err := http.ListenAndServe(port, mux); err != nil {
-							log.Fatal("server failed", zap.String("reason", err.Error()))
+							log.Fatal("Server failed", zap.Error(err))
 						}
 						return nil
 					},

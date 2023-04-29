@@ -13,8 +13,8 @@
 // to the project: https://entkit.com
 // ---------------------------------------------------------
 
-import React, {useState} from "react";
-import {HttpError} from "@refinedev/core";
+import React, { useState } from "react";
+import { HttpError } from "@refinedev/core";
 import * as RA from "@refinedev/antd";
 import * as Antd from "antd";
 import * as AntdIcons from "@ant-design/icons";
@@ -24,19 +24,21 @@ import * as Custom from "./custom";
 import * as View from "./view";
 import * as Action from "./action";
 
-export type CompanyTableProps = Antd.TableProps<Interfaces.DemoCompanyInterface>
-    & {
+export type CompanyTableProps =
+    Antd.TableProps<Interfaces.DemoCompanyInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoCompanyInterface,
             HttpError,
             any,
             Interfaces.DemoCompanyInterface
-        >
-    }
-export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const CompanyTable: React.FC<CompanyTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoCompanyInterface>({
         resource: "company",
         initialSorter: [
@@ -50,18 +52,21 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "name",
                 value: null,
                 operator: "contains",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
                 "name",
                 "description",
-                {"countries": [
-                    /*{
+                {
+                    countries: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -72,10 +77,12 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"phones": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    phones: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -88,10 +95,12 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"emails": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    emails: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -103,10 +112,12 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"websites": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    websites: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -118,10 +129,12 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"locations": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    locations: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -141,24 +154,18 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {
-                    "logoImage": [
-                        "id",
-                        "title",
-                        "originalURL",
-                    ]
+                        "totalCount",
+                    ],
                 },
                 {
-                    "coverImage": [
-                        "id",
-                        "title",
-                        "originalURL",
-                    ]
+                    logoImage: ["id", "title", "originalURL"],
                 },
-                {"galleryImages": [
-                    /*{
+                {
+                    coverImage: ["id", "title", "originalURL"],
+                },
+                {
+                    galleryImages: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -169,8 +176,9 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
+                        "totalCount",
+                    ],
+                },
             ],
             cursors,
         },
@@ -178,103 +186,105 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="name"
                     title="Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        
-                        return <Custom.MyCustomTitle value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <Custom.MyCustomTitle value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "name",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="countries"
                     title="Countries"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="phones"
                     title="Phones"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="emails"
                     title="Emails"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="websites"
                     title="Websites"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="locations"
                     title="Locations"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="logoImage"
                     title="Logo Image"
-                    render={
-                        (value)=>(<View.ImageBadge { ...value } />)
-                    }
+                    render={(value) => <View.ImageBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="coverImage"
                     title="Cover Image"
-                    render={
-                        (value)=>(<View.ImageBadge { ...value } />)
-                    }
+                    render={(value) => <View.ImageBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="galleryImages"
                     title="Gallery Images"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 {/* endregion Edges*/}
 
@@ -284,17 +294,17 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.CompanyShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.CompanyEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.CompanyDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -303,77 +313,83 @@ export const CompanyTable :React.FC<CompanyTableProps> = ({extendTable, ...props
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type CountryTableProps = Antd.TableProps<Interfaces.DemoCountryInterface>
-    & {
+};
+export type CountryTableProps =
+    Antd.TableProps<Interfaces.DemoCountryInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoCountryInterface,
             HttpError,
             any,
             Interfaces.DemoCountryInterface
-        >
-    }
-export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const CountryTable: React.FC<CountryTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoCountryInterface>({
         resource: "country",
         initialSorter: [
@@ -387,22 +403,26 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "name",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "code",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
                 "name",
                 "code",
-                {"companies": [
-                    /*{
+                {
+                    companies: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -413,10 +433,12 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"phones": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    phones: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -429,10 +451,12 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"emails": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    emails: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -444,10 +468,12 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"websites": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    websites: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -459,10 +485,12 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"locations": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    locations: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -482,8 +510,9 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
+                        "totalCount",
+                    ],
+                },
             ],
             cursors,
         },
@@ -491,97 +520,105 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="name"
                     title="Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "name",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="code"
                     title="Code"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("code", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "code",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="companies"
                     title="Companies"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="phones"
                     title="Phones"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="emails"
                     title="Emails"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="websites"
                     title="Websites"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="locations"
                     title="Locations"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 {/* endregion Edges*/}
 
@@ -591,17 +628,17 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.CountryShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.CountryEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.CountryDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -610,77 +647,82 @@ export const CountryTable :React.FC<CountryTableProps> = ({extendTable, ...props
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type EmailTableProps = Antd.TableProps<Interfaces.DemoEmailInterface>
-    & {
-        extendTable?: RA.useTableProps<
-            Interfaces.DemoEmailInterface,
-            HttpError,
-            any,
-            Interfaces.DemoEmailInterface
-        >
-    }
-export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+};
+export type EmailTableProps = Antd.TableProps<Interfaces.DemoEmailInterface> & {
+    extendTable?: RA.useTableProps<
+        Interfaces.DemoEmailInterface,
+        HttpError,
+        any,
+        Interfaces.DemoEmailInterface
+    >;
+};
+export const EmailTable: React.FC<EmailTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoEmailInterface>({
         resource: "email",
         initialSorter: [
@@ -694,19 +736,23 @@ export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) 
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "title",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "description",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "address",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -714,18 +760,10 @@ export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) 
                 "description",
                 "address",
                 {
-                    "company": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    company: ["id", "name", "description"],
                 },
                 {
-                    "country": [
-                        "id",
-                        "name",
-                        "code",
-                    ]
+                    country: ["id", "name", "code"],
                 },
             ],
             cursors,
@@ -734,92 +772,97 @@ export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) 
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="title"
                     title="Title"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("title", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "title",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="description"
                     title="Description"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("description", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "description",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="address"
                     title="Address"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("address", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "address",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="company"
                     title="Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="country"
                     title="Country"
-                    render={
-                        (value)=>(<View.CountryBadge { ...value } />)
-                    }
+                    render={(value) => <View.CountryBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -829,17 +872,17 @@ export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) 
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.EmailShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.EmailEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.EmailDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -848,77 +891,82 @@ export const EmailTable :React.FC<EmailTableProps> = ({extendTable, ...props} ) 
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type ImageTableProps = Antd.TableProps<Interfaces.DemoImageInterface>
-    & {
-        extendTable?: RA.useTableProps<
-            Interfaces.DemoImageInterface,
-            HttpError,
-            any,
-            Interfaces.DemoImageInterface
-        >
-    }
-export const ImageTable :React.FC<ImageTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+};
+export type ImageTableProps = Antd.TableProps<Interfaces.DemoImageInterface> & {
+    extendTable?: RA.useTableProps<
+        Interfaces.DemoImageInterface,
+        HttpError,
+        any,
+        Interfaces.DemoImageInterface
+    >;
+};
+export const ImageTable: React.FC<ImageTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoImageInterface>({
         resource: "image",
         initialSorter: [
@@ -932,40 +980,31 @@ export const ImageTable :React.FC<ImageTableProps> = ({extendTable, ...props} ) 
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "title",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "originalURL",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
                 "title",
                 "originalURL",
                 {
-                    "galleryCompany": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    galleryCompany: ["id", "name", "description"],
                 },
                 {
-                    "logoCompany": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    logoCompany: ["id", "name", "description"],
                 },
                 {
-                    "coverCompany": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    coverCompany: ["id", "name", "description"],
                 },
             ],
             cursors,
@@ -974,83 +1013,85 @@ export const ImageTable :React.FC<ImageTableProps> = ({extendTable, ...props} ) 
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="title"
                     title="Title"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("title", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "title",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="originalURL"
                     title="Original Url"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoImageViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoImageViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("original_url", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "original_url",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="galleryCompany"
                     title="Gallery Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="logoCompany"
                     title="Logo Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="coverCompany"
                     title="Cover Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -1060,17 +1101,17 @@ export const ImageTable :React.FC<ImageTableProps> = ({extendTable, ...props} ) 
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.ImageShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.ImageEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.ImageDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -1079,77 +1120,83 @@ export const ImageTable :React.FC<ImageTableProps> = ({extendTable, ...props} ) 
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type LocationTableProps = Antd.TableProps<Interfaces.DemoLocationInterface>
-    & {
+};
+export type LocationTableProps =
+    Antd.TableProps<Interfaces.DemoLocationInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoLocationInterface,
             HttpError,
             any,
             Interfaces.DemoLocationInterface
-        >
-    }
-export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const LocationTable: React.FC<LocationTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoLocationInterface>({
         resource: "location",
         initialSorter: [
@@ -1163,51 +1210,63 @@ export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...pro
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "title",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "description",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "latitude",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "longitude",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "address",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "postcode",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "type",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "state",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "suburb",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "streetType",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "streetName",
                 value: null,
                 operator: "contains",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -1223,18 +1282,10 @@ export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...pro
                 "streetType",
                 "streetName",
                 {
-                    "company": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    company: ["id", "name", "description"],
                 },
                 {
-                    "country": [
-                        "id",
-                        "name",
-                        "code",
-                    ]
+                    country: ["id", "name", "code"],
                 },
             ],
             cursors,
@@ -1243,220 +1294,233 @@ export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...pro
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="title"
                     title="Title"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("title", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "title",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="description"
                     title="Description"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("description", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "description",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="latitude"
                     title="Latitude"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("latitude", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "latitude",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="longitude"
                     title="Longitude"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("longitude", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "longitude",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="address"
                     title="Address"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("address", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "address",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="postcode"
                     title="Postcode"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("postcode", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "postcode",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="type"
                     title="Type"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("type", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "type",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="state"
                     title="State"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("state", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "state",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="suburb"
                     title="Suburb"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("suburb", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "suburb",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="streetType"
                     title="Street Type"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("street_type", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "street_type",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="streetName"
                     title="Street Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("street_name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "street_name",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="company"
                     title="Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="country"
                     title="Country"
-                    render={
-                        (value)=>(<View.CountryBadge { ...value } />)
-                    }
+                    render={(value) => <View.CountryBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -1466,17 +1530,17 @@ export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...pro
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.LocationShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.LocationEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.LocationDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -1485,77 +1549,82 @@ export const LocationTable :React.FC<LocationTableProps> = ({extendTable, ...pro
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type PhoneTableProps = Antd.TableProps<Interfaces.DemoPhoneInterface>
-    & {
-        extendTable?: RA.useTableProps<
-            Interfaces.DemoPhoneInterface,
-            HttpError,
-            any,
-            Interfaces.DemoPhoneInterface
-        >
-    }
-export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+};
+export type PhoneTableProps = Antd.TableProps<Interfaces.DemoPhoneInterface> & {
+    extendTable?: RA.useTableProps<
+        Interfaces.DemoPhoneInterface,
+        HttpError,
+        any,
+        Interfaces.DemoPhoneInterface
+    >;
+};
+export const PhoneTable: React.FC<PhoneTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoPhoneInterface>({
         resource: "phone",
         initialSorter: [
@@ -1569,23 +1638,28 @@ export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) 
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "title",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "description",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "number",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "type",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -1594,18 +1668,10 @@ export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) 
                 "number",
                 "type",
                 {
-                    "company": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    company: ["id", "name", "description"],
                 },
                 {
-                    "country": [
-                        "id",
-                        "name",
-                        "code",
-                    ]
+                    country: ["id", "name", "code"],
                 },
             ],
             cursors,
@@ -1614,108 +1680,114 @@ export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) 
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="title"
                     title="Title"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("title", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "title",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="description"
                     title="Description"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("description", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "description",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="number"
                     title="Number"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("number", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "number",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="type"
                     title="Type"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("type", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "type",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="company"
                     title="Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="country"
                     title="Country"
-                    render={
-                        (value)=>(<View.CountryBadge { ...value } />)
-                    }
+                    render={(value) => <View.CountryBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -1725,17 +1797,17 @@ export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) 
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.PhoneShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.PhoneEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.PhoneDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -1744,77 +1816,83 @@ export const PhoneTable :React.FC<PhoneTableProps> = ({extendTable, ...props} ) 
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type ProductTableProps = Antd.TableProps<Interfaces.DemoProductInterface>
-    & {
+};
+export type ProductTableProps =
+    Antd.TableProps<Interfaces.DemoProductInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoProductInterface,
             HttpError,
             any,
             Interfaces.DemoProductInterface
-        >
-    }
-export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const ProductTable: React.FC<ProductTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoProductInterface>({
         resource: "product",
         initialSorter: [
@@ -1828,35 +1906,43 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "name",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "image",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "url",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "lastSell",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "createdAt",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "status",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "buildStatus",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -1869,21 +1955,17 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                 "status",
                 "buildStatus",
                 {
-                    "warehouse": [
+                    warehouse: [
                         "id",
                         "name",
                         "lastUpdate",
                         "originalData",
                         "enabled",
                         "filters",
-                    ]
+                    ],
                 },
                 {
-                    "vendor": [
-                        "id",
-                        "name",
-                        "schema",
-                    ]
+                    vendor: ["id", "name", "schema"],
                 },
             ],
             cursors,
@@ -1892,117 +1974,130 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="name"
                     title="Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "name",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="image"
                     title="Image"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoImageViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoImageViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("image", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "image",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="url"
                     title="Url"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoURLViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoURLViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("url", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "url",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="lastSell"
                     title="Last Sell"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoDateViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoDateViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("last_sell", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "last_sell",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="createdAt"
                     title="Created At"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoDateViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoDateViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("created_at", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "created_at",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="status"
                     title="Status"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoEnumsProcessStatusViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return (
+                            <View.DemoEnumsProcessStatusViewOnList
+                                value={value}
+                            />
+                        );
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Select
@@ -2028,21 +2123,26 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                                         label: "failed",
                                     },
                                 ]}
-                                style={ { width: '100%', minWidth: "100px" } }
+                                style={{ width: "100%", minWidth: "100px" }}
                             />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("status", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "status",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="buildStatus"
                     title="Build Status"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoEnumsProcessStatusViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return (
+                            <View.DemoEnumsProcessStatusViewOnList
+                                value={value}
+                            />
+                        );
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Select
@@ -2068,28 +2168,27 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                                         label: "failed",
                                     },
                                 ]}
-                                style={ { width: '100%', minWidth: "100px" } }
+                                style={{ width: "100%", minWidth: "100px" }}
                             />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("build_status", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "build_status",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="warehouse"
                     title="Warehouse"
-                    render={
-                        (value)=>(<View.WarehouseBadge { ...value } />)
-                    }
+                    render={(value) => <View.WarehouseBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="vendor"
                     title="Vendor"
-                    render={
-                        (value)=>(<View.VendorBadge { ...value } />)
-                    }
+                    render={(value) => <View.VendorBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -2099,17 +2198,17 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.ProductShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.ProductEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.ProductDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -2118,77 +2217,83 @@ export const ProductTable :React.FC<ProductTableProps> = ({extendTable, ...props
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type VendorTableProps = Antd.TableProps<Interfaces.DemoVendorInterface>
-    & {
+};
+export type VendorTableProps =
+    Antd.TableProps<Interfaces.DemoVendorInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoVendorInterface,
             HttpError,
             any,
             Interfaces.DemoVendorInterface
-        >
-    }
-export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const VendorTable: React.FC<VendorTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoVendorInterface>({
         resource: "vendor",
         initialSorter: [
@@ -2202,22 +2307,26 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "name",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "schema",
                 value: null,
                 operator: "contains",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
                 "name",
                 "schema",
-                {"warehouses": [
-                    /*{
+                {
+                    warehouses: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -2231,10 +2340,12 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
-                {"products": [
-                    /*{
+                        "totalCount",
+                    ],
+                },
+                {
+                    products: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -2251,8 +2362,9 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
+                        "totalCount",
+                    ],
+                },
             ],
             cursors,
         },
@@ -2260,76 +2372,84 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="name"
                     title="Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "name",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="schema"
                     title="Schema"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoCodeViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoCodeViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("schema", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "schema",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="warehouses"
                     title="Warehouses"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="products"
                     title="Products"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 {/* endregion Edges*/}
 
@@ -2339,17 +2459,17 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.VendorShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.VendorEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.VendorDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -2358,77 +2478,83 @@ export const VendorTable :React.FC<VendorTableProps> = ({extendTable, ...props} 
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type WarehouseTableProps = Antd.TableProps<Interfaces.DemoWarehouseInterface>
-    & {
+};
+export type WarehouseTableProps =
+    Antd.TableProps<Interfaces.DemoWarehouseInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoWarehouseInterface,
             HttpError,
             any,
             Interfaces.DemoWarehouseInterface
-        >
-    }
-export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const WarehouseTable: React.FC<WarehouseTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoWarehouseInterface>({
         resource: "warehouse",
         initialSorter: [
@@ -2442,27 +2568,33 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "name",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "lastUpdate",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "originalData",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "enabled",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "filters",
                 value: null,
                 operator: "eq",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -2471,8 +2603,9 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
                 "originalData",
                 "enabled",
                 "filters",
-                {"products": [
-                    /*{
+                {
+                    products: [
+                        /*{
                         edges: [
                             {
                                 node: [
@@ -2489,14 +2622,11 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
                             },
                         ],
                     },*/
-                    "totalCount",
-                ]},
+                        "totalCount",
+                    ],
+                },
                 {
-                    "vendor": [
-                        "id",
-                        "name",
-                        "schema",
-                    ]
+                    vendor: ["id", "name", "schema"],
                 },
             ],
             cursors,
@@ -2505,118 +2635,131 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="name"
                     title="Name"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("name", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "name",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="lastUpdate"
                     title="Last Update"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoDateViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoDateViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("last_update", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "last_update",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="originalData"
                     title="Original Data"
-                    render={ (value)=> {
-                        return <View.DemoCodeViewOnList value={ value } />
-                    } }
+                    render={(value) => {
+                        return <View.DemoCodeViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("original_data", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "original_data",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="enabled"
                     title="Enabled"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoBooleanViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoBooleanViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("enabled", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "enabled",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="filters"
                     title="Filters"
-                    render={ (value)=> {
-                        return <View.DemoStringListViewOnList value={ value } />
-                    } }
+                    render={(value) => {
+                        return <View.DemoStringListViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("filters", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "filters",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="products"
                     title="Products"
-                    render={
-                        (value)=><span>{ value?.totalCount || "No" } Items</span>
-                    }
+                    render={(value) => (
+                        <span>{value?.totalCount || "No"} Items</span>
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="vendor"
                     title="Vendor"
-                    render={
-                        (value)=>(<View.VendorBadge { ...value } />)
-                    }
+                    render={(value) => <View.VendorBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -2626,17 +2769,17 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.WarehouseShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.WarehouseEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.WarehouseDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -2645,77 +2788,83 @@ export const WarehouseTable :React.FC<WarehouseTableProps> = ({extendTable, ...p
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>
         </>
     );
-};export type WebsiteTableProps = Antd.TableProps<Interfaces.DemoWebsiteInterface>
-    & {
+};
+export type WebsiteTableProps =
+    Antd.TableProps<Interfaces.DemoWebsiteInterface> & {
         extendTable?: RA.useTableProps<
             Interfaces.DemoWebsiteInterface,
             HttpError,
             any,
             Interfaces.DemoWebsiteInterface
-        >
-    }
-export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props} ) => {
-
-    const [cursors, setCursors] = useState<Cursors>({first: 10,})
-    const [perPage, setPerPage] = useState<number>(10)
+        >;
+    };
+export const WebsiteTable: React.FC<WebsiteTableProps> = ({
+    extendTable,
+    ...props
+}) => {
+    const [cursors, setCursors] = useState<Cursors>({ first: 10 });
+    const [perPage, setPerPage] = useState<number>(10);
     const table = RA.useTable<Interfaces.DemoWebsiteInterface>({
         resource: "website",
         initialSorter: [
@@ -2729,19 +2878,23 @@ export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props
                 field: "id",
                 value: null,
                 operator: "eq",
-            },{
+            },
+            {
                 field: "title",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "description",
                 value: null,
                 operator: "contains",
-            },{
+            },
+            {
                 field: "url",
                 value: null,
                 operator: "contains",
-            },],
+            },
+        ],
         metaData: {
             fields: [
                 "id",
@@ -2749,18 +2902,10 @@ export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props
                 "description",
                 "url",
                 {
-                    "company": [
-                        "id",
-                        "name",
-                        "description",
-                    ]
+                    company: ["id", "name", "description"],
                 },
                 {
-                    "country": [
-                        "id",
-                        "name",
-                        "code",
-                    ]
+                    country: ["id", "name", "code"],
                 },
             ],
             cursors,
@@ -2769,92 +2914,97 @@ export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props
         ...extendTable,
     });
 
-    const data = table.tableQueryResult.data as any
+    const data = table.tableQueryResult.data as any;
 
     return (
         <>
-            <Antd.Table {...table.tableProps} pagination={false} rowKey="id" {...props}>
-                { /* region Fields */ }
+            <Antd.Table
+                {...table.tableProps}
+                pagination={false}
+                rowKey="id"
+                {...props}
+            >
+                {/* region Fields */}
                 <Antd.Table.Column
                     dataIndex="id"
                     title="Id"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoUUIDViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoUUIDViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("id", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "id",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="title"
                     title="Title"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("title", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "title",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="description"
                     title="Description"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoStringViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoStringViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("description", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "description",
+                        table.sorter,
+                    )}
                 />
                 <Antd.Table.Column
                     dataIndex="url"
                     title="Url"
-                    sorter={
-                        {}
-                    }
-                    render={ (value)=> {
-                        return <View.DemoURLViewOnList value={ value } />
-                    } }
+                    sorter={{}}
+                    render={(value) => {
+                        return <View.DemoURLViewOnList value={value} />;
+                    }}
                     filterDropdown={(props) => (
                         <RA.FilterDropdown {...props}>
                             <Antd.Input />
                         </RA.FilterDropdown>
                     )}
-                    defaultSortOrder={RA.getDefaultSortOrder("url", table.sorter)}
+                    defaultSortOrder={RA.getDefaultSortOrder(
+                        "url",
+                        table.sorter,
+                    )}
                 />
                 {/* endregion */}
 
-                { /* region Edges */ }
+                {/* region Edges */}
                 <Antd.Table.Column
                     dataIndex="company"
                     title="Company"
-                    render={
-                        (value)=>(<View.CompanyBadge { ...value } />)
-                    }
+                    render={(value) => <View.CompanyBadge {...value} />}
                 />
                 <Antd.Table.Column
                     dataIndex="country"
                     title="Country"
-                    render={
-                        (value)=>(<View.CountryBadge { ...value } />)
-                    }
+                    render={(value) => <View.CountryBadge {...value} />}
                 />
                 {/* endregion Edges*/}
 
@@ -2864,17 +3014,17 @@ export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props
                     render={(_, record) => (
                         <Antd.Space>
                             <Action.WebsiteShowAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.WebsiteEditAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
                             <Action.WebsiteDeleteAction
-                                recordItemIDs={ [record.id] }
+                                recordItemIDs={[record.id]}
                                 size="small"
                                 hideText={true}
                             />
@@ -2883,59 +3033,62 @@ export const WebsiteTable :React.FC<WebsiteTableProps> = ({extendTable, ...props
                 />
             </Antd.Table>
 
-            <Antd.Space style={ {marginTop: 20} }>
-                <Antd.Typography.Text type="secondary">Total {data?.total || 0}</Antd.Typography.Text>
+            <Antd.Space style={{ marginTop: 20 }}>
+                <Antd.Typography.Text type="secondary">
+                    Total {data?.total || 0}
+                </Antd.Typography.Text>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasPreviousPage)}
                     onClick={() => {
-                        setCursors((ov)=>({
+                        setCursors((ov) => ({
                             ...ov,
                             before: data?.pageInfo?.startCursor,
                             last: perPage,
                             after: undefined,
                             first: undefined,
-                        }))
-                    }
-                    }>
-                    <AntdIcons.LeftOutlined/>
+                        }));
+                    }}
+                >
+                    <AntdIcons.LeftOutlined />
                     Prev
                 </Antd.Button>
                 <Antd.Button
                     disabled={!Boolean(data?.pageInfo?.hasNextPage)}
                     onClick={() => {
-                        setCursors((ov)=>{
+                        setCursors((ov) => {
                             return {
                                 ...ov,
                                 after: data?.pageInfo?.endCursor,
                                 first: perPage,
                                 before: undefined,
                                 last: undefined,
-                            }
-                        })
-                    }}>
+                            };
+                        });
+                    }}
+                >
                     Next
-                    <AntdIcons.RightOutlined/>
+                    <AntdIcons.RightOutlined />
                 </Antd.Button>
                 <Antd.Select
                     labelInValue
-                    defaultValue={ { value: 10, label: '10 / page' } }
-                    style={ { width: 110 } }
-                    onChange={(value)=>{
-                        setPerPage(value.value)
-                        setCursors((ov)=>({
+                    defaultValue={{ value: 10, label: "10 / page" }}
+                    style={{ width: 110 }}
+                    onChange={(value) => {
+                        setPerPage(value.value);
+                        setCursors((ov) => ({
                             ...ov,
                             // Return to first page
                             first: value.value,
                             last: undefined,
                             before: undefined,
                             after: undefined,
-                        }))
+                        }));
                     }}
                     options={[
-                        {value: 10, label: '10 / page'},
-                        {value: 20, label: '20 / page'},
-                        {value: 50, label: '50 / page'},
-                        {value: 100, label: '100 / page'},
+                        { value: 10, label: "10 / page" },
+                        { value: 20, label: "20 / page" },
+                        { value: 50, label: "50 / page" },
+                        { value: 100, label: "100 / page" },
                     ]}
                 />
             </Antd.Space>

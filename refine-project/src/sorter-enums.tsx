@@ -14,72 +14,72 @@
 // ---------------------------------------------------------
 
 export const CompanySorterEnums = {
-    "id": "ID",
-    "name": "NAME",
-    "description": "DESCRIPTION",
-}
+    id: "ID",
+    name: "NAME",
+    description: "DESCRIPTION",
+};
 export const CountrySorterEnums = {
-    "id": "ID",
-    "name": "NAME",
-    "code": "CODE",
-}
+    id: "ID",
+    name: "NAME",
+    code: "CODE",
+};
 export const EmailSorterEnums = {
-    "id": "ID",
-    "title": "TITLE",
-    "description": "DESCRIPTION",
-    "address": "ADDRESS",
-}
+    id: "ID",
+    title: "TITLE",
+    description: "DESCRIPTION",
+    address: "ADDRESS",
+};
 export const ImageSorterEnums = {
-    "id": "ID",
-    "title": "TITLE",
-    "originalURL": "ORIGINAL_URL",
-}
+    id: "ID",
+    title: "TITLE",
+    originalURL: "ORIGINAL_URL",
+};
 export const LocationSorterEnums = {
-    "id": "ID",
-    "title": "TITLE",
-    "description": "DESCRIPTION",
-    "latitude": "LATITUDE",
-    "longitude": "LONGITUDE",
-    "address": "ADDRESS",
-    "postcode": "POSTCODE",
-    "type": "TYPE",
-    "state": "STATE",
-    "suburb": "SUBURB",
-    "streetType": "STREET_TYPE",
-    "streetName": "STREET_NAME",
-}
+    id: "ID",
+    title: "TITLE",
+    description: "DESCRIPTION",
+    latitude: "LATITUDE",
+    longitude: "LONGITUDE",
+    address: "ADDRESS",
+    postcode: "POSTCODE",
+    type: "TYPE",
+    state: "STATE",
+    suburb: "SUBURB",
+    streetType: "STREET_TYPE",
+    streetName: "STREET_NAME",
+};
 export const PhoneSorterEnums = {
-    "id": "ID",
-    "title": "TITLE",
-    "description": "DESCRIPTION",
-    "number": "NUMBER",
-    "type": "TYPE",
-}
+    id: "ID",
+    title: "TITLE",
+    description: "DESCRIPTION",
+    number: "NUMBER",
+    type: "TYPE",
+};
 export const ProductSorterEnums = {
-    "id": "ID",
-    "name": "TITLE",
-    "description": "DESCRIPTION",
-    "image": "IMAGE",
-    "url": "URL",
-    "lastSell": "LAST_SELL",
-    "createdAt": "CREATED_AT",
-    "status": "STATUS",
-    "buildStatus": "BUILD_STATUS",
-}
+    id: "ID",
+    name: "TITLE",
+    description: "DESCRIPTION",
+    image: "IMAGE",
+    url: "URL",
+    lastSell: "LAST_SELL",
+    createdAt: "CREATED_AT",
+    status: "STATUS",
+    buildStatus: "BUILD_STATUS",
+};
 export const VendorSorterEnums = {
-    "id": "ID",
-    "name": "NAME",
-    "schema": "SCHEMA",
-}
+    id: "ID",
+    name: "NAME",
+    schema: "SCHEMA",
+};
 export const WarehouseSorterEnums = {
-    "id": "ID",
-    "name": "NAME",
-    "lastUpdate": "LAST_UPDATE",
-    "enabled": "ENABLED",
-}
+    id: "ID",
+    name: "NAME",
+    lastUpdate: "LAST_UPDATE",
+    enabled: "ENABLED",
+};
 export const WebsiteSorterEnums = {
-    "id": "ID",
-    "title": "TITLE",
-    "description": "DESCRIPTION",
-    "url": "URL",
-}
+    id: "ID",
+    title: "TITLE",
+    description: "DESCRIPTION",
+    url: "URL",
+};

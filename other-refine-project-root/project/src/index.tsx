@@ -25,24 +25,20 @@ declare global {
     }
 }
 
-fetch("/environment.json")
-    .then((res) => res.json())
-    .then((data) => {
-        window.environment = data;
-    })
-    .then(() => {
-        const keycloak = new Keycloak(window.environment.auth.keycloak);
-        const container = document.getElementById("root") as HTMLElement;
-        const root = createRoot(container);
+function start(){
+    const keycloak = new Keycloak(window.environment.auth.keycloak);
+    const container = document.getElementById("root") as HTMLElement;
+    const root = createRoot(container);
 
-        root.render(
-            <ReactKeycloakProvider authClient={keycloak}>
-                <React.StrictMode>
-                    <App />
-                </React.StrictMode>
-            </ReactKeycloakProvider>,
-        );
-    });
+    root.render(
+        <ReactKeycloakProvider authClient={keycloak}>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </ReactKeycloakProvider>,
+    );
+}
+start()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
