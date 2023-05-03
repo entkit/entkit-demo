@@ -30,6 +30,7 @@ export const CompanyCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoCompanyInterface>();
 
     const [countriesCursors, setCountriesCursors] = useState<Cursors>({});
+
     const { selectProps: countriesSelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -48,6 +49,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
+
     const { selectProps: phonesSelectProps } =
         RA.useSelect<Interfaces.DemoPhoneInterface>({
             resource: "Phone",
@@ -66,6 +68,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
+
     const { selectProps: emailsSelectProps } =
         RA.useSelect<Interfaces.DemoEmailInterface>({
             resource: "Email",
@@ -84,6 +87,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
+
     const { selectProps: websitesSelectProps } =
         RA.useSelect<Interfaces.DemoWebsiteInterface>({
             resource: "Website",
@@ -102,6 +106,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
+
     const { selectProps: locationsSelectProps } =
         RA.useSelect<Interfaces.DemoLocationInterface>({
             resource: "Location",
@@ -120,6 +125,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [logo_imageCursors, setLogoImageCursors] = useState<Cursors>({});
+
     const { selectProps: logo_imageSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -138,6 +144,7 @@ export const CompanyCreate: React.FC = () => {
             ],
         });
     const [cover_imageCursors, setCoverImageCursors] = useState<Cursors>({});
+
     const { selectProps: cover_imageSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -158,6 +165,7 @@ export const CompanyCreate: React.FC = () => {
     const [gallery_imagesCursors, setGalleryImagesCursors] = useState<Cursors>(
         {},
     );
+
     const { selectProps: gallery_imagesSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -189,6 +197,7 @@ export const CompanyCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -265,6 +274,7 @@ export const CountryCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoCountryInterface>();
 
     const [companiesCursors, setCompaniesCursors] = useState<Cursors>({});
+
     const { selectProps: companiesSelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -283,6 +293,7 @@ export const CountryCreate: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
+
     const { selectProps: phonesSelectProps } =
         RA.useSelect<Interfaces.DemoPhoneInterface>({
             resource: "Phone",
@@ -301,6 +312,7 @@ export const CountryCreate: React.FC = () => {
             ],
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
+
     const { selectProps: emailsSelectProps } =
         RA.useSelect<Interfaces.DemoEmailInterface>({
             resource: "Email",
@@ -319,6 +331,7 @@ export const CountryCreate: React.FC = () => {
             ],
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
+
     const { selectProps: websitesSelectProps } =
         RA.useSelect<Interfaces.DemoWebsiteInterface>({
             resource: "Website",
@@ -337,6 +350,7 @@ export const CountryCreate: React.FC = () => {
             ],
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
+
     const { selectProps: locationsSelectProps } =
         RA.useSelect<Interfaces.DemoLocationInterface>({
             resource: "Location",
@@ -368,6 +382,7 @@ export const CountryCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="code"
                     label="Code"
@@ -420,6 +435,7 @@ export const EmailCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoEmailInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -438,6 +454,7 @@ export const EmailCreate: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -469,6 +486,7 @@ export const EmailCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -476,6 +494,7 @@ export const EmailCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="address"
                     label="Address"
@@ -508,6 +527,7 @@ export const ImageCreate: React.FC = () => {
 
     const [gallery_companyCursors, setGalleryCompanyCursors] =
         useState<Cursors>({});
+
     const { selectProps: gallery_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -526,6 +546,7 @@ export const ImageCreate: React.FC = () => {
             ],
         });
     const [logo_companyCursors, setLogoCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: logo_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -546,6 +567,7 @@ export const ImageCreate: React.FC = () => {
     const [cover_companyCursors, setCoverCompanyCursors] = useState<Cursors>(
         {},
     );
+
     const { selectProps: cover_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -577,6 +599,7 @@ export const ImageCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="originalURL"
                     label="Original Url"
@@ -624,6 +647,7 @@ export const LocationCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoLocationInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -642,6 +666,7 @@ export const LocationCreate: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -673,6 +698,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -680,6 +706,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="latitude"
                     label="Latitude"
@@ -687,6 +714,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="longitude"
                     label="Longitude"
@@ -694,6 +722,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="address"
                     label="Address"
@@ -701,6 +730,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="postcode"
                     label="Postcode"
@@ -708,6 +738,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="type"
                     label="Type"
@@ -715,6 +746,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="state"
                     label="State"
@@ -722,6 +754,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="suburb"
                     label="Suburb"
@@ -729,6 +762,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="streetType"
                     label="Street Type"
@@ -736,6 +770,7 @@ export const LocationCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="streetName"
                     label="Street Name"
@@ -767,6 +802,7 @@ export const PhoneCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoPhoneInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -785,6 +821,7 @@ export const PhoneCreate: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -812,10 +849,11 @@ export const PhoneCreate: React.FC = () => {
                 <Antd.Form.Item
                     name="title"
                     label="Title"
-                    rules={[{ required: true }]}
+                    rules={[{ required: false }]}
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -823,6 +861,7 @@ export const PhoneCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="number"
                     label="Number"
@@ -830,6 +869,7 @@ export const PhoneCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="type"
                     label="Type"
@@ -861,6 +901,7 @@ export const ProductCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoProductInterface>();
 
     const [warehouseCursors, setWarehouseCursors] = useState<Cursors>({});
+
     const { selectProps: warehouseSelectProps } =
         RA.useSelect<Interfaces.DemoWarehouseInterface>({
             resource: "Warehouse",
@@ -879,6 +920,7 @@ export const ProductCreate: React.FC = () => {
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
+
     const { selectProps: vendorSelectProps } =
         RA.useSelect<Interfaces.DemoVendorInterface>({
             resource: "Vendor",
@@ -910,6 +952,7 @@ export const ProductCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -917,6 +960,7 @@ export const ProductCreate: React.FC = () => {
                 >
                     <View.DemoRichTextViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="image"
                     label="Image"
@@ -924,6 +968,7 @@ export const ProductCreate: React.FC = () => {
                 >
                     <View.DemoImageViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="url"
                     label="Url"
@@ -931,17 +976,19 @@ export const ProductCreate: React.FC = () => {
                 >
                     <View.DemoURLViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="status"
                     label="Status"
-                    rules={[{ required: true }]}
+                    rules={[{ required: false }]}
                 >
                     <View.DemoEnumsProcessStatusViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="buildStatus"
                     label="Build Status"
-                    rules={[{ required: true }]}
+                    rules={[{ required: false }]}
                 >
                     <View.DemoEnumsProcessStatusViewOnForm />
                 </Antd.Form.Item>
@@ -969,6 +1016,7 @@ export const VendorCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoVendorInterface>();
 
     const [warehousesCursors, setWarehousesCursors] = useState<Cursors>({});
+
     const { selectProps: warehousesSelectProps } =
         RA.useSelect<Interfaces.DemoWarehouseInterface>({
             resource: "Warehouse",
@@ -987,18 +1035,19 @@ export const VendorCreate: React.FC = () => {
             ],
         });
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
+
     const { selectProps: productsSelectProps } =
         RA.useSelect<Interfaces.DemoProductInterface>({
             resource: "Product",
-            optionLabel: "url",
+            optionLabel: "name",
             optionValue: "id",
             metaData: {
                 cursors: productsCursors,
-                fields: ["id", "url"],
+                fields: ["id", "name"],
             },
             onSearch: (value: string) => [
                 {
-                    field: "url",
+                    field: "name",
                     operator: "contains",
                     value,
                 },
@@ -1018,6 +1067,7 @@ export const VendorCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="schema"
                     label="Schema"
@@ -1049,24 +1099,26 @@ export const WarehouseCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoWarehouseInterface>();
 
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
+
     const { selectProps: productsSelectProps } =
         RA.useSelect<Interfaces.DemoProductInterface>({
             resource: "Product",
-            optionLabel: "url",
+            optionLabel: "name",
             optionValue: "id",
             metaData: {
                 cursors: productsCursors,
-                fields: ["id", "url"],
+                fields: ["id", "name"],
             },
             onSearch: (value: string) => [
                 {
-                    field: "url",
+                    field: "name",
                     operator: "contains",
                     value,
                 },
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
+
     const { selectProps: vendorSelectProps } =
         RA.useSelect<Interfaces.DemoVendorInterface>({
             resource: "Vendor",
@@ -1098,6 +1150,7 @@ export const WarehouseCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="originalData"
                     label="Original Data"
@@ -1105,13 +1158,15 @@ export const WarehouseCreate: React.FC = () => {
                 >
                     <View.DemoCodeViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="enabled"
                     label="Enabled"
-                    rules={[{ required: true }]}
+                    rules={[{ required: false }]}
                 >
                     <View.DemoBooleanViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="filters"
                     label="Filters"
@@ -1143,6 +1198,7 @@ export const WebsiteCreate: React.FC = () => {
         RA.useForm<Interfaces.DemoWebsiteInterface>();
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -1161,6 +1217,7 @@ export const WebsiteCreate: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -1192,6 +1249,7 @@ export const WebsiteCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="description"
                     label="Description"
@@ -1199,6 +1257,7 @@ export const WebsiteCreate: React.FC = () => {
                 >
                     <View.DemoStringViewOnForm />
                 </Antd.Form.Item>
+
                 <Antd.Form.Item
                     name="url"
                     label="Url"

@@ -28,6 +28,14 @@ func (pc *PhoneCreate) SetTitle(s string) *PhoneCreate {
 	return pc
 }
 
+// SetNillableTitle sets the "title" field if the given value is not nil.
+func (pc *PhoneCreate) SetNillableTitle(s *string) *PhoneCreate {
+	if s != nil {
+		pc.SetTitle(*s)
+	}
+	return pc
+}
+
 // SetDescription sets the "description" field.
 func (pc *PhoneCreate) SetDescription(s string) *PhoneCreate {
 	pc.mutation.SetDescription(s)
@@ -133,6 +141,10 @@ func (pc *PhoneCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (pc *PhoneCreate) defaults() {
+	if _, ok := pc.mutation.Title(); !ok {
+		v := phone.DefaultTitle
+		pc.mutation.SetTitle(v)
+	}
 	if _, ok := pc.mutation.ID(); !ok {
 		v := phone.DefaultID()
 		pc.mutation.SetID(v)

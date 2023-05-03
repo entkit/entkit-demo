@@ -136,7 +136,7 @@ var (
 	// PhonesColumns holds the columns for the "phones" table.
 	PhonesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUUID},
-		{Name: "title", Type: field.TypeString, Size: 128},
+		{Name: "title", Type: field.TypeString, Size: 128, Default: "Phone number"},
 		{Name: "description", Type: field.TypeString, Size: 500},
 		{Name: "number", Type: field.TypeString, Size: 24},
 		{Name: "type", Type: field.TypeString, Size: 24},

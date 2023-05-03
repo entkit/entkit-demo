@@ -585,7 +585,7 @@ func (c *LocationUpdateOne) SetInput(i UpdateLocationInput) *LocationUpdateOne {
 
 // CreatePhoneInput represents a mutation input for creating phones.
 type CreatePhoneInput struct {
-	Title       string
+	Title       *string
 	Description string
 	Number      string
 	Type        string
@@ -595,7 +595,9 @@ type CreatePhoneInput struct {
 
 // Mutate applies the CreatePhoneInput on the PhoneMutation builder.
 func (i *CreatePhoneInput) Mutate(m *PhoneMutation) {
-	m.SetTitle(i.Title)
+	if v := i.Title; v != nil {
+		m.SetTitle(*v)
+	}
 	m.SetDescription(i.Description)
 	m.SetNumber(i.Number)
 	m.SetType(i.Type)

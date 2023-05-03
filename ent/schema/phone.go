@@ -24,6 +24,7 @@ func (Phone) Fields() []ent.Field {
 			),
 		field.String("title").
 			MaxLen(128).
+			Default("Phone number").
 			Annotations(
 				entkit.TitleField(),
 				entkit.FilterOperator(gen.Contains),

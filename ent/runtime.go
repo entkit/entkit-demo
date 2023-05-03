@@ -127,6 +127,8 @@ func init() {
 	_ = phoneFields
 	// phoneDescTitle is the schema descriptor for title field.
 	phoneDescTitle := phoneFields[1].Descriptor()
+	// phone.DefaultTitle holds the default value on creation for the title field.
+	phone.DefaultTitle = phoneDescTitle.Default.(string)
 	// phone.TitleValidator is a validator for the "title" field. It is called by the builders before save.
 	phone.TitleValidator = phoneDescTitle.Validators[0].(func(string) error)
 	// phoneDescDescription is the schema descriptor for description field.

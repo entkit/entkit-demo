@@ -62,9 +62,10 @@ export const RoutesBundle: React.FC = () => {
                     index
                     element={<NavigateToResource resource="company" />}
                 />
+
                 <Route path="com">
                     <Route path="show/:id" element={<Show.CompanyMainShow />} />
-                    <Route index element={<List.CompanyList />} />
+                    <Route index path="" element={<List.CompanyList />} />
                     <Route path="create" element={<Create.CompanyCreate />} />
                     <Route path="edit/:id" element={<Edit.CompanyEdit />} />
                     <Route
@@ -75,7 +76,7 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="country">
                     <Route path="show/:id" element={<Show.CountryMainShow />} />
-                    <Route index element={<List.CountryList />} />
+                    <Route index path="" element={<List.CountryList />} />
                     <Route path="create" element={<Create.CountryCreate />} />
                     <Route path="edit/:id" element={<Edit.CountryEdit />} />
                     <Route
@@ -86,18 +87,14 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="email">
                     <Route path="show/:id" element={<Show.EmailMainShow />} />
-                    <Route index element={<List.EmailList />} />
+                    <Route index path="" element={<List.EmailList />} />
                     <Route path="create" element={<Create.EmailCreate />} />
                     <Route path="edit/:id" element={<Edit.EmailEdit />} />
-                    <Route
-                        path="edges/:id"
-                        element={<EdgesDiagram.EmailEdgesDiagram />}
-                    />
                 </Route>
 
                 <Route path="image">
                     <Route path="show/:id" element={<Show.ImageMainShow />} />
-                    <Route index element={<List.ImageList />} />
+                    <Route index path="" element={<List.ImageList />} />
                     <Route path="create" element={<Create.ImageCreate />} />
                     <Route path="edit/:id" element={<Edit.ImageEdit />} />
                     <Route
@@ -111,7 +108,7 @@ export const RoutesBundle: React.FC = () => {
                         path="show/:id"
                         element={<Show.LocationMainShow />}
                     />
-                    <Route index element={<List.LocationList />} />
+                    <Route index path="" element={<List.LocationList />} />
                     <Route path="create" element={<Create.LocationCreate />} />
                     <Route path="edit/:id" element={<Edit.LocationEdit />} />
                     <Route
@@ -122,7 +119,7 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="phone">
                     <Route path="show/:id" element={<Show.PhoneMainShow />} />
-                    <Route index element={<List.PhoneList />} />
+                    <Route index path="" element={<List.PhoneList />} />
                     <Route path="create" element={<Create.PhoneCreate />} />
                     <Route path="edit/:id" element={<Edit.PhoneEdit />} />
                     <Route
@@ -133,7 +130,7 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="product">
                     <Route path="show/:id" element={<Show.ProductMainShow />} />
-                    <Route index element={<List.ProductList />} />
+                    <Route index path="" element={<List.ProductList />} />
                     <Route path="create" element={<Create.ProductCreate />} />
                     <Route path="edit/:id" element={<Edit.ProductEdit />} />
                     <Route
@@ -144,7 +141,7 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="vendor">
                     <Route path="show/:id" element={<Show.VendorMainShow />} />
-                    <Route index element={<List.VendorList />} />
+                    <Route index path="" element={<List.VendorList />} />
                     <Route path="create" element={<Create.VendorCreate />} />
                     <Route path="edit/:id" element={<Edit.VendorEdit />} />
                     <Route
@@ -158,7 +155,7 @@ export const RoutesBundle: React.FC = () => {
                         path="show/:id"
                         element={<Show.WarehouseMainShow />}
                     />
-                    <Route index element={<List.WarehouseList />} />
+                    <Route index path="" element={<List.WarehouseList />} />
                     <Route path="create" element={<Create.WarehouseCreate />} />
                     <Route path="edit/:id" element={<Edit.WarehouseEdit />} />
                     <Route
@@ -169,7 +166,7 @@ export const RoutesBundle: React.FC = () => {
 
                 <Route path="website">
                     <Route path="show/:id" element={<Show.WebsiteMainShow />} />
-                    <Route index element={<List.WebsiteList />} />
+                    <Route index path="" element={<List.WebsiteList />} />
                     <Route path="create" element={<Create.WebsiteCreate />} />
                     <Route path="edit/:id" element={<Edit.WebsiteEdit />} />
                     <Route

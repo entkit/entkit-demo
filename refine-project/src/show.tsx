@@ -185,11 +185,8 @@ export const CompanyShow: React.FC<CompanyShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.CompanyListAction recordItemIDs={[record.id]} />
-
                     <Action.CompanyEditAction recordItemIDs={[record.id]} />
-
                     <Action.CompanyDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.CompanyEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -549,11 +546,8 @@ export const CountryShow: React.FC<CountryShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.CountryListAction recordItemIDs={[record.id]} />
-
                     <Action.CountryEditAction recordItemIDs={[record.id]} />
-
                     <Action.CountryDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.CountryEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -779,14 +773,8 @@ export const EmailShow: React.FC<EmailShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.EmailListAction recordItemIDs={[record.id]} />
-
                     <Action.EmailEditAction recordItemIDs={[record.id]} />
-
                     <Action.EmailDeleteAction recordItemIDs={[record.id]} />
-
-                    <Action.EmailEdgesDiagramAction
-                        recordItemIDs={[record.id]}
-                    />
                 </>
             )}
             {...showProps}
@@ -871,11 +859,8 @@ export const ImageShow: React.FC<ImageShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.ImageListAction recordItemIDs={[record.id]} />
-
                     <Action.ImageEditAction recordItemIDs={[record.id]} />
-
                     <Action.ImageDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.ImageEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -972,11 +957,8 @@ export const LocationShow: React.FC<LocationShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.LocationListAction recordItemIDs={[record.id]} />
-
                     <Action.LocationEditAction recordItemIDs={[record.id]} />
-
                     <Action.LocationDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.LocationEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -1079,11 +1061,8 @@ export const PhoneShow: React.FC<PhoneShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.PhoneListAction recordItemIDs={[record.id]} />
-
                     <Action.PhoneEditAction recordItemIDs={[record.id]} />
-
                     <Action.PhoneDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.PhoneEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -1183,11 +1162,8 @@ export const ProductShow: React.FC<ProductShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.ProductListAction recordItemIDs={[record.id]} />
-
                     <Action.ProductEditAction recordItemIDs={[record.id]} />
-
                     <Action.ProductDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.ProductEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -1329,11 +1305,8 @@ export const VendorShow: React.FC<VendorShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.VendorListAction recordItemIDs={[record.id]} />
-
                     <Action.VendorEditAction recordItemIDs={[record.id]} />
-
                     <Action.VendorDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.VendorEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -1497,11 +1470,8 @@ export const WarehouseShow: React.FC<WarehouseShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.WarehouseListAction recordItemIDs={[record.id]} />
-
                     <Action.WarehouseEditAction recordItemIDs={[record.id]} />
-
                     <Action.WarehouseDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.WarehouseEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />
@@ -1623,11 +1593,8 @@ export const WebsiteShow: React.FC<WebsiteShowProps> = ({
             headerButtons={() => (
                 <>
                     <Action.WebsiteListAction recordItemIDs={[record.id]} />
-
                     <Action.WebsiteEditAction recordItemIDs={[record.id]} />
-
                     <Action.WebsiteDeleteAction recordItemIDs={[record.id]} />
-
                     <Action.WebsiteEdgesDiagramAction
                         recordItemIDs={[record.id]}
                     />

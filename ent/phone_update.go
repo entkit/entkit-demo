@@ -36,6 +36,14 @@ func (pu *PhoneUpdate) SetTitle(s string) *PhoneUpdate {
 	return pu
 }
 
+// SetNillableTitle sets the "title" field if the given value is not nil.
+func (pu *PhoneUpdate) SetNillableTitle(s *string) *PhoneUpdate {
+	if s != nil {
+		pu.SetTitle(*s)
+	}
+	return pu
+}
+
 // SetDescription sets the "description" field.
 func (pu *PhoneUpdate) SetDescription(s string) *PhoneUpdate {
 	pu.mutation.SetDescription(s)
@@ -266,6 +274,14 @@ type PhoneUpdateOne struct {
 // SetTitle sets the "title" field.
 func (puo *PhoneUpdateOne) SetTitle(s string) *PhoneUpdateOne {
 	puo.mutation.SetTitle(s)
+	return puo
+}
+
+// SetNillableTitle sets the "title" field if the given value is not nil.
+func (puo *PhoneUpdateOne) SetNillableTitle(s *string) *PhoneUpdateOne {
+	if s != nil {
+		puo.SetTitle(*s)
+	}
 	return puo
 }
 

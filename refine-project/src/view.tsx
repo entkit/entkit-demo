@@ -306,7 +306,7 @@ export const CompanyBadge: React.FC<Partial<Type.DemoCompanyInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/com/show/:id".replace(":id", String(props.id))
+                    "com/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.name}
@@ -341,7 +341,7 @@ export const CountryBadge: React.FC<Partial<Type.DemoCountryInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/country/show/:id".replace(":id", String(props.id))
+                    "country/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.name}
@@ -376,7 +376,7 @@ export const EmailBadge: React.FC<Partial<Type.DemoEmailInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/email/show/:id".replace(":id", String(props.id))
+                    "email/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.title}
@@ -411,7 +411,7 @@ export const ImageBadge: React.FC<Partial<Type.DemoImageInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/image/show/:id".replace(":id", String(props.id))
+                    "image/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.originalURL ? (
@@ -452,7 +452,7 @@ export const LocationBadge: React.FC<Partial<Type.DemoLocationInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/location/show/:id".replace(":id", String(props.id))
+                    "location/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.title}
@@ -487,7 +487,7 @@ export const PhoneBadge: React.FC<Partial<Type.DemoPhoneInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/phone/show/:id".replace(":id", String(props.id))
+                    "phone/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.title}
@@ -522,7 +522,7 @@ export const ProductBadge: React.FC<Partial<Type.DemoProductInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/product/show/:id".replace(":id", String(props.id))
+                    "product/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.image ? (
@@ -559,7 +559,7 @@ export const VendorBadge: React.FC<Partial<Type.DemoVendorInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/vendor/show/:id".replace(":id", String(props.id))
+                    "vendor/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.name}
@@ -594,7 +594,7 @@ export const WarehouseBadge: React.FC<Partial<Type.DemoWarehouseInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/warehouse/show/:id".replace(":id", String(props.id))
+                    "warehouse/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.name}
@@ -629,7 +629,7 @@ export const WebsiteBadge: React.FC<Partial<Type.DemoWebsiteInterface>> = (
             <Link
                 to={
                     window.environment.appPath +
-                    "/website/show/:id".replace(":id", String(props.id))
+                    "website/show/:id".replace(":id", String(props.id))
                 }
             >
                 {props.title}

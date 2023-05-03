@@ -112,6 +112,7 @@ export const CompanyEdit: React.FC = () => {
         });
 
     const [countriesCursors, setCountriesCursors] = useState<Cursors>({});
+
     const { selectProps: countriesSelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -130,6 +131,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
+
     const { selectProps: phonesSelectProps } =
         RA.useSelect<Interfaces.DemoPhoneInterface>({
             resource: "Phone",
@@ -148,6 +150,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
+
     const { selectProps: emailsSelectProps } =
         RA.useSelect<Interfaces.DemoEmailInterface>({
             resource: "Email",
@@ -166,6 +169,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
+
     const { selectProps: websitesSelectProps } =
         RA.useSelect<Interfaces.DemoWebsiteInterface>({
             resource: "Website",
@@ -184,6 +188,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
+
     const { selectProps: locationsSelectProps } =
         RA.useSelect<Interfaces.DemoLocationInterface>({
             resource: "Location",
@@ -202,6 +207,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [logo_imageCursors, setLogoImageCursors] = useState<Cursors>({});
+
     const { selectProps: logo_imageSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -220,6 +226,7 @@ export const CompanyEdit: React.FC = () => {
             ],
         });
     const [cover_imageCursors, setCoverImageCursors] = useState<Cursors>({});
+
     const { selectProps: cover_imageSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -240,6 +247,7 @@ export const CompanyEdit: React.FC = () => {
     const [gallery_imagesCursors, setGalleryImagesCursors] = useState<Cursors>(
         {},
     );
+
     const { selectProps: gallery_imagesSelectProps } =
         RA.useSelect<Interfaces.DemoImageInterface>({
             resource: "Image",
@@ -273,22 +281,6 @@ export const CompanyEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoRichTextViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Countries"
                     name={["countryIDs"]}
@@ -422,6 +414,7 @@ export const CountryEdit: React.FC = () => {
         });
 
     const [companiesCursors, setCompaniesCursors] = useState<Cursors>({});
+
     const { selectProps: companiesSelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -440,6 +433,7 @@ export const CountryEdit: React.FC = () => {
             ],
         });
     const [phonesCursors, setPhonesCursors] = useState<Cursors>({});
+
     const { selectProps: phonesSelectProps } =
         RA.useSelect<Interfaces.DemoPhoneInterface>({
             resource: "Phone",
@@ -458,6 +452,7 @@ export const CountryEdit: React.FC = () => {
             ],
         });
     const [emailsCursors, setEmailsCursors] = useState<Cursors>({});
+
     const { selectProps: emailsSelectProps } =
         RA.useSelect<Interfaces.DemoEmailInterface>({
             resource: "Email",
@@ -476,6 +471,7 @@ export const CountryEdit: React.FC = () => {
             ],
         });
     const [websitesCursors, setWebsitesCursors] = useState<Cursors>({});
+
     const { selectProps: websitesSelectProps } =
         RA.useSelect<Interfaces.DemoWebsiteInterface>({
             resource: "Website",
@@ -494,6 +490,7 @@ export const CountryEdit: React.FC = () => {
             ],
         });
     const [locationsCursors, setLocationsCursors] = useState<Cursors>({});
+
     const { selectProps: locationsSelectProps } =
         RA.useSelect<Interfaces.DemoLocationInterface>({
             resource: "Location",
@@ -527,22 +524,6 @@ export const CountryEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="code"
-                    label="Code"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Companies"
                     name={["companyIDs"]}
@@ -604,6 +585,7 @@ export const EmailEdit: React.FC = () => {
         });
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -622,6 +604,7 @@ export const EmailEdit: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -647,38 +630,10 @@ export const EmailEdit: React.FC = () => {
             headerButtons={() => (
                 <>
                     <Action.EmailShowAction recordItemIDs={id ? [id] : []} />
-
-                    <Action.EmailEdgesDiagramAction
-                        recordItemIDs={id ? [id] : []}
-                    />
                 </>
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="address"
-                    label="Address"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Company"
                     name="companyID"
@@ -722,6 +677,7 @@ export const ImageEdit: React.FC = () => {
 
     const [gallery_companyCursors, setGalleryCompanyCursors] =
         useState<Cursors>({});
+
     const { selectProps: gallery_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -740,6 +696,7 @@ export const ImageEdit: React.FC = () => {
             ],
         });
     const [logo_companyCursors, setLogoCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: logo_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -760,6 +717,7 @@ export const ImageEdit: React.FC = () => {
     const [cover_companyCursors, setCoverCompanyCursors] = useState<Cursors>(
         {},
     );
+
     const { selectProps: cover_companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -793,22 +751,6 @@ export const ImageEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="originalURL"
-                    label="Original Url"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoImageViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Gallery Company"
                     name="galleryCompanyID"
@@ -873,6 +815,7 @@ export const LocationEdit: React.FC = () => {
         });
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -891,6 +834,7 @@ export const LocationEdit: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -924,94 +868,6 @@ export const LocationEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="latitude"
-                    label="Latitude"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="longitude"
-                    label="Longitude"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="address"
-                    label="Address"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="postcode"
-                    label="Postcode"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="type"
-                    label="Type"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="state"
-                    label="State"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="suburb"
-                    label="Suburb"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="streetType"
-                    label="Street Type"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="streetName"
-                    label="Street Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Company"
                     name="companyID"
@@ -1053,6 +909,7 @@ export const PhoneEdit: React.FC = () => {
         });
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -1071,6 +928,7 @@ export const PhoneEdit: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -1104,38 +962,6 @@ export const PhoneEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="number"
-                    label="Number"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="type"
-                    label="Type"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Company"
                     name="companyID"
@@ -1181,6 +1007,7 @@ export const ProductEdit: React.FC = () => {
         });
 
     const [warehouseCursors, setWarehouseCursors] = useState<Cursors>({});
+
     const { selectProps: warehouseSelectProps } =
         RA.useSelect<Interfaces.DemoWarehouseInterface>({
             resource: "Warehouse",
@@ -1199,6 +1026,7 @@ export const ProductEdit: React.FC = () => {
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
+
     const { selectProps: vendorSelectProps } =
         RA.useSelect<Interfaces.DemoVendorInterface>({
             resource: "Vendor",
@@ -1232,76 +1060,6 @@ export const ProductEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoRichTextViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="image"
-                    label="Image"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoImageViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="url"
-                    label="Url"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoURLViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="lastSell"
-                    label="Last Sell"
-                    rules={[{ required: false }]}
-                    getValueProps={(value) => ({
-                        value: value ? dayjs(value) : "",
-                    })}
-                >
-                    <View.DemoDateViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="createdAt"
-                    label="Created At"
-                    rules={[{ required: false }]}
-                    getValueProps={(value) => ({
-                        value: value ? dayjs(value) : "",
-                    })}
-                >
-                    <View.DemoDateViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="status"
-                    label="Status"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoEnumsProcessStatusViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="buildStatus"
-                    label="Build Status"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoEnumsProcessStatusViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Warehouse"
                     name="warehouseID"
@@ -1357,6 +1115,7 @@ export const VendorEdit: React.FC = () => {
         });
 
     const [warehousesCursors, setWarehousesCursors] = useState<Cursors>({});
+
     const { selectProps: warehousesSelectProps } =
         RA.useSelect<Interfaces.DemoWarehouseInterface>({
             resource: "Warehouse",
@@ -1375,18 +1134,19 @@ export const VendorEdit: React.FC = () => {
             ],
         });
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
+
     const { selectProps: productsSelectProps } =
         RA.useSelect<Interfaces.DemoProductInterface>({
             resource: "Product",
-            optionLabel: "url",
+            optionLabel: "name",
             optionValue: "id",
             metaData: {
                 cursors: productsCursors,
-                fields: ["id", "url"],
+                fields: ["id", "name"],
             },
             onSearch: (value: string) => [
                 {
-                    field: "url",
+                    field: "name",
                     operator: "contains",
                     value,
                 },
@@ -1408,22 +1168,6 @@ export const VendorEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="schema"
-                    label="Schema"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoCodeViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Warehouses"
                     name={["warehouseIDs"]}
@@ -1474,24 +1218,26 @@ export const WarehouseEdit: React.FC = () => {
         });
 
     const [productsCursors, setProductsCursors] = useState<Cursors>({});
+
     const { selectProps: productsSelectProps } =
         RA.useSelect<Interfaces.DemoProductInterface>({
             resource: "Product",
-            optionLabel: "url",
+            optionLabel: "name",
             optionValue: "id",
             metaData: {
                 cursors: productsCursors,
-                fields: ["id", "url"],
+                fields: ["id", "name"],
             },
             onSearch: (value: string) => [
                 {
-                    field: "url",
+                    field: "name",
                     operator: "contains",
                     value,
                 },
             ],
         });
     const [vendorCursors, setVendorCursors] = useState<Cursors>({});
+
     const { selectProps: vendorSelectProps } =
         RA.useSelect<Interfaces.DemoVendorInterface>({
             resource: "Vendor",
@@ -1527,49 +1273,6 @@ export const WarehouseEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="name"
-                    label="Name"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="lastUpdate"
-                    label="Last Update"
-                    rules={[{ required: false }]}
-                    getValueProps={(value) => ({
-                        value: value ? dayjs(value) : "",
-                    })}
-                >
-                    <View.DemoDateViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="originalData"
-                    label="Original Data"
-                    rules={[{ required: false }]}
-                >
-                    <View.DemoCodeViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="enabled"
-                    label="Enabled"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoBooleanViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="filters"
-                    label="Filters"
-                    rules={[{ required: false }]}
-                >
-                    <View.DemoStringListViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Products"
                     name={["productIDs"]}
@@ -1610,6 +1313,7 @@ export const WebsiteEdit: React.FC = () => {
         });
 
     const [companyCursors, setCompanyCursors] = useState<Cursors>({});
+
     const { selectProps: companySelectProps } =
         RA.useSelect<Interfaces.DemoCompanyInterface>({
             resource: "Company",
@@ -1628,6 +1332,7 @@ export const WebsiteEdit: React.FC = () => {
             ],
         });
     const [countryCursors, setCountryCursors] = useState<Cursors>({});
+
     const { selectProps: countrySelectProps } =
         RA.useSelect<Interfaces.DemoCountryInterface>({
             resource: "Country",
@@ -1661,30 +1366,6 @@ export const WebsiteEdit: React.FC = () => {
             )}
         >
             <Antd.Form {...formProps} layout="vertical">
-                <Antd.Form.Item
-                    name="title"
-                    label="Title"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="description"
-                    label="Description"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoStringViewOnForm />
-                </Antd.Form.Item>
-
-                <Antd.Form.Item
-                    name="url"
-                    label="Url"
-                    rules={[{ required: true }]}
-                >
-                    <View.DemoURLViewOnForm />
-                </Antd.Form.Item>
-
                 <Antd.Form.Item
                     label="Company"
                     name="companyID"

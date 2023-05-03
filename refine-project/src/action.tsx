@@ -92,7 +92,7 @@ export const CompanyListAction: React.FC<CompanyListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "com".replace(":id", String(recordItemIDs[0]))
+                "com/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -361,7 +361,7 @@ export const CountryListAction: React.FC<CountryListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "country".replace(":id", String(recordItemIDs[0]))
+                "country/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -630,7 +630,7 @@ export const EmailListAction: React.FC<EmailListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "email".replace(":id", String(recordItemIDs[0]))
+                "email/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -805,40 +805,6 @@ export const EmailDeleteAction: React.FC<EmailDeleteActionProps> = ({
     ) : null;
 };
 
-export type EmailEdgesDiagramActionProps = ButtonProps &
-    RefineButtonCommonProps &
-    RefineButtonSingleProps &
-    RefineButtonLinkingProps & {
-        recordItemIDs: Type.DemoID[];
-        onSuccess?: (data: any) => void;
-    };
-
-export const EmailEdgesDiagramAction: React.FC<
-    EmailEdgesDiagramActionProps
-> = ({ recordItemIDs, hideText, onSuccess, ...props }) => {
-    const { data: permissions } = usePermissions<Record<string, string[]>>();
-    const can = Boolean(permissions?.Email?.includes("Read"));
-    const additionalProps = null || {};
-    const Link = useLink();
-
-    return can ? (
-        <Link
-            to={
-                window.environment.appPath +
-                "email/edges/:id".replace(":id", String(recordItemIDs[0]))
-            }
-        >
-            <Antd.Button
-                icon={<AntdIcons.ClusterOutlined />}
-                {...additionalProps}
-                {...props}
-            >
-                {hideText || "Edges Diagram"}
-            </Antd.Button>
-        </Link>
-    ) : null;
-};
-
 export type ImageShowActionProps = ButtonProps &
     RefineButtonCommonProps &
     RefineButtonSingleProps &
@@ -899,7 +865,7 @@ export const ImageListAction: React.FC<ImageListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "image".replace(":id", String(recordItemIDs[0]))
+                "image/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -1168,7 +1134,7 @@ export const LocationListAction: React.FC<LocationListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "location".replace(":id", String(recordItemIDs[0]))
+                "location/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -1437,7 +1403,7 @@ export const PhoneListAction: React.FC<PhoneListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "phone".replace(":id", String(recordItemIDs[0]))
+                "phone/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -1706,7 +1672,7 @@ export const ProductListAction: React.FC<ProductListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "product".replace(":id", String(recordItemIDs[0]))
+                "product/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -2059,7 +2025,7 @@ export const VendorListAction: React.FC<VendorListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "vendor".replace(":id", String(recordItemIDs[0]))
+                "vendor/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -2328,7 +2294,7 @@ export const WarehouseListAction: React.FC<WarehouseListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "warehouse".replace(":id", String(recordItemIDs[0]))
+                "warehouse/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button
@@ -2597,7 +2563,7 @@ export const WebsiteListAction: React.FC<WebsiteListActionProps> = ({
         <Link
             to={
                 window.environment.appPath +
-                "website".replace(":id", String(recordItemIDs[0]))
+                "website/".replace(":id", String(recordItemIDs[0]))
             }
         >
             <Antd.Button

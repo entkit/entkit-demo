@@ -27,7 +27,9 @@ func (cwi *CompanyWhereInput) ApplySearchQuery(q *string) *CompanyWhereInput {
 	}
 
 	var orPredicates []predicate.Company
+
 	orPredicates = append(orPredicates, company.NameContains(*q))
+
 	orPredicates = append(orPredicates, company.DescriptionContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)
@@ -48,6 +50,7 @@ func (cwi *CountryWhereInput) ApplySearchQuery(q *string) *CountryWhereInput {
 	}
 
 	var orPredicates []predicate.Country
+
 	orPredicates = append(orPredicates, country.NameContains(*q))
 	orPredicates = append(orPredicates, country.CodeEQ(*q))
 	// id uuid Field
@@ -69,7 +72,9 @@ func (ewi *EmailWhereInput) ApplySearchQuery(q *string) *EmailWhereInput {
 	}
 
 	var orPredicates []predicate.Email
+
 	orPredicates = append(orPredicates, email.TitleContains(*q))
+
 	orPredicates = append(orPredicates, email.DescriptionContains(*q))
 	orPredicates = append(orPredicates, email.AddressEQ(*q))
 	// id uuid Field
@@ -91,6 +96,7 @@ func (iwi *ImageWhereInput) ApplySearchQuery(q *string) *ImageWhereInput {
 	}
 
 	var orPredicates []predicate.Image
+
 	orPredicates = append(orPredicates, image.TitleContains(*q))
 	orPredicates = append(orPredicates, image.OriginalURLEQ(*q))
 	// id uuid Field
@@ -112,14 +118,20 @@ func (lwi *LocationWhereInput) ApplySearchQuery(q *string) *LocationWhereInput {
 	}
 
 	var orPredicates []predicate.Location
+
 	orPredicates = append(orPredicates, location.TitleContains(*q))
+
 	orPredicates = append(orPredicates, location.DescriptionContains(*q))
+
 	orPredicates = append(orPredicates, location.AddressContains(*q))
 	orPredicates = append(orPredicates, location.PostcodeEQ(*q))
 	orPredicates = append(orPredicates, location.TypeEQ(*q))
+
 	orPredicates = append(orPredicates, location.StateContains(*q))
+
 	orPredicates = append(orPredicates, location.SuburbContains(*q))
 	orPredicates = append(orPredicates, location.StreetTypeEQ(*q))
+
 	orPredicates = append(orPredicates, location.StreetNameContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)
@@ -140,7 +152,9 @@ func (pwi *PhoneWhereInput) ApplySearchQuery(q *string) *PhoneWhereInput {
 	}
 
 	var orPredicates []predicate.Phone
+
 	orPredicates = append(orPredicates, phone.TitleContains(*q))
+
 	orPredicates = append(orPredicates, phone.DescriptionContains(*q))
 	orPredicates = append(orPredicates, phone.NumberEQ(*q))
 	orPredicates = append(orPredicates, phone.TypeEQ(*q))
@@ -163,9 +177,12 @@ func (pwi *ProductWhereInput) ApplySearchQuery(q *string) *ProductWhereInput {
 	}
 
 	var orPredicates []predicate.Product
+
 	orPredicates = append(orPredicates, product.NameContains(*q))
+
 	orPredicates = append(orPredicates, product.DescriptionContains(*q))
 	orPredicates = append(orPredicates, product.ImageEQ(*q))
+
 	orPredicates = append(orPredicates, product.URLContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)
@@ -186,7 +203,9 @@ func (vwi *VendorWhereInput) ApplySearchQuery(q *string) *VendorWhereInput {
 	}
 
 	var orPredicates []predicate.Vendor
+
 	orPredicates = append(orPredicates, vendor.NameContains(*q))
+
 	orPredicates = append(orPredicates, vendor.SchemaContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)
@@ -207,7 +226,9 @@ func (wwi *WarehouseWhereInput) ApplySearchQuery(q *string) *WarehouseWhereInput
 	}
 
 	var orPredicates []predicate.Warehouse
+
 	orPredicates = append(orPredicates, warehouse.NameContains(*q))
+
 	orPredicates = append(orPredicates, warehouse.OriginalDataContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)
@@ -228,8 +249,11 @@ func (wwi *WebsiteWhereInput) ApplySearchQuery(q *string) *WebsiteWhereInput {
 	}
 
 	var orPredicates []predicate.Website
+
 	orPredicates = append(orPredicates, website.TitleContains(*q))
+
 	orPredicates = append(orPredicates, website.DescriptionContains(*q))
+
 	orPredicates = append(orPredicates, website.URLContains(*q))
 	// id uuid Field
 	u, err := uuid.Parse(*q)

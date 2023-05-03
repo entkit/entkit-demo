@@ -393,6 +393,7 @@ export const CompanyEdgesDiagram: React.FC<CompanyEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.CompanyShowAction recordItemIDs={[record.id]} />
@@ -708,6 +709,7 @@ export const CountryEdgesDiagram: React.FC<CountryEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.CountryShowAction recordItemIDs={[record.id]} />
@@ -807,6 +809,7 @@ export const EmailEdgesDiagram: React.FC<EmailEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.EmailShowAction recordItemIDs={[record.id]} />
@@ -921,6 +924,7 @@ export const ImageEdgesDiagram: React.FC<ImageEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.ImageShowAction recordItemIDs={[record.id]} />
@@ -1028,6 +1032,7 @@ export const LocationEdgesDiagram: React.FC<LocationEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.LocationShowAction recordItemIDs={[record.id]} />
@@ -1128,6 +1133,7 @@ export const PhoneEdgesDiagram: React.FC<PhoneEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.PhoneShowAction recordItemIDs={[record.id]} />
@@ -1239,6 +1245,7 @@ export const ProductEdgesDiagram: React.FC<ProductEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.ProductShowAction recordItemIDs={[record.id]} />
@@ -1414,6 +1421,7 @@ export const VendorEdgesDiagram: React.FC<VendorEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.VendorShowAction recordItemIDs={[record.id]} />
@@ -1554,6 +1562,7 @@ export const WarehouseEdgesDiagram: React.FC<WarehouseEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.WarehouseShowAction recordItemIDs={[record.id]} />
@@ -1653,6 +1662,7 @@ export const WebsiteEdgesDiagram: React.FC<WebsiteEdgesDiagramProps> = ({
     return (
         <RA.Show
             isLoading={isLoading}
+            title={"Edges Diagram"}
             headerButtons={() => (
                 <>
                     <Action.WebsiteShowAction recordItemIDs={[record.id]} />

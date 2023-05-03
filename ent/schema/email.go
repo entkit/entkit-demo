@@ -60,8 +60,8 @@ func (Email) Annotations() []schema.Annotation {
 		entgql.QueryField(),
 		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 		entkit.Icon("MailOutlined"),
-		entkit.Actions(
-			append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
-		),
+		//entkit.Actions(
+		//	append(entkit.DefaultActions, entkit.EdgesDiagramAction)...,
+		//),
 	}
 }
